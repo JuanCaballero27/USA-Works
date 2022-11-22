@@ -1,0 +1,152 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage{notesconfig}
+
+
+% \pagestyle{plain}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Matemáticas Discretas}
+\newcommand{\professor}{Diego Villamizar}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{23 Septiembre 2022}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+
+\linespread{1.5}
+
+\begin{document}
+%-----------------------------------------------------------
+%                       Encabezado
+%-----------------------------------------------------------
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+    \begin{tabular}[l]{@{}l@{}}
+        \textbf{\instituto}\\
+        \textbf{Disciplina: \disciplina}\\
+        \textbf{Profesor: \professor}\\ 
+    \end{tabular} & 
+    \begin{tabular}[l]{@{}l@{}}
+        {\curso}\\
+        {\alumnoI}\\
+        % {\alumnoII}\\
+    \end{tabular}
+\end{tabular*}
+\end{table}
+\begin{center}
+\rule[2ex]{\textwidth}{1pt}
+
+{\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+%--------------------------------------------------------
+%                       Contenido                      
+%--------------------------------------------------------
+\section*{Principio de inclusión-exclusión}
+Si recordamos lo trabajado en clase, cuando tenemos dos conjuntos finitos $A, B$ y dichos conjuntos son disyuntos entonces: $$|A \cup B| = |A| + |B|$$
+Pero la cosa cuando dichos dos conjuntos no son disyuntos. En general, de manera intuitiva, cuando se cuentan los elementos de $A$ y los elementos de $B$, los elementos que están en ambos conjuntos se han contado dos veces, por lo que es necesario excluirlos. En general, se tendrá:
+$$|A \cup B| = |A| + |B| - |A \cap B|$$
+Luego, dentro de este contexto, sería útil generalizar esta formula a tres conjuntos, cuatro conjuntos, y hasta $n$ conjuntos. Sin acudir a la demostración formal, esto es conocido como el Principio de inclusión-exclusión:
+\begin{theorem}[Principio de inclusión-exclusión]
+    Sea $\{A_i\}_{i \in [n]}$ una colección de conjuntos, para el cardinal de la unión de los conjuntos se tendrá:
+    \begin{align*}
+        \left|\bigcup_{i \in [n]} A_i\right| &= \sum_{k = 1}^n (-1)^{k-1} \sum_{X \in \binom{[n]}{k}} \left|\bigcap_{x \in X} A_x\right|
+    \end{align*}
+\end{theorem}
+
+\section*{Aplicaciones del Principio de inclusión-exclusión}
+\subsection*{Desarreglos}
+Un problema interesante en combinatoria es el problema de desarreglos, el cúal tiene que ver con funciones biyectivas y el principio de inclusión-exclusión. Para ello, empezaremos viendo que es un desarreglo:
+\begin{definition}[Desarreglo]
+    Sea $\sigma \in \mathfrak{S}_n$ una permutación, se dice que $\sigma$ es un desarreglo si y solo si $\sigma(i) \neq i$ para todo $i \in [n]$.
+\end{definition}
+Por ejemplo, para $n=3$ los desarreglos en $\mathfrak{S}_n$ serán las permutaciones:
+$$\begin{matrix}
+    \sigma = \begin{pmatrix}
+        1 & 2 & 3\\
+        2 & 3 & 1\\
+    \end{pmatrix} & \sigma = \begin{pmatrix}
+        1 & 2 & 3\\
+        3 & 1 & 2\\
+    \end{pmatrix}
+\end{matrix}$$
+El problema en general, es determinar el número de desarreglos en general para $\mathfrak{S}_n$. Para ello, introduceremos la siguiente notación:
+\begin{notation}
+    Al conjunto de desarreglos en $\mathfrak{S}_n$ se denotará como $\mathbb{D}_n$. Además, se define el siguiente conjunto para efectos del ejercicio:
+    \begin{align*}
+        A_i &:= \{\sigma \in \mathfrak{S}_n | \sigma(i) = i\}
+    \end{align*}
+    Para todo $i \in [n]$.
+\end{notation}
+Si quisieramos determinar el número de desarreglos en $\mathfrak{S}_n$ es más conveniente determinar cúales permutaciones no son desarreglos y descartarlas. Es decir:
+\begin{align*}
+    \mathbb{D}_n &= |\mathfrak{S}_n| - \left|\bigcup_{i \in [n]} A_i\right|
+\end{align*}
+Y es aquí donde conviene usar el principio de inclusión y exclusión para determinar el cardinal del segundo conjunto mostrado. 
+\begin{align*}
+    \left|\bigcup_{i \in [n]} A_i\right| &= \sum_{k = 1}^n (-1)^k \sum_{X \in \binom{[n]}{k}} \left|\bigcap_{x \in X} A_x\right|
+\end{align*}
+El siguiente paso es entender que signfica $\left|\bigcap_{x \in X} A_x\right|$ en dicha sumatoria. Por ejemplo, hay que tener en cuenta lo siguiente:
+\begin{itemize}
+    \item Para $A_i$ solo tenemos un elemento fijo dentro de la permutación, por lo que tendremos $n-1$ elementos para permutar en la función, por lo que $|A_i| = (n-1)!$.
+    \item Para $A_i$ y $A_j$ de forma que $i \neq j$, tendremos dos elementos fijos y entonces serán $n-2$ elementos para permutar, por lo que $|A_i \cap A_j| = (n-2)!$.
+    \item En general, para $\left|\bigcap_{x \in X} A_x\right| = (n-k)!$ para $X \in \binom{[n]}{k}$, teniendo en cuenta que dado eso, $|X| = k$. 
+\end{itemize}
+Luego, la formula anterior se puede escribir como:
+\begin{align*}
+    \left|\bigcup_{i \in [n]} A_i\right| &= \sum_{k = 1}^n (-1)^k \sum_{X \in \binom{[n]}{k}} \left|\bigcap_{x \in X} A_x\right|\\
+    &= \sum_{k = 1}^n (-1)^{k-1} \sum_{X \in \binom{[n]}{k}} (n-k)!\\
+    &= \sum_{k = 1}^n (-1)^{k-1} \cdot (n-k)! \sum_{X \in \binom{[n]}{k}} 1\\
+    &= \sum_{k = 1}^n (-1)^{k-1} \cdot (n-k)! \cdot \binom{n}{k}\\
+    &= \sum_{k = 1}^n (-1)^{k-1} \cdot (n-k)! \cdot \frac{n!}{(n-k)! \cdot k!}\\
+    &= \sum_{k = 1}^n (-1)^{k-1} \cdot \frac{n!}{k!}\\
+\end{align*}
+Y luego tendremos:
+\begin{align*}
+    \mathbb{D}_n &= |\mathfrak{S}_n| - \left|\bigcup_{i \in [n]} A_i\right|\\
+    &= n! - \sum_{k = 1}^n \frac{(-1)^{k-1} n!}{k!}\\
+    &= n! + \sum_{k = 1}^n \frac{(-1)^kn!}{k!}\\
+    &= \sum_{k = 0}^n \frac{(-1)^kn!}{k!}
+\end{align*}
+
+
+\subsection*{Desarreglos Parte 2}
+Fue interesante el ejercicio anterior, pero ahora vamos a centrarnos en algo más complejo donde los desarreglos serán utiles.
+\begin{definition}[Conjunto de puntos fijos]
+    Para dos números enteros no negativos $n, k$ se define:
+    \begin{align*}
+        \mathbb{A}_{n, k} &:= \{\pi \in \mathfrak{S}_n | \text{La cantidad de puntos fijos de $\pi$ es $k$}\}
+    \end{align*}
+\end{definition}
+Por ejemplo, para $n=4$ y $k = 2$ se tendrá:
+\begin{align*}
+    \mathbb{A}_{4, 2} &= \{(1, 2, 4, 3), (1, 4, 3, 2), (1, 3, 2, 4), (4, 2, 3, 1), (3, 2, 1, 4), (2, 1, 3, 4)\}
+\end{align*}
+El problema es determinar $|\mathbb{A}_{n, k}$ en general. Para ello, tomaremos pequeños problemas y los analizaremos:
+\begin{itemize}
+    \item $|\mathbb{A}_{n, 0}| = |\mathbb{D}_{n}|$ ya que el no tener puntos fijos es el mismo conjunto de desarreglos.
+    \item $|\mathbb{A}_{n, n}| = 1$ ya que la única permutación que tiene $n$ puntos fijos es la permutación identidad.
+    \item $|\mathbb{A}_{n, n-1}| = 0$ ya que al fijar $n-1$ puntos solo quedará un elemento cuya imagen tendrá que ser el mismo para ser una permutación, por lo que tendrá $n$ puntos fijos en realidad.
+    \item $|\mathbb{A}_{n, k}| = \binom{n}{k} \cdot |\mathbb{D}_{n-k}|$ ya que para escoger los $k$ puntos fijos se tienen $\binom{n}{k}$ opciones y el resto de puntos al no poder ser fijos serán $|\mathbb{D}_{n-k}|$ opciones.
+\end{itemize}
+
+De esto mismo, se deriva una formula alternativa para $n!$. Primero, se tiene la sigiente igualdad:
+\begin{align*}
+    \bigcup_{0 \le k \le n} \mathbb{A}_{n, k} &= \mathfrak{S}_n
+\end{align*}
+La primera inclusión es evidente, por lo que se demostrará la otra desigualdad:
+\begin{itemize}
+    \item[$\subseteq)$] Suponga que $\sigma \in \bigcup_{0 \le k \le n} \mathbb{A}_{n, k}$, por definción para algún $k$ tal que $0 \le k \le n$ se tendrá que $\sigma \in \mathbb{A}_{n, k}$ y por definción $\sigma \in \mathfrak{S}_n$.
+
+    \item[$\supseteq)$] Suponga que $\sigma \in \mathfrak{S}_n$, entonces por definición $\sigma$ es una biyección y tendrá $k$ puntos fijos con $0 \le k \le n$ de forma que $\sigma \in \mathbb{A}_{n, k}$ para algún $k$ y por tanto $\sigma \in \bigcup_{0 \le k \le n} \mathbb{A}_{n, k}$.
+\end{itemize}
+Notese que para $i \neq j$ se tendrá que $A_i \cap A_j = \emptyset$ por lo que se podrá aplicar lo siguiente:
+\begin{align*}
+    |\bigcup_{0 \le k \le n} \mathbb{A}_{n, k}| &= \sum_{k = 0}^n |\mathbb{A}_{n, k}|\\
+    &= \sum_{k = 0}^n \binom{n}{k} \cdot |\mathbb{D}_{n-k}|
+\end{align*}
+Y luego es interesante notar que:
+\begin{align*}
+    n! &= \sum_{k = 0}^n \binom{n}{k} \cdot |\mathbb{D}_{n-k}|
+\end{align*}
+Gracias a la igualdad de conjuntos determinada anteriormente.
+\end{document}

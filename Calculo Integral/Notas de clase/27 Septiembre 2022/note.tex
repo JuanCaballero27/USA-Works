@@ -1,0 +1,160 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage{notesconfig}
+
+
+% \pagestyle{plain}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Calculo Integral}
+\newcommand{\professor}{Fabio Molina}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{27 Septiembre 2022}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+
+\linespread{1.5}
+
+\begin{document}
+%-----------------------------------------------------------
+%                       Encabezado
+%-----------------------------------------------------------
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+    \begin{tabular}[l]{@{}l@{}}
+        \textbf{\instituto}\\
+        \textbf{Disciplina: \disciplina}\\
+        \textbf{Profesor: \professor}\\ 
+    \end{tabular} & 
+    \begin{tabular}[l]{@{}l@{}}
+        {\curso}\\
+        {\alumnoI}\\
+        % {\alumnoII}\\
+    \end{tabular}
+\end{tabular*}
+\end{table}
+\begin{center}
+\rule[2ex]{\textwidth}{1pt}
+
+{\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+%--------------------------------------------------------
+%                       Contenido                      
+%--------------------------------------------------------
+\section*{Funciones iguales}
+Anteriormente hemos visto un teorema muy importante y como dicho teorema nos ayuda a generar resultados como un criterio para minimos y máximos. La idea de funciones iguales hasta orden $n$ busca generalizar este concepto más allá de los Polinomios de Taylor, pero a su vez nos dará una herramienta potente para trabajar de nuevo.
+
+\begin{definition}[Funciones iguales de orden $n$]
+    Sean $f$ y $g$ dos funciones de variable real, diremos que $f$ es igual a $g$ hasta orden $n$ en $a$ si y solo si:
+    \begin{align*}
+        \lim_{x \to a} \frac{f(x)-g(x)}{(x-a)^k} = 0
+    \end{align*}
+    Para $0 \le k \le n$.
+\end{definition}
+Esta definición es una generalización del teorema sobre limite de la diferencia del Polinomio de Taylor y su función. En general, esta definición resultar ser útil para cualquier tipo de funciones, puesto que más adelante nos permitirá generar más fácilmente una formula para polinomios de Taylor.
+
+\section*{Igualdad entre Polinomios}
+Con todo en orden, es hora de probar un teorema que de primera vista parece evidente pero que vendrá de ayuda más adelante:
+\begin{theorem}
+    Sean $P$ y $Q$ dos polinomios de variable real con grado menor o igual que $n$, de forma que $P$ es igual hasta orden $n$ a $Q$ en un punto $c$. Podemos concluir que $P = Q$.
+\end{theorem}
+\begin{proof}
+    Para esto, tengamos en cuenta que si son iguales hasta orden $n$ podremos de forma recursiva con el orden del limite. Por ejemplo, si $P(x) = a_0 + a_1(x-c)+a_2(x-c)^2 + \dots + a_n(x-c)^n$ y $Q(x) = b_0 + b_1(x-c) + b_2(x-c)^2 + \dots + b_n(x-c)^n$ tendremos para cuando $k = 0$:
+    \begin{align*}
+        \lim_{x \to c} \frac{P(x) - Q(x)}{(x-c)^0} &= \lim_{x \to c} P(x) - Q(x)\\
+        &=\lim_{x \to c} \left[(a_0 - b_0) + \sum_{i = 1}^n (a_i - b_i) (x-c)^i\right]\\
+        &= a_0 - b_0 = 0
+    \end{align*}
+    Por lo que concluimos que $a_0 = b_0$. Luego, si $k = 1$ tendremos:
+    \begin{align*}
+        \lim_{x \to c} \frac{P(x) - Q(x)}{x-c} &= \lim_{x \to c} \frac{(a_0 - b_0) + (a_1 - b_1)(x-c) + \sum_{i = 2}^n (a_i - b_i)(x-c)^i}{x-c}\\
+        &= \lim_{x \to c} \frac{(a_1 - b_1)(x-c)}{x-c} + \frac{1}{x-c} \cdot \sum_{i = 2}^n (a_i - b_i)(x-c)^i\\
+        &= \lim_{x \to c} (a_1-b_1) + \sum_{i = 2}^n (a_i - b_i)(x-c)^{i-1}\\
+        &= a_1 - b_1 = 0
+    \end{align*}
+    Por lo que ahora $a_1 = b_1$. En general si continuamos con este proceso iterativamente, para $k$ en general tendremos:
+    \begin{align*}
+        \lim_{x \to c}\frac{P(x)-Q(x)}{(x-c)^k} &= \lim_{x \to c} \frac{\sum_{i = 0}^{k-1} (a_i-b_i)(x-c)^i + (a_k + b_k)(x-c)^k + \sum_{i = k+1}^n (a_i - b_i)(x-c)^i}{(x-c)^k}\\
+        &= \lim_{x \to c} \frac{(a_k-b_k)(x-c)^k}{(x-c)^k} + \frac{1}{(x-c)^k} \sum_{i = k+1}^n (a_i - b_i)(x-c)^i\\
+        &= \lim_{x \to c} (a_k - b_k) + \sum_{i = k+1}^n (a_i - b_i)(x-c)^{i-k}\\
+        &= a_k - b_k = 0
+    \end{align*}
+    Por lo que en general $a_k = b_k$ lo que nos permite concluir que $P = Q$.
+\end{proof}
+
+Este teorema, tan bello y \textit{relativamente} sencillo de probar da paso a un corolario que nos dará información sobre el Polinomio de Taylor:
+\begin{corollary}
+    Sea $f$ una función de forma que $P_{n, a, f}$ existe y además existe un polinomio $P$ de forma que $f$ es igual hasta orden $n$ en a $P$ en $a$, entones $P = P_{n, a, f}$.
+\end{corollary}
+\begin{proof}
+    Dado que ya se ha demostrado que el polinomio de Taylor de orden $n$ para $f$ en $a$ es igual hasta orden $n$ a $f$ en $a$, tendremos:
+    \begin{align*}
+        \lim_{x \to a} \frac{f(x) - P_{n, a, f}(x)}{(x-a)^k} &= 0
+    \end{align*} 
+    Para cualquier $k$ entre $0$ y $n$. Luego, tendremos por hipotesís:
+    \begin{align*}
+        \lim_{x \to a} \frac{f(x) - P(x)}{(x-a)^k} &= 0
+    \end{align*}
+    Igualando ambas expresiones:
+    \begin{align*}
+        \lim_{x \to a} \frac{f(x) - P_{n, a, f}(x)}{(x-a)^k} &= \lim_{x \to a} \frac{f(x) - P(x)}{(x-a)^k}\\
+        \lim_{x \to a} \frac{f(x) - P_{n, a, f}(x)}{(x-a)^k} - \lim_{x \to a} \frac{f(x) - P(x)}{(x-a)^k} &= 0\\
+        \lim_{x \to a} \frac{f(x) - P_{n, a, f}(x)}{(x-a)^k} - \frac{f(x) - P(x)}{(x-a)^k} &= 0\\
+        \lim_{x \to a} \frac{f(x) - P_{n, a, f}(x) - f(x) + P(x)}{(x-a)^k} &= 0\\
+        \lim_{x \to a} \frac{P(x) - P_{n, a, f}(x)}{(x-a)^k} &= 0\\
+    \end{align*}
+    Por lo que $P$ es igual hasta orden $n$ a $P_{n, a, f}$ y por el teorema anterior tendremos que $P = P_{n, a, f}$.
+\end{proof}
+
+\begin{remark}
+    La prueba anterior refleja un poco sobre la naturaleza de la relación \textit{Ser igual hasta orden $n$ en $a$ a..}. Con un poco más de esfuerzo se puede demostrar que la relación es una relación de equivalencia(Reflexiva, Simetrica y Transitiva).
+\end{remark}
+
+\begin{example}
+    Recordemos que determinar el polinomio de Taylor para la función $f(x) = \arctan(x)$ era un proceso tedioso. Aquí miraremos una forma de determinar de manera más \textit{directa} dicho polinomio de Taylor para $a = 0$.
+
+    Empecemos notando que $\arctan(x) = \int_{0}^x \frac{1}{1+t^2} dt$, y dentro de la expresión de adentro podremos realizar una división síntetica para terminar con algo así:
+    \begin{align*}
+        \arctan(x) &= \int_{0}^x 1 - t^2 + t^4 + \dots +(-1)^n t^{2n} + \frac{(-1)^{n+1}t^{2n+2}}{1+t^2} dt\\
+        &= t - \frac{t^3}{3} + \frac{t^5}{5} + \dots + (-1)^n \frac{t^{2n+1}}{2n+1} + \int_{0}^x \frac{(-1)^{n+1}t^{2n+2}}{1+t^2} dt 
+    \end{align*}
+    Ahora, notese que en la última expresión tenemos un polinomio con una integral. Si la integral tiende a $0$ habremos encontrado el polinomio de Taylor de grado $2n+1$ para $\arctan(x)$. Por ello, analizar la expresión será importante.\\
+
+    Notese que:
+    \begin{align*}
+        \int_{0}^x \frac{(-1)^{n+1}t^{2n+2}}{1+t^2} dt &\le \left|\int_{0}^x \frac{(-1)^{n+1}t^{2n+2}}{1+t^2} dt \right|\\
+        &= \left|\int_{0}^x \frac{t^{2n+2}}{1+t^2} dt \right|\\
+        &\le \left|\int_{0}^x \frac{t^{2n+2}}{1} dt  \right|\\
+        &= \left|\int_{0}^x t^{2n+2} dt\right|\\
+        &= \left|\frac{x^{2n+3}}{2n+3}\right|\\
+        &= \frac{ |x|^{2n+3}}{2n+3}
+    \end{align*}
+    Luego, sin importar el valor de $x$ se puede tomar $n$ suficientemente grande para hacer que $\frac{ |x|^{2n+3}}{2n+3}$ tienda a $0$ con lo que $\int_{0}^x \frac{(-1)^{n+1}t^{2n+2}}{1+t^2} dt $ tenderá a $0$ y luego, es evidente que $\arctan(x)$ y el Polinomio escrito son iguales hasta orden $n$ en $0$. Por tanto:
+    \begin{align*}
+        P_{2n+1, 0, f}(x) &= \sum_{k = 0}^n (-1)^k\frac{x^{2k+1}}{2k+1}
+    \end{align*}
+    E incluso esto permite determinar los valores para las derivadas de $\arctan(x)$ evaluadas en $0$ con la siguiente formula(¿Por qué?):
+    \begin{align*}
+        \frac{d^{2k+1}}{dx^{2k+1}} \arctan(x) &= (-1)^k\frac{k!}{2k+1}
+    \end{align*}
+\end{example}
+
+\section*{Inicios de la formula para el polinomio de Taylor}
+Recordemos que nuestra meta es encontrar una forma sencilla de determinar un polinomio de Taylor. Pues, dentro de un ejercicio practico podremos hacer algo así.\\
+
+Para $\int_{a}^x \frac{d}{dx} f(t) dt$ al evaluarse por el \textit{Teorema fundamental del cálculo} tendremos:
+\begin{align*}
+    \int_{a}^x \frac{d}{dx} f(t) dt &= f(x) - f(a)
+\end{align*}
+Luego, despejando $f(x)$ tendremos:
+\begin{align*}
+    f(x) &= f(a) + \int_{a}^x \frac{d}{dx} f(t) dt
+\end{align*}
+Notese en este punto que $f(a)$ es el Polinomio de grado $0$ en $a$ para $f$. Luego, si integramos por partes haciendo que $u = \frac{d}{dx} f(t)$ y $dv = dt$, para que tengamos que $du = \frac{d^2}{dx^2} f(t) dt$ y $v = t-x$(¿Por qué no aplicar $v = t$?), tendremos:
+\begin{align*}
+    f(x) &= f(a) + \int_{a}^x \frac{d}{dx} f(t) dt\\
+    &= f(a) + \left(\frac{d}{dx} f(t) (t -x)|_{a}^{x}\right) + \int_{a}^x (x-t) \frac{d^2}{dx^2}f(t) dt\\
+    &= f(a) + \frac{d}{dx} f(a)(x-a) + \int_{a}^x (x-t) \frac{d^2}{dx^2} f(t)dt
+\end{align*}
+Lo que viene siendo el polinomio de Taylor de grado $1$ junto con otra integral. Este proceso recursivo nos llevará más adelante a una formula bonita y elegante para determinar en general el polinomio de Taylor.
+\end{document}

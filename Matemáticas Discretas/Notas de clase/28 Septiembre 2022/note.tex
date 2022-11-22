@@ -1,0 +1,210 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage{notesconfig}
+
+\DeclareRobustCommand{\stirling}{\genfrac\{\}{0pt}{}}
+
+% \pagestyle{plain}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Matemáticas Discretas}
+\newcommand{\professor}{Diego Villamizar}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{28 Septiembre 2022}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+
+\linespread{1.5}
+
+\begin{document}
+%-----------------------------------------------------------
+%                       Encabezado
+%-----------------------------------------------------------
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+    \begin{tabular}[l]{@{}l@{}}
+        \textbf{\instituto}\\
+        \textbf{Disciplina: \disciplina}\\
+        \textbf{Profesor: \professor}\\ 
+    \end{tabular} & 
+    \begin{tabular}[l]{@{}l@{}}
+        {\curso}\\
+        {\alumnoI}\\
+        % {\alumnoII}\\
+    \end{tabular}
+\end{tabular*}
+\end{table}
+\begin{center}
+\rule[2ex]{\textwidth}{1pt}
+
+{\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+%--------------------------------------------------------
+%                       Contenido                      
+%--------------------------------------------------------
+\section*{Funciones sobreyectivas}
+\subsection*{Formula mediante Inclusión-Exclusión}
+Una manera de determinar funciones sobreyectivas es mediante el principio de inclusión-exclusión. Para $S_{n, k}$ definido como el conjunto de funciones $f: [n] \to [k]$ de forma que $f$ es sobreyectiva, recordemos que en general el conjunto de las funciones $f: [n] \to [k]$ es $[k]^{[n]}$ y tiene cardinal $k^n$. Luego, si queremos determinar el número de funciones que no son sobreyectivas podremos determinar el siguiente conjunto:
+\begin{align*}
+    A_i &:= \{f \in [k]^{[n]} : i \not\in f([n])\}
+\end{align*}
+Para todo $i \in [k]$, lo que en pocas palabras significa determinar que elementos no reciben image+n en ciertas funciones y denotarlas. Luego, el conjunto de todas las funciones que no entran en esta categoría será:
+\begin{align*}
+    \bigcup_{i = 1}^k A_i
+\end{align*}
+Luego, el cardinal de esta unión será:
+\begin{align*}
+    \left|\bigcup_{i = 1}^k A_i\right| &= \sum_{i = 1}^n (-1)^{i-1} \sum_{X \in \binom{[n]}{i}} \left|\bigcap_{x \in X} A_x\right|
+\end{align*}
+Por lo que el siguiente paso será determinar los elementos de las intersecciones:
+\begin{itemize}
+    \item Para $|A_1|$ pensemos que tenemos una función de $f: [n] \to [k]$ pero que $1 \not\in f([n])$. Luego, esto sería tener una función sobreyectiva si no estuviera el $1$ en $[k]$, lo que al final viene siendo una función que va de $[n]$ a un conjunto de $k-1$ elementos, por lo que el cardinal será $(k-1)^n$. 
+    \item Para $|A_2|$ pensemos que tenemos una función de $f: [n] \to [k]$ pero que $2 \not\in f([n])$. Luego, esto sería tener una función sobreyectiva si no estuviera el $2$ en $[k]$, lo que al final viene siendo una función que va de $[n]$ a un conjunto de $k-1$ elementos, por lo que el cardinal será $(k-1)^n$.
+    \item Para $|A_1 \cap A_2|$ tendremos una función $f: [n] \to [k]$ que sería sobreyectiva si $1, 2 \not \in [k]$. Pero de nuevo, esto no dice nada acerca de la función y en general lo que tenemos es una función de $[n]$ hacía un conjunto de $k-2$ elementos, por lo que su cardinal será $(k-2)^n$.
+    \item En general, para $|A_1 \cap A_2 \cap \dots \cap A_i|$ tendremos una función que va de $[n]$ hacía un conjunto de $k-i$ elementos, por lo que su cardinal será en sí $(k-i)^n$.
+\end{itemize}
+Luego, reemplazando esto en nuestra formula:
+\begin{align*}
+    \left|\bigcup_{i = 1}^k A_i\right| &= \sum_{i = 1}^n (-1)^{i-1} \sum_{X \in \binom{[n]}{i}} (k-i)^n\\
+    &= \sum_{i = 1}^n (-1)^{i-1} \cdot (k-i)^n \cdot \sum_{X \in \binom{[n]}{i}} 1\\
+    &= \sum_{i = 1}^n (-1)^{i-1} \cdot \binom{n}{i} \cdot (k-i)^n
+\end{align*}
+Y luego si a todo el conjunto de funciones le extraemos el conjunto de funciones que no son sobreyectivas obtendremos:
+\begin{align*}
+    \left|[k]^{[n]} - \bigcup_{i = 1}^k A_i \right| &= k^n - \sum_{i = 1}^n (-1)^{i-1} \cdot \binom{n}{i} \cdot (k-i)^n \\
+    &= k^n + \sum_{i = 1}^n (-1)^i \cdot \binom{n}{i} \cdot (k-i)^n\\
+    &= \sum_{i = 0}^n (-1)^i \cdot \binom{n}{i} \cdot (k-i)^n
+\end{align*}
+Por lo que:
+\begin{align*}
+    |S_{n, k}| &= \sum_{i = 0}^k (-1)^i \cdot \binom{k}{i} \cdot (k-i)^n
+\end{align*}
+
+\subsection*{Números de Stirling de segundo orden}
+Ahora que entramos a contar funciones sobreyectivas, podemos pensar en ellas como una partición donde cada conjunto de la partición representa elementos que van a la misma imagen. Por ejemplo, para la función:
+\begin{align*}
+    f: [3] \to [2]\\
+\end{align*}
+De modo que $f(1) = f(3) = 1$ y $f(2) = 2$ tendremos la partición $\{\{1, 3\}, \{2\}\}$ donde $1, 3$ están en el mismo conjunto dado que van a la misma imagen y por ello $2$ está en otro conjunto, puesto que va a un elemento diferente. Es obvio que este conjunto es una partición de $[3]$, y nos da información importante sobre la función. Antes de seguir, vamos a introducir algunas definciones:
+
+\begin{definition}[Orden cánonico o estandar]
+    Sea $\pi \vdash X$ una partición, entonces se define el orden cánonico de $\pi$ como una enumeración de sus elementos de forma que para:
+    \begin{align*}
+        \pi &= \{B_1, B_2, \dots, B_n\}
+    \end{align*}
+    Donde $\min(B_1) \le \min(B_2) \le \dots \le \min(B_n)$.
+\end{definition}
+
+Esta herramienta del orden estandar nos permitirá interactuar fácilmente con permutaciones, pero también es útil de manera similar a como definimos el conjunto $\binom{[n]}{k}$ y $\mathfrak{S}_n$ definir un conjunto de particiones para $[n]$.
+
+\begin{definition}[Conjunto de particiones y número de Stirling de segundo orden]
+    Sean $n, k \in \mathbb{Z}$ de forma que $k \le n$ definimos el conjunto:
+    \begin{align*}
+        \stirling{[n]}{k} &:= \{\pi \subseteq \mathcal{P}([n]) : \pi \vdash [n] \wedge |\pi| = k\}
+    \end{align*}
+    Es decir, el conjunto de particiones de $[n]$ que posee $k$ elementos. El cardinal de este conjunto denotado por $\stirling{n}{k}$ se denomina número de Stirling de segundo orden.
+\end{definition}
+
+¡Perfecto! Podríamos hacer entonces una biyección entre $S_{n, k}$ y $\stirling{[n]}{k}$ de no ser por un pequeño detalle. Si tengo una función $f: [3] \to [2]$ de forma que $f(1) = f(2) = 1$ y $f(3) = 2$ y además tengo una función $g: [3] \to [2]$ de forma que $g(1) = g(2) = 2$ y $g(3) = 1$, con $f$ y con $g$ podría generar la misma partición en orden estandar, aún cuando poseen imagenes diferentes. Es por eso que dentro del juego tiene que entrar algo que me permita decir a donde mandar cada elemento y eso es una permutación. Por ejemplo, para $f$ podríamos tener la partición $\{\{1, 2\}, \{3\}\}$ y la permutación $(1, 2)$ diciendo que a los elementos de $\{1, 2\}$ los mando a $1$ y al elemento de $\{3\}$ lo mando a $2$. Luego, para $g$ tendremos la partición $\{\{1, 2\}, \{3\}\}$ y la permutación $(2, 1)$ de forma que a los elementos de $\{1, 2\}$ los mando a $2$ y al elemento de $\{3\}$ lo mando a $1$. Con esto en mente, probaremos el siguiente teorema:
+
+\begin{theorem}
+    Para $n, k \in \mathbb{Z}$ con $k \le n$:
+    \begin{align*}
+        S_{n, k} \cong \stirling{[n]}{k} \times \mathfrak{S}_k
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    Para hacer esta demostración tomaremos dos funciones $\varphi$ y $\psi$ de forma que sean inversas. Empecemos definiendo:
+    $$\begin{matrix}
+        \varphi: & S_{n, k} & \to & \stirling{[n]}{k} \times \mathfrak{S}_k\\
+        & f & \mapsto & (\pi, \sigma)
+    \end{matrix}$$
+    Definiendo:
+    \begin{itemize}
+        \item $\pi$ como una partición en orden estandar donde $\pi = \{B \subseteq [n] : f^{-1}(\{i\}) = B\text{, para algún $i \in [n]$}\}$. Es decir, $\pi$ es una partición de los elementos que tienen la misma imagen. Esta partición en orden estandar estará enumerada como $\{B_1, B_2, \dots, B_k\}$(¿Por que se asegura que tiene $k$ elementos?)
+        \item $\sigma$ es definida por:
+        $$\begin{matrix}
+            \sigma: & [k] &\to &[k]\\
+            & i & \mapsto & j
+        \end{matrix}$$
+        Si y solo si $f(B_i) = j$ o en otras palabras que para todo $x \in B_i$, $f(x) = j$.
+    \end{itemize}
+
+    Luego, definimos la función inversa como:
+    $$\begin{matrix}
+        \psi: & \stirling{[n]}{k} \times \mathfrak{S}_k & \to & S_{n, k}\\
+        & (\pi, \sigma) &\mapsto & f
+    \end{matrix}$$
+    De forma que la función $f$ se define por como $f:[n] \to [k]$ donde $f(B_i) = \{\sigma(i)\}$ para todo $B_i \in \pi$, o en otras palabras, que $f(x) = \sigma(i)$ si y solo si $x \in B_i$ (¿Por qué esta será una función sobreyectiva?).\\
+
+    Con esto en mente, es hora de demostrar que ambas funciones son inversas:
+    \begin{itemize}
+        \item Tome $f \in S_{n, k}$, queremos demostrar que $(\psi \circ \varphi)(f) = f$. Para ello, sabemos que $\varphi(f) = (\pi_f, \sigma_f)$. Luego, $\psi(\pi_f, \sigma_f) = g$ siendo $g$ una función sobreyectiva de $[n]$ a $[k]$. Queremos demostrar entonces que $f = g$. Ya tenemos que tienen el mismo dominio y codominio, por lo que basta probar que poseen la misma regla de asignación. Sea $a \in [n]$, entonces $g(a) = \sigma(i)$ para algún para algún $i \in [k]$ haciendo que $a \in B_i$ por definción, pero entonces $\sigma(i) = f(a)$ dado que $a \in B_i$ y $\sigma(i)  = f(x)$ para todo $x \in B_i$ por definción de $\sigma_f$ por lo que $g(a) = f(a)$. Luego, $(\psi \circ \varphi)(f) = f$.
+        \item Tome $(\pi, \sigma) \in \stirling{[n]}{k} \times \mathfrak{S}_k$, queremos demostrar que $(\varphi \circ \psi)(\pi, \sigma) = (\pi, \sigma)$. Para ello, note que $\psi(\pi, \sigma) = g$ siendo $g: [n] \to [k]$ una función sobreyectiva. Luego, $\varphi(g) = (\pi', \sigma')$ y lo importante es demostrar que $\pi = \pi'$ y $\sigma = \sigma'$. Para lo primero, recordemos que $|\pi| = |\pi'| = k$, y luego hace falta solo demostrar que $\pi' \subseteq \pi$ para demostrar que son iguales(¿Por qué?).\\
+        
+        Suponga entonces que $B \in \pi'$, por lo que por definción $g^{-1}(\{i\}) = B$ para algún $i \in [k]$. Luego, también sabemos que por definción de $g$, si $g(B) = \{i\}$ entonces $i = \sigma(j)$ para algún $j \in [k]$, por lo que en realidad $B := B_k$ bajo la númeración estandar y luego dado que $B_k \in \pi$ entonces $B \in \pi$. Por tanto, concluimos que $\pi = \pi'$.\\
+
+        Ahora, si queremos demostrar que $\sigma = \sigma'$, ya tenemos asegurado que son funciones con el mismo dominio y codominio. Luego, para $i \in [k]$ tendremos que $\sigma'(i) = j$ si y solo si $g(B_i) = \{j\}$. Pero por definción de $g$, eso quiere decir que $g(B_i) = \{\sigma(i)\}$, por lo que $\sigma(i) = j$ y concluimos que $\sigma(i) = \sigma'(i)$.
+    \end{itemize}
+    Por lo tanto la composición de ambas funciones es la identidad de cada dominio y esto nos permite ver que son inversas, lo que implica que son funciones biyectivas y por tanto $S_{n, k} \cong \stirling{[n]}{k} \times \mathfrak{S}_k$.
+\end{proof}
+
+\subsection*{Formula para números de Stirling}
+Ya que sabemos que los dos conjuntos están en biyección, tendremos la siguiente igualdad:
+\begin{align*}
+    |S_{n, k}| &= \left|\stirling{[n]}{k} \times \mathfrak{S}_k\right|\\
+    |S_{n, k}| &= \left|\stirling{[n]}{k}\right| \cdot |\mathfrak{S}_k|\\
+    \sum_{i = 0}^k (-1)^i \cdot \binom{k}{i} \cdot (k-i)^n &= \stirling{n}{k} \cdot k!\\
+    \stirling{n}{k} &= \frac{1}{k!} \cdot \sum_{i = 0}^k (-1)^i \cdot \binom{k}{i} \cdot (k-i)^n\\
+\end{align*}
+
+\section*{Teorema del Binomio...Otra vez}
+Increible! Para cerrar esta sección, enunciaremos el teorema del Binomio visto anteriormente para una resta de dos números y veremos como este concepto permite extender el teorema a racionales.
+\begin{theorem}[Teorema del binomio Parte 2]
+    Sean $x, y \in \mathbb{Z}^{\ge 0}$ y $n \ge 0$ entonces:
+    \begin{align*}
+        (x-y)^n &= \sum_{k = 0}^n \binom{n}{k} \cdot (-1)^k y^k \cdot x^{n-k}
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    Sin perdida de generalidad suponga que $y \le x$. Suponga que $X \cong [x]$ y $Y \cong [y]$, y que $Y \subseteq X$. Luego:
+    \begin{align*}
+        (x-y)^n &= |X \setminus Y|^n\\
+    \end{align*}
+    Luego, si designamos:
+    \begin{align*}
+        A_i &:= \{z \in X^n | z_i \in Y\}
+    \end{align*}
+    Podremos notar que $(X\setminus Y)^n = X^n \setminus \bigcup_{i \in [n]} A_i$ y usando el principio de inclusión y exclusión:
+    \begin{align*}
+        |(X\setminus Y)^n| &= x^n - \sum_{i = 1}^n (-1)^{i-1} \sum_{X \in \binom{[n]}{i}} \left|\bigcap_{x \in X} A_x\right| 
+    \end{align*}
+    Analizando un poco las intersecciones tendremos:
+    \begin{itemize}
+        \item $|A_i|$ será un conjunto donde la $i$-esima componente de cada elemento pertence a $Y$ y el resto de componentes pertenecen a $X$ en general. Dado eso, para la primera componente habrán $y$ opciones y para cada una de las restantes, $x$ opciones. Por tanto $|A_i| = y \cdot x^{n-1}$.
+        \item $|A_i \cap A_j|$ con $i \neq j$ será un conjunto donde la $i$-esima y la $j$-esima componente de cada elemento sean elementos de $Y$ y el resto pertenecerán a $X$ en general. Por ello, en cada componente donde el elemento pertenece a $Y$ habrán $y$ opciones para escoger el elemento, y en el resto, $x$ opciones. Por tanto $|A_i \cap A_j| = y^2 \cdot x^{n-2}$.
+        \item $|A_1 \cap A_2 \cap \dots \cap A_k|$ será un conjunto donde la primeras $k$ componentes de sus elementos pertenecen a $Y$ y por tanto el resto pertenencen en general a $X$. Luego, para dichas componentes hay $y$ opciones y para el resto $x$ por lo que $|A_1 \cap A_2 \cap \dots \cap A_k| = y^k \cdot x^{n-k}$, lo que aplica para cualquier intersección de $k$ conjuntos de la forma $A_i$.
+    \end{itemize}
+    Reemplazando en la formula que tenemos:
+    \begin{align*}
+        |(X\setminus Y)^n| &= x^n - \sum_{i = 1}^n (-1)^{i-1} \sum_{X \in \binom{[n]}{i}} \left|\bigcap_{x \in X} A_x\right| \\
+        &= x^n - \sum_{i = 1}^n (-1)^{i-1} \sum_{X \in \binom{[n]}{i}} y^k \cdot x^{n-k}\\
+        &= x^n - \sum_{i = 1}^n (-1)^{i-1} \cdot y^k \cdot x^{n-k} \cdot \sum_{X \in \binom{[n]}{k}} 1\\
+        &= x^n - \sum_{i = 1}^n (-1)^{i-1}\cdot \binom{n}{k} \cdot y^k \cdot x^{n-k}\\
+        &= x^n + \sum_{i = 1}^n (-1)^i \cdot \binom{n}{k} y^k \cdot x^{n-k}\\
+        &= \sum_{i = 0}^n (-1)^i \cdot \binom{n}{k} \cdot y^k \cdot x^{n-k}
+    \end{align*}
+\end{proof}
+Luego, tendremos que:
+\begin{align*}
+    (x-y)^n &= \sum_{k = 0}^n \binom{n}{k} \cdot (-1)^k y^k \cdot x^{n-k}
+\end{align*}
+
+Como pequeño corolario, podremos extender a todo número entero y racional el teorema del binomio.
+\begin{corollary}
+    Para todo $x, y \in \mathbb{Q}$ y $n \ge 0$ tendremos que el Teorema del binomio en general es valido.
+\end{corollary}
+\begin{proof}
+    Para derivar las formulas y la validez del teorema, en el caso de $\mathbb{Z}$ use las dos partes del teorema por casos y factorizando $-1$ en caso de ser necesario. Para $\mathbb{Q}$ exprese $x = \frac{a}{b}$ y $y = \frac{c}{d}$, aplique la suma de fracciones y busque aplicar el teorema del binomio unicamente en la suma de un entero.
+\end{proof}
+\end{document}

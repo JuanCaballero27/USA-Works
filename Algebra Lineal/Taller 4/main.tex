@@ -1,0 +1,212 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage[top=1cm,left=1cm,right=1.5cm,bottom=2cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true,urlcolor=magenta,citecolor=red,linkcolor=violet,bookmarks=true]{hyperref}
+\usepackage[sort&compress,round,comma,authoryear]{natbib}
+\usepackage{makeidx}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{textcomp}
+\usepackage[many]{tcolorbox}
+\usepackage{empheq}
+\usepackage{tasks}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{lipsum}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{bookmark}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lastpage}
+\usepackage{epigraph}
+\usepackage{enumerate}
+\usepackage{enumitem}
+
+\newlist{questions}{enumerate}{3}
+\setlist[questions]{label=\arabic*.}
+\newcommand{\question}{\item}
+\setlist[enumerate,1]{% (
+leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
+
+\newlist{partes}{enumerate}{3}
+\setlist[partes]{label=(\alph*)}
+\newcommand{\parte}{\item}
+%---
+\newlist{subpartes}{enumerate}{3}
+\setlist[subpartes]{label=\roman*)}
+\newcommand{\subparte}{\item}
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\pagestyle{plain}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Algebra Lineal 1}
+\newcommand{\professor}{Alejandro Garzón Leyton}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{Taller 10}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\y}{\boldsymbol{y}}
+\newcommand{\balpha}{\mbox{${ \bm \alpha}$}}
+\newcommand{\bmu}{\mbox{${\bm \mu}$}}
+\newcommand{\bbeta}{\mbox{${\bm \beta}$}}
+\newcommand{\bteta}{\mbox{${\bm \theta}$}}
+\newcommand{\bgama}{\mbox{${\bm \gamma}$}}
+\newcommand{\bxi}{\mbox{${\bm \xl}$}}
+\newcommand{\bvarphi}{\mbox{${ \bm \varphi}$}}
+\newcommand{\SZ}{\mbox{ $Z$}}
+\newcommand{\muz}{\mu_{z,l}}
+\newcommand{\muo}{\mu_{0,l}}
+\newcommand{\etao}{\eta_{0,l}}
+\newcommand{\etaz}{\eta_{z,l}}
+\newcommand{\xbeta}{x_{l}\bgama}
+\newcommand{\mui}{\mu_{l}}
+\newcommand{\zetaind}{\zeta \mathtt{I}_{\{s_{l} \in Z \}}} 
+\newcommand{\spz}{ s_{l} \in z}
+\newcommand{\snpz}{ s_{l} \notin z}
+\newcommand{\sps}{ s_{l} \in S}
+\newcommand{\gphi}{ \Gamma(\phi)}
+\newcommand{\scan}{ \Lambda_{z}}
+\newcommand{\gmuop}{ \Gamma(\muo\phi)}
+\newcommand{\gmuzp}{ \Gamma(\muz \phi)}
+\newcommand{\gumuop}{ \Gamma((1-\muo)\phi)}
+\newcommand{\gumuzp}{ \Gamma((1-\muz)\phi)}
+\newcommand{\dlobeta}{ \frac{\parteial l_{0}(\bgama, \phi, 0) }{\parteial \bgama}}
+\newcommand{\lz}{  l_{z}(\bgama, \phi, \tau)}
+\newcommand{\lo}{  l_{0}(\beta, \phi, 0)}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\dis}{\displaystyle}
+\linespread{1.5}
+
+\newtheorem*{definition*}{Definición}
+\newtheorem*{theorem*}{Teorema}
+\newtheorem*{axiom*}{Postulado}
+\newtheorem{theorem}{Teorema}[section]
+\renewcommand*{\proofname}{\textbf{Demostración}}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      Emcabezado                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+    \begin{tabular}[l]{@{}l@{}}
+        \textbf{\instituto}\\
+        \textbf{Disciplina: \disciplina}\\
+        \textbf{Profesor: \professor}\\ 
+    \end{tabular} & 
+    \begin{tabular}[l]{@{}l@{}}
+        {\curso}\\
+        {\alumnoI}\\
+        {\alumnoII}\\
+    \end{tabular}
+\end{tabular*}
+\end{table}
+\begin{center}
+\rule[2ex]{\textwidth}{1pt}
+{\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+\begin{questions}[label=\protect\circled{\bfseries\arabic*}]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Preguntas                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\question \textbf{Pregunta 12:} Resolver el siguiente sistema de ecuaciones lineales
+
+$$\begin{matrix}
+    x_1 &-& 3x_2 &+& 4x_3 &= -4\\
+    3x_1 &-& 7x_2 &+& 7x_3 &= -8\\
+    -4x_1 &+& 6x_2 &-& x_3 &= 1\\
+\end{matrix}$$
+
+Para resolver el sistema, representamos los coeficientes y el termino independiente en una matriz como sigue:\\
+$$\begin{bmatrix}1 & -3 & 4 & -4\\3 & -7 & 7 & -8\\-4 & 6 & -1 & 7\\\end{bmatrix}$$
+Ahora, se busca dejar en la forma escalonada reducida a la matríz, por lo que se efectuan las siguientes operaciones:
+
+\begin{center}
+\begin{tabular}{cc}
+    \vspace{0.5cm}
+    $\begin{bmatrix}1 & -3 & 4 & -4\\3 & -7 & 7 & -8\\-4 & 6 & -1 & 7\\\end{bmatrix}$ & Matriz original \\
+    \vspace{0.5cm}
+    $\begin{bmatrix} 1 & -3 & 4 & -4\\ 3 & -7 & 7 & -8 \\ 4 & -6 & 1 & -7\end{bmatrix}$ & $F_3 \leftarrow -F_3$\\
+    \vspace{0.5cm}
+    $\begin{bmatrix}1 & -3 & 4 & -4\\ 3 & -7 & 7 & -8\\ 0 & 6 & -15 & 9 \end{bmatrix}$ & $F_3 \leftarrow F_3 - 4F_1$\\
+        \vspace{0.5cm}
+
+    $\begin{bmatrix}1 & -3 & 4 & -4\\ 3 & -7 & 7 & -8\\ 0 & 2 & -5 & 3 \end{bmatrix}$ & $F_3 \leftarrow \frac{1}{3}F_3$\\
+        \vspace{0.5cm}
+
+    $\begin{bmatrix}1 & -3 & 4 & -4\\ 0 & 2 & -5 & 4\\ 0 & 2 & -5 & 3 \end{bmatrix}$ & $F_2 \leftarrow F_2 - 3F_1$\\
+        \vspace{0.5cm}
+
+    $\begin{bmatrix}1 & -3 & 4 & -4\\ 0 & 2 & -5 & 4\\ 0 & 0 & 0 & 1 \end{bmatrix}$ & $F_3 \leftarrow F_3 - F_2$
+\end{tabular}
+\end{center}
+Luego, volviendo a escribir las ecuaciones en base a la última matriz resultante:
+$$\begin{matrix}
+    x_1 &-& 3x_2 &+& 4x_3 &= -4\\
+    0x_1 &+& 2x_2 &-& 5x_3 &= 4\\
+    0x_1 &+& 0x_2 &-& 0x_3 &= 1\\
+\end{matrix}$$
+Y dado que para todo $\alpha, \beta, \gamma \in \mathbb{C}$ nunca es verdad que:
+$$\alpha \cdot 0 + \beta \cdot 0 + \gamma \cdot 0 = 1$$
+Podemos concluir que el sistema es inconsistente. Y gracias a que es equivalente al sistema original, podemos concluir que el sistema original también es inconsistente.
+
+\question \textbf{Pregunta 20:} Determinar los valores de $h$ para los cuales la matriz es la matriz aumentada de un sistema linear consistente.
+$$\begin{bmatrix}
+1 & h & -3\\
+-2 & 4 & 6\\
+\end{bmatrix}$$
+
+\text{Para determinar lo requerido en la pregunta, basta con preguntarse cuando el sistema de ecucaciones 
+lineales de la matriz dada no sería consistente. Es decir, en cuales podremos obtener ecuaciones de 
+solución vacía o rectas paralelas.\\ 
+Dado que para ningún valor se genera una ecuación del tipo $0x_1 + 0x_2 = -3$ y gracias a que al 
+despejar el sistema es imposible generar rectas paralelas con las ecuaciones, dicho sistema tiene 
+solución para $h \in \mathbb{C}$.}
+
+
+\question \textbf{Pregunta 30:} Determinar la operación elemental de filas que transforma la primera matriz en la segunda, y determinar la operación inversa que transforma la segunda en la primera.
+\begin{center}
+    \begin{tabular}{c c}
+        $\begin{bmatrix} 1 & 3 & -4\\ 0 & -2 & 6\\ 0 & -5 & 9 \end{bmatrix}$ & $\begin{bmatrix} 1 & 3 & -4\\ 0 & 1 & -3\\ 0 & -5 & 9 \end{bmatrix}$ \\
+    \end{tabular}
+\end{center}
+Para empezar, se determina cual fila de la primera matriz es aquella que es alterada para obtener la segunda matriz. En este caso, $F_2$ es aquella fila que es alterada, y como se puede apreciar, el cambio se hace al multiplicar por $-\frac{1}{2}$. Para comprobar:
+\begin{center}
+    \begin{tabular}{c c}
+        \vspace{0.5cm}
+        $\begin{bmatrix} 1 & 3 & -4\\ 0 & -2 & 6\\ 0 & -5 & 9 \end{bmatrix}$ & Matriz Original \\
+        $\begin{bmatrix} 1 & 3 & -4\\ 0 & 1 & -3\\ 0 & -5 & 9 \end{bmatrix}$ & $F_2 \leftarrow -\frac{1}{2} F_2$
+    \end{tabular}
+\end{center}
+A su vez, eso nos permite determinar que la operación inversa que convierte la segunda matriz en la primera será multiplicar por $-2$ la segunda fila. Resultando así:
+\begin{center}
+    \begin{tabular}{c c}
+        \vspace{0.5cm}
+        $\begin{bmatrix} 1 & 3 & -4\\ 0 & 1 & -3\\ 0 & -5 & 9 \end{bmatrix}$ & Matriz Original \\
+        $\begin{bmatrix} 1 & 3 & -4\\ 0 & -2 & 6\\ 0 & -5 & 9 \end{bmatrix}$ & $F_2 \leftarrow -2 F_2$
+    \end{tabular}
+\end{center}
+\end{questions}
+\end{document}

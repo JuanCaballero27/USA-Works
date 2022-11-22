@@ -1,0 +1,217 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage{pstricks-add}
+\usepackage[top=1cm,left=1cm,right=1.5cm,bottom=2cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true,urlcolor=magenta,citecolor=red,linkcolor=violet,bookmarks=true]{hyperref}
+\usepackage[sort&compress,round,comma,authoryear]{natbib}
+\usepackage{makeidx}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{textcomp}
+\usepackage[many]{tcolorbox}
+\usepackage{empheq}
+\usepackage{tasks}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{lipsum}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{bookmark}
+\usepackage{pgfplots}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lastpage}
+\usepackage{epigraph}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
+\usetikzlibrary{arrows}
+\usepackage{subfiles} % Insert the commands.tex file which contains the majority of the structure behind the template
+\pgfplotsset{compat=1.15}
+
+\newlist{questions}{enumerate}{3}
+\setlist[questions]{label=\arabic*.}
+\newcommand{\question}{\item}
+\setlist[enumerate,1]{% (
+leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
+
+\newlist{partes}{enumerate}{3}
+\setlist[partes]{label=(\alph*)}
+\newcommand{\parte}{\item}
+%---
+\newlist{subpartes}{enumerate}{3}
+\setlist[subpartes]{label=\roman*)}
+\newcommand{\subparte}{\item}
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\pagestyle{plain}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Matemáticas Discretas}
+\newcommand{\professor}{Diego Villamizar}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{Taller 4}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+\linespread{1.5}
+\pagestyle{empty}
+\newtheorem*{definition*}{Definición}
+\newtheorem*{theorem*}{Teorema}
+\newtheorem*{axiom*}{Postulado}
+\newtheorem{theorem}{Teorema}[section]
+\renewcommand*{\proofname}{\textbf{Demostración}}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      Emcabezado                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+    \begin{tabular}[l]{@{}l@{}}
+        \textbf{\instituto}\\
+        \textbf{Disciplina: \disciplina}\\
+        \textbf{Profesor: \professor}\\ 
+    \end{tabular} & 
+    \begin{tabular}[l]{@{}l@{}}
+        {\curso}\\
+        {\alumnoI}\\
+    \end{tabular}
+\end{tabular*}
+\end{table}
+\begin{center}
+\rule[2ex]{\textwidth}{1pt}
+{\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+\begin{questions}[label=\protect\circled{\bfseries\arabic*}]
+    \question Considere la siguiente sucesión: 
+        $$F_n = \begin{cases} n &  n\leq 1\\
+        F_{n-1}+F_{n-2} & n>1\end{cases}$$
+    Calcule $F_8$, pruebe que $\Delta[F_x]=F_{x-1}$ y concluya, usando el T.F.C.D, que 
+        $$\sum _{k = 0}^nF_k=F_{n+2}-1.$$
+
+    \begin{proof}
+        Para empezar, cálculando los primeros terminos de la sucesión:
+        \begin{align*}
+            F_0 &= 0\\
+            F_1 &= 1\\
+            F_2 &= 1\\
+            F_3 &= 2\\
+            F_4 &= 3\\
+            F_5 &= 5\\
+            F_6 &= 8\\
+            F_7 &= 13\\
+            F_8 &= 21
+        \end{align*}
+
+        Luego, evaluando la derivada de la sucesión para el caso en el cúal $x \ge 1$
+        \begin{align*}
+            \Delta[F_x] &= F_{x+1} - F_x\\
+            &= F_x + F_{x-1} - F_x\\
+            &= F_{x-1} 
+        \end{align*}
+        Notese que cuando $x = 0$ tendremos $\Delta[F_x] = 1$. Luego, gracias a ese resultado $\Delta[F_{x+1}] = F_x$ podremos evaluar la siguiente expresión:
+        \begin{align*}
+            \sum_{k = 0}^n F_k &= \sum_0^n F_x\\
+            &= \sum_0^n \Delta[F_{x+1}]\\
+            &= F_{x+1} |_{0}^{n+1}\\
+            &= F_{n+2} - F_1\\
+            &= F_{n+2} - 1
+        \end{align*}
+    \end{proof}
+
+    \question Use el T.F.C.D para probar que si $c\geq 2$ entero, entonces
+        $$\sum _{k = 0}^nc^k=\frac{c^{k+1}-1}{c-1}.$$
+
+    \begin{proof}
+        Note primero que:
+        \begin{align*}
+            \Delta\left[\frac{c^x}{c-1}\right] &= \frac{c^{x+1}}{c-1} - \frac{c^x}{c-1}\\
+            &= \frac{c^{x+1}-c^x}{c-1}\\
+            &= \frac{c^x(c-1)}{c-1}\\
+            &= c^x
+        \end{align*}
+        Lo que permite evaluar la siguiente expresión:
+        \begin{align*}
+            \sum_{k = 0}^n c^k &= \sum_0^n c^x\\
+            &= \sum_0^n \Delta\left[\frac{c^x}{c-1}\right]\\
+            &= \frac{c^{n+1}}{c-1} - \frac{c^0}{c-1}\\
+            &= \frac{c^{n+1}-1}{c-1}
+        \end{align*}
+    \end{proof}
+
+    \question Pruebe que:
+    \begin{align*}
+        {n \brack 2} &= (n-1)! \cdot H_{n-1}
+    \end{align*}
+    \begin{proof}
+        Recordemos que:
+        \begin{align*}
+            {n \brack 2} &= \sum_{x \in \binom{[n-1]}{n-2}} \prod_{x \in X} x
+        \end{align*}
+
+        Gracias a la formula que tenemos para cálcular binomiales, sabemos que:
+        \begin{align*}
+            \binom{n-1}{n-2} &= \frac{(n-1)!}{(n-1-(n-2))! (n-2)!}\\
+            &= \frac{(n-1) (n-2)!}{(n-2)!}\\
+            &= n-1
+        \end{align*}
+        Cada uno de los conjuntos que están en $\binom{[n-1]}{n-2}$ es $[n-1]$ sin un elemento. Luego, si queremos cálcular la productoria de los elementos de cada conjunto, sabemos que $\prod_{x \in [n-1]} x = (n-1)!$, por lo que cuando sacamos $i$ de $[n-1]$ la productoria será $\frac{(n-1)!}{i}$ para todo $i \in [n-1]$. Por lo que:
+        \begin{align*}
+            \sum_{x \in \binom{[n-1]}{n-2}} \prod_{x \in X} x &= \frac{(n-1)!}{1} + \frac{(n-1)!}{2} + \dots + \frac{(n-1)!}{(n-1)}\\
+            &= (n-1)! \left[1 + \frac{1}{2} + \dots + \frac{1}{n-1}\right]\\
+            &= (n-1)! \sum_{i = 1}^{n-1} \frac{1}{i}
+        \end{align*}
+        Luego, si hacemos un cambio de variable de forma que $k = i - 1$, tendremos que la sumatoria empezará en $0$, llegará hasta $n-2$ y se expresará como:
+        \begin{align*}
+            (n-1)! \sum_{i = 1}^{n-1} \frac{1}{i} &= (n-1)! \sum_{k = 0}^{n-2} \frac{1}{k+1}\\
+            &= (n-1)! \sum_{k = 0}^{n-2} k^{\underline{-1}}\\
+        \end{align*}
+        Y si recordamos que
+        \begin{align*}
+            \sum _{k = 0}^nk^{\underline{-1}}=H_{n+1},
+        \end{align*}
+        entonces concluimos que:
+        \begin{align*}
+            {n \brack 2} &= (n-1)! \cdot H_{n-1}
+        \end{align*}
+    \end{proof}
+
+    \question Calcule, usando el T.F.C.D, la expresión $$\sum _{k = 0}^n\frac{1}{(k+1)(k+2)}.$$
+    \textbf{Hint:} ¿Qué es $\Delta\left [\frac{1}{x}\right ]$?
+    \begin{proof}
+        Note primero que:
+        \begin{align*}
+            \Delta\left[-\frac{1}{x+1}\right] &= -\frac{1}{x+2} + \frac{1}{x+1}\\
+            &= \frac{-x-1 + x + 2}{(x+2)(x+1)}\\
+            &= \frac{1}{(x+2)(x+1)}
+        \end{align*}
+        Lo que permite evaluar la expresión:
+        \begin{align*}
+            \sum _{k = 0}^n\frac{1}{(k+1)(k+2)} &= \sum_0^n \frac{1}{(x+1)(x+2)}\\
+            &= \sum_0^n \Delta\left[-\frac{1}{x+1}\right]\\
+            &= -\frac{1}{n+2} + \frac{1}{1}\\
+            &= \frac{n+2}{n+2} - \frac{1}{n+2}\\
+            &= \frac{n+1}{n+2} 
+        \end{align*}
+    \end{proof}
+\end{questions}
+\end{document}

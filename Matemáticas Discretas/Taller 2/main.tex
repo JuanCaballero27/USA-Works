@@ -1,0 +1,512 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage{pstricks-add}
+\usepackage[top=1cm,left=1cm,right=1.5cm,bottom=2cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true,urlcolor=magenta,citecolor=red,linkcolor=violet,bookmarks=true]{hyperref}
+\usepackage[sort&compress,round,comma,authoryear]{natbib}
+\usepackage{makeidx}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{textcomp}
+\usepackage[many]{tcolorbox}
+\usepackage{empheq}
+\usepackage{tasks}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{lipsum}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{bookmark}
+\usepackage{pgfplots}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lastpage}
+\usepackage{epigraph}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
+\usetikzlibrary{arrows}
+\usepackage{subfiles} % Insert the commands.tex file which contains the majority of the structure behind the template
+\pgfplotsset{compat=1.15}
+
+\newlist{questions}{enumerate}{3}
+\setlist[questions]{label=\arabic*.}
+\newcommand{\question}{\item}
+\setlist[enumerate,1]{% (
+leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
+
+\newlist{partes}{enumerate}{3}
+\setlist[partes]{label=(\alph*)}
+\newcommand{\parte}{\item}
+%---
+\newlist{subpartes}{enumerate}{3}
+\setlist[subpartes]{label=\roman*)}
+\newcommand{\subparte}{\item}
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\pagestyle{plain}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Matemáticas Discretas}
+\newcommand{\professor}{Diego Villamizar}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{Taller 2}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+\newcommand{\X}{\mathbf{X}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\y}{\boldsymbol{y}}
+\newcommand{\balpha}{\mbox{${ \bm \alpha}$}}
+\newcommand{\bmu}{\mbox{${\bm \mu}$}}
+\newcommand{\bbeta}{\mbox{${\bm \beta}$}}
+\newcommand{\bteta}{\mbox{${\bm \theta}$}}
+\newcommand{\bgama}{\mbox{${\bm \gamma}$}}
+\newcommand{\bxi}{\mbox{${\bm \xl}$}}
+\newcommand{\bvarphi}{\mbox{${ \bm \varphi}$}}
+\newcommand{\SZ}{\mbox{ $Z$}}
+\newcommand{\muz}{\mu_{z,l}}
+\newcommand{\muo}{\mu_{0,l}}
+\newcommand{\etao}{\eta_{0,l}}
+\newcommand{\etaz}{\eta_{z,l}}
+\newcommand{\xbeta}{x_{l}\bgama}
+\newcommand{\mui}{\mu_{l}}
+\newcommand{\zetaind}{\zeta \mathtt{I}_{\{s_{l} \in Z \}}} 
+\newcommand{\spz}{ s_{l} \in z}
+\newcommand{\snpz}{ s_{l} \notin z}
+\newcommand{\sps}{ s_{l} \in S}
+\newcommand{\gphi}{ \Gamma(\phi)}
+\newcommand{\scan}{ \Lambda_{z}}
+\newcommand{\gmuop}{ \Gamma(\muo\phi)}
+\newcommand{\gmuzp}{ \Gamma(\muz \phi)}
+\newcommand{\gumuop}{ \Gamma((1-\muo)\phi)}
+\newcommand{\gumuzp}{ \Gamma((1-\muz)\phi)}
+\newcommand{\dlobeta}{ \frac{\parteial l_{0}(\bgama, \phi, 0) }{\parteial \bgama}}
+\newcommand{\lz}{  l_{z}(\bgama, \phi, \tau)}
+\newcommand{\lo}{  l_{0}(\beta, \phi, 0)}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\dis}{\displaystyle}
+\linespread{1.5}
+\pagestyle{empty}
+\newtheorem*{definition*}{Definición}
+\newtheorem*{theorem*}{Teorema}
+\newtheorem*{axiom*}{Postulado}
+\newtheorem{theorem}{Teorema}[section]
+\renewcommand*{\proofname}{\textbf{Demostración}}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      Emcabezado                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+    \begin{tabular}[l]{@{}l@{}}
+        \textbf{\instituto}\\
+        \textbf{Disciplina: \disciplina}\\
+        \textbf{Profesor: \professor}\\ 
+    \end{tabular} & 
+    \begin{tabular}[l]{@{}l@{}}
+        {\curso}\\
+        {\alumnoI}\\
+    \end{tabular}
+\end{tabular*}
+\end{table}
+\begin{center}
+\rule[2ex]{\textwidth}{1pt}
+{\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+\begin{questions}[label=\protect\circled{\bfseries\arabic*}]
+\question Pruebe que $\binom{n}{k} = |\{(x_1, \dots, x_n) \in \{0, 1\}^{n}: x_1 + x_2 + \dots + x_n = k\}|$
+\begin{proof}
+    Denominemos $F$ al siguiente conjunto:
+    $$F := \{(x_1, \dots, x_n) \in \{0, 1\}^{n}: x_1 + x_2 + \dots + x_n = k\}$$
+    Para la Demostración es necesario probar que $\binom{[n]}{k} \cong F$. Para ello, definamos la función:
+    $$\begin{matrix}
+        f: &\binom{[n]}{k} &\to &F\\
+        & X &\mapsto& a^X\\
+    \end{matrix}$$
+    Donde definimos la $n$-tupla $a^X$ como:
+    \begin{align*}
+        a^X_i &= \begin{cases}
+            1 & i \in X\\
+            0 & i \not\in X\\
+        \end{cases}
+    \end{align*}
+    Ahora, demostrando que la función es biyectiva:
+    \begin{itemize}
+        \item \textbf{Inyectiva:} Sean $X, Y \in \binom{[n]}{k}$ de forma que:
+        \begin{align*}
+            f(X) &= f(Y)\\
+            a^X &= a^Y
+        \end{align*} 
+        Lo que indica que para $i \in [n]$, $a^x_i = a^Y_i$. Ahora, suponga que $z \in X$. Eso
+        quiere decir que $a^X_z = 1$. Luego, también $a^Y_z = 1$, por lo que necesariamente $z \in Y$ para que eso sea posible.
+        De la misma manera se concluye que si $z \in Y$ entonces $z \in X$. Concluimos que $X = Y$. 
+    \end{itemize}
+    \item \textbf{Sobreyectividad:} Sea $a$ una $n$-tupla de $F$. Teniendo en cuenta que la suma de las componentes de $a$ es $k$ y que
+    solo puede contener $1$ y $0$, podemos deducir que en $a$, $k$ componentes son $1$. Luego, defina el conjunto $A$ como:
+    \begin{align*}
+        A := \{i \in [n] | a_i = 1\}
+    \end{align*}
+    Ya sabemos que $A \subseteq [n]$ y justamente por la acotación anterior sabemos que $|A| = k$. Por lo que concluimos que
+    $A \in \binom{[n]}{k}$. Luego, $f(A) = a$ por la misma definición de la función y la forma como el conjunto toma los elementos de $a$.
+\end{proof}
+
+\question Pruebe que si $A$ es un conjunto finito y $n \ge 1$, entonces:
+$$|A^n| = |\underbrace{A \times A \times \dots \times A}_{n\, veces}| = |A|^n$$
+\begin{proof}
+    La Demostración para esta propiedad se hará por inducción. El caso para $n=1$ es trivial. Supongamos entonces que
+    para $n \ge 1$ en general se cumple que $|A^n| = |A|^n$ para un conjunto finito $A$. Luego, para $n+1$, en pro de la demostración
+    se usaría un reemplazo como el siguiente:
+    \begin{align*}
+        |A^{n+1}| &= |A^n\times A|
+    \end{align*}
+    Pero recordemos que $A^{n+1}$ es un conjunto de $n+1$-tuplas mientras que $A^n \times A$ es un conjunto de parejas ordenadas. Para realizar dicha acción, es necesario demmostrar que
+    $A^{n+1} \cong A^n \times A$. Considere la función $f$ definida por:
+    $$\begin{matrix}
+        f: &A^n \times A &\to& A^{n+1}\\
+        &z = (x = (x_1, \dots, x_n), a)& \mapsto &b
+    \end{matrix}$$
+    definiendo:
+    \begin{align*}
+        b_i &= \begin{cases}
+            x_i & i \le n\\
+            a & i = n+1
+        \end{cases}
+    \end{align*}
+    Y demostrando que la función es una biyección tendremos:
+    \begin{itemize}
+        \item \textbf{Inyectividad:} Sean $z, w \in A^n \times A$ de forma que su imagen bajo $f$ es igual. Tendremos:
+        \begin{align*}
+            f(z) &= f(w)\\
+            (a_1, a_2, \dots, a_n, a_{n+1}) &= (b_1, b_2, \dots, b_n, b_{n+1})
+        \end{align*}
+        Tenga en cuenta que $z$ y $w$ se componen de una $n$-tupla y un elemento de $a$. Luego, si las dos $n+1$-tuplas son iguales quiere
+        decir que son iguales componente a componente. Para empezar, $a_{n+1} = b_{n+1}$, y además para todo $i \in [n]$, $a_i = b_i$. Por la definición de la función y $z, w$ se tendrá que:
+        \begin{align*}
+            z &= ((a_1, a_2, \dots, a_n), a_{n+1})\\
+            w &= ((b_1, b_2, \dots, b_n), b_{n+1})\\
+        \end{align*} 
+        Por lo que gracias a lo dicho anteriormente concluimos que $z = w$.
+
+        \item \textbf{Sobreyectividad:} Para una $n+1$-tupla de la forma $(a_1, a_2, \dots, a_n, a_{n+1})$ con $a_i \in A$ para todo $i \in [n+1]$ podremos construir la pareja ordenada:
+        \begin{align*}
+            z &= ((a_1, a_2, \dots, a_n), a_{n+1})
+        \end{align*}
+        Luego, la primera componente de $z$ de una $n$-tupla y la segunda componente es un elemento de $A$, por lo que $z \in A^n \times A$.
+        Y al realizar $f(z)$ por definición será $(a_1, a_2, \dots, a_n, a_{n+1})$. Por lo tanto $f$ es sobreyectiva.
+    \end{itemize}
+    Ya comprobado que $A^{n+1} \cong A^n \times A$ es posible decir:
+    \begin{align*}
+        |A^{n+1}| &= |A^n \times A|\\
+        &= |A^n| \times |A|\\
+        &= |A|^n \times |A|\\
+        &= |A|^{n+1}
+    \end{align*}
+    Por lo que la proposición es verdad para $n+1$. Luego, se puede afirmar que es verdad en general para todo $n \ge 1$.
+\end{proof}
+\question Use inducción para probar las siguientes proposiciones:
+\begin{partes}
+\parte $2^n \ge n^2$ para $n \ge 4$
+\begin{proof}
+    Cuando $n = 4$ se tendrá en el lado izquierdo y derecho de la desigualdad respectivamente:
+    \begin{align*}
+        2^n & & n^2 \\
+        =2^4 & & =4^2 \\
+        =16 & & 16\\
+    \end{align*}
+    Por lo que la proposición es valida para $n = 4$. Supongamos que también lo es en general para $n \ge 4$. Luego,
+    para demostrar que lo es para $n+1$ se tendrá:
+    \begin{align*}
+        (n + 1)^2 &= n^2 + 2n + 1\\
+        &\le 2^n + 2n + 1\\
+        &\le 2^n + 2^n\\
+        &= 2^{n+1}
+    \end{align*}
+    (La desigualdad $2^n \ge 2n+1$ es valida gracias a la limitación para $n$). Por lo que concluimos que en general la proposición es verdad para todo $n \ge 4$.
+\end{proof}
+
+\parte $7^n - 1$ es divisible por $6$ para $n \ge 1$
+\begin{proof}
+    Cuando $n = 1$ la expresión será:
+    \begin{align*}
+        7^n - 1 &= 7^1 -1\\
+        &= 7 - 1\\
+        &= 6\\
+        &= 6 \cdot 1\\
+    \end{align*}
+    Por lo que efectivamente se cumple en dicho caso. Supongamos que en general se cumple para $n \ge 1$, es decir, que
+    existe $k \in \mathbb{Z}$ de forma que $6k = 7^n - 1$. Para demostrar que también es verdad para $n+1$ se tendrá:
+    \begin{align*}
+        7^{n+1} - 1 &= 7^n \cdot 7 - 1\\
+        &= 7^n + 6 \cdot 7^n - 1\\
+        &= 7^n - 1 + 6\cdot 7^n\\
+        &= 6 \cdot k + 6 \cdot 7^n\\
+        &= 6 \cdot (k + 7^n)\\
+    \end{align*}
+    Y gracias a que $k+7^n$ es un número entero, concluimos que $6$ divide $7^{n+1}-1$. Por lo que podemos concluir que la
+    proposición es valida para todo $n \ge 1$.
+\end{proof}
+
+\parte $6 \cdot 7^n - 2 \cdot 3^n$ es divisible por $4$ para $n \ge 1$
+\begin{proof}
+    Cuando $n = 1$ se tendrá:
+    \begin{align*}
+        6 \cdot 7^n - 2\cdot 3^n &= 6 \cdot 7 - 2 \cdot 3\\
+        &= 42 - 6\\
+        &= 36\\
+        &= 4 \cdot 9
+    \end{align*}
+    Por lo que efectivamente la proposición es verdad para $n = 1$. Supongamos que en general es verdad para $n \ge 1$, es decir que existe
+    $k \in \mathbb{Z}$ de forma que $4k = 6\cdot 7^n - 2\cdot 3^n$. Demostrando para $n+1$:
+    \begin{align*}
+        6 \cdot 7^{n+1} - 2 \dot 3^{n+1} &= 6 \cdot 7 \cdot 7^n - 2 \cdot 3 \cdot 3^n\\
+        &= 6 \cdot 6 \cdot 7^n + 6 \cdot 7^n - 2 \cdot 2 \cdot 3^n - 2 \cdot 3^n\\
+        &= 6\cdot 7^n - 2\cdot 3^n + 36 \cdot 7^n - 4\cdot 3^n\\
+        &= 4k + 36\cdot 7^n - 4\cdot 3^n\\
+        &= 4\cdot (k + 9 \cdot 7^n - 3^n)\\ 
+    \end{align*}
+    Y dado que $k+9\cdot 7^n - 3^n$ es un número entero, concluimos que la proposición es verdad para $n+1$. Por lo que en general
+    será verdad para $n \ge 1$.
+\end{proof}
+
+\parte Sea $x \ge 0$ y $n \ge 1$, pruebe que $(1+x)^n \ge 1+n \cdot x$
+\begin{proof}
+    Para $n=1$ los dos lados de la desigualdad serán:
+    \begin{align*}
+        (1+x)^n &= (1+x)^1 & 1+n \cdot x &= 1+ 1 \cdot x\\
+        &= 1+x & &= 1+x
+    \end{align*}
+    Por lo que es verdad para $n=1$. Supongamos que lo es en general para $n \ge 1$. Demostraremos que lo es para $n+1$.
+    Por lo que se tendrá:
+    \begin{align*}
+        1+(n+1) \cdot x &= 1+n\cdot x + x\\
+        &\le (1+x)^n + x\\
+        &\le (1+x)^n + (1+x)\\
+    \end{align*}
+    Y gracias a que $(1+x) \ge 1$ se tendrá por propiedades de los números reales que:
+    \begin{align*}
+        (1+x)^n + (1+x) &\le (1+x)^n \cdot (1+x)\\
+        &= (1+x)^{n+1}
+    \end{align*}
+    Por lo que la proposición es verdad para $n+1$ y en general lo será para $n \ge 1$.
+\end{proof}
+\end{partes}
+
+
+\question Sea $\{a_i\}_{i \in [n]}$ una sucesión finita de números positivos. Pruebe que
+\begin{align*}
+    (a_1a_2\dots a_n)^{\frac{1}{2^n}} &\le \frac{a_1+a_2+\dots+a_n}{2^n}
+\end{align*}
+para $n \ge 1$.
+\begin{proof}
+    Para $n=1$ se tendrá la desigualdad:
+    \begin{align*}
+        \sqrt{a_1} \le \frac{a_1}{2}
+    \end{align*}
+    Pero si se hace $a_1 = 1$ entonces:
+    \begin{align*}
+        \sqrt{1} &= 1\\
+        &\le \frac{1}{2}
+    \end{align*}
+    Lo cúal es una contradicción. Por tanto, la proposición no es verdadera en general.
+\end{proof}
+
+\question Use la definición dada en clase para probar lo siguiente:
+\begin{partes}
+\parte $\binom{n}{1} = n$ para $n \ge 0$
+\begin{proof}
+    Será necesario demostrar $\binom{[n]}{1} \cong [n]$. Por lo que considere la siguiente función:
+    $$\begin{matrix}
+        f: & [n] & \to & \binom{[n]}{1}\\
+        & k & \mapsto & \{k\}\\
+    \end{matrix}$$
+    Demostrando que la función es una biyección:
+    \begin{itemize}
+        \item \textbf{Inyectividad:} Sean $k_1, k_2 \in [n]$ de forma que:
+        \begin{align*}
+            f(k_1) &= f(k_2)\\
+            \{k_1\} &= \{k_2\}
+        \end{align*}
+        Y para que ambos conjuntos sean el mismo es necesario que $k_1 = k_2$.
+        \item \textbf{Sobreyectividad:} Sea $\{k\} \in \binom{[n]}{1}$, ya que se sabe que
+        $\{k\} \subseteq [n]$ podemos concluir que $k \in [n]$. Por lo que para $k$ se tendrá que $f(k) = \{k\}$.
+    \end{itemize}
+    Por lo que la función es una biyección y concluimos que $\binom{n}{1} = n$.
+\end{proof}
+
+\parte Pruebe por inducción sobre $n$ que $\binom{n}{2} = \frac{n\cdot(n-1)}{2}$ para $n \ge 0$
+\begin{proof}
+    Para $n=0$ se tiene que:
+    \begin{align*}
+        \binom{0}{2} &= 0 & \frac{0 \cdot (0 - 1)}{2} &= 0\\
+    \end{align*}
+    Por lo que la proposición es verdadera para $n = 0$. Supongamos que lo es en general para $n \ge 0$ y demostraremos entonces que lo es para $n+1$:
+    \begin{align*}
+        \binom{n+1}{2} &= \binom{n}{2} + \binom{n}{1}\\
+        &= \frac{n \cdot (n-1)}{2} + n\\
+        &= n \cdot \left(\frac{n-1}{2} + 1\right)\\
+        &= n \cdot \left(\frac{n-1+2}{2}\right)\\
+        &= n \cdot \left(\frac{n+1}{2}\right)\\
+        &= \frac{n \cdot (n+1)}{2}
+    \end{align*}
+    Por lo que la expresión es verdad para $n+1$. Podemos concluir que entonces lo es para todo $n \ge 0$.
+\end{proof}
+
+\parte $\binom{n}{k} = \binom{n}{n-k}$ para $0 \le k \le n$
+\begin{proof}
+    Es necesario demostrar que $\binom{[n]}{k} \cong \binom{[n]}{n-k}$. Considere la función $f$ definida por:
+    $$\begin{matrix}
+        f: & \binom{[n]}{k} &\to & \binom{[n]}{n-k}\\
+        & X & \mapsto & [n]-X
+    \end{matrix}$$
+    Basta con recordar que $|B \setminus A| = |B| - |A|$ cuando $A \subseteq B$ para comprobar que $[n]-X \in \binom{[n]}{n-k}$ para $X \in \binom{[n]}{k}$.
+    Ahora, demostrando que la función es biyectiva:
+    \begin{itemize}
+        \item \textbf{Inyectividad:} Para $X, Y \in \binom{[n]}{k}$ de forma que sus imagenes son iguales se tendrá:
+        \begin{align*}
+            f(X) &= f(Y)\\
+            [n] \setminus X &= [n] \setminus Y
+        \end{align*}
+        Lo que lógicamente implica que $x \not\in X$ si y solo $x \not\in Y$. Pero eso es decir que $x \in X$ si y solo si $x \in Y$ y por tanto $X=Y$.
+        \item \textbf{Sobreyectividad:} Para $X \in \binom{[n]}{n-k}$ tome $A = [n]-X$. No es dificil ver que $|A| = k$ por lo que
+        $A \in \binom{[n]}{k}$. Luego, $f(A) = [n] \setminus ([n] \setminus X) = X$. Por lo que la función es sobreyectiva. 
+    \end{itemize}
+    Luego, podemos concluir que la función es una biyección y por tanto $\binom{n}{k} = \binom{n}{n-k}$.
+\end{proof}
+\end{partes}
+
+\question Dada una permutación $\sigma \in \mathfrak{S}_n$ considere la relación $R \subseteq [n]^2$ dada por:
+\begin{align*}
+    R_\sigma &= \{(a, b) \in [n]^2: \exists k \in \mathbb{Z}^{\ge 0} | \sigma^k (a) = b\}
+\end{align*}
+\begin{partes}
+    \parte Demostrar que $R_\sigma$ es una relación de equivalencia.
+    \begin{proof}
+        Para demostrar que $R_\sigma$ es una relación de equivalencia demostraremos que es reflexiva, simetrica y transitiva.
+        \begin{itemize}
+            \item \textbf{Reflexiva:} $(a, a) \in R_\sigma$ ya que para $k = 0$, $\sigma^k(a) = \sigma^0(a) = a$ considerando de forma
+            intuitiva que $\sigma^0$ no realiza transformaciones en $a$, o de manera más formal, que es un elemento neutro en la composición de funciones, siendo $\sigma^0(a) = Id_{[n]}(a)$.
+            \item \textbf{Simetrica:} Supongamos que $(a, b) \in R_\sigma$. Luego, existe $k \in \mathbb{Z}^{\ge 0}$ de forma que $\sigma^k(a)=b$. Ahora, tenga en cuenta que
+            para $k \ge n$ la composición de $\sigma$ sobre sí misma se vuelve un proceso ciclico, gracias a que $\sigma^n = Id_{[n]}$(La demostración de esta propiedad
+            para permutaciones se demuestra en \href{https://people.math.sc.edu/shaoyun/math5463slide8.pdf}{Permutation Groups By Shaoyun Yi}). Por lo que no es ninguna perdida de generalidad
+            suponer que $k \le n$. Entonces tome $\sigma^{n-k}$ que puede ser expresada como $\sigma^n \circ (\sigma^{-1})^k$. Si se demuestra que al componerle con $\sigma^k$ se obtiene la identidad se
+            demuestra que dicha función es una inversa para $\sigma^{k}$ y que por tanto al estar $n-k$ en $\mathbb{Z}^{\ge 0}$ concluir que $\sigma^{n-k}(b) = a$. Además gracias a que $\sigma$ es una biyección está asegurada la
+            existencia de dicha función inversa. Se tendrá entonces que:
+            \begin{align*}
+                \sigma^k \circ (\sigma^n \circ (\sigma^{-1})^k) &= \sigma^k \circ (\sigma^{-1})^k\\
+                &= Id_{[n]}
+            \end{align*} 
+            Y de manera similar también:
+            \begin{align*}
+                (\sigma^n \circ (\sigma^{-1})^k) \circ \sigma^k &= (\sigma^{-1})^k \circ \sigma^k\\
+                &= Id_{[n]}
+            \end{align*}  
+            Luego, dado que $\sigma^{n-k}(b) = a$ por lo demostrado arriba, $(b, a) \in R_\sigma$.
+
+            \item \textbf{Transitiva:} Supongamos que $(a, b) \in R_\sigma$ y $(b, c) \in R_\sigma$. Entonces existen $k, l \in \mathbb{Z}^{\ge 0}$ de forma que
+            $\sigma^k(a) = b$ y $\sigma^l(b) = c$. Luego, si se componen ambas funciones, es decir, evaluar $\sigma^{l+k}$ en $a$ se tendrá:
+            \begin{align*}
+                \sigma^{l+k}(a) &= (\sigma^l \circ \sigma^k)(a)\\
+                &= \sigma^l(\sigma^k(a))\\
+                &= \sigma^l(b)\\
+                &= c
+            \end{align*}
+            Y dado que $l+k \in \mathbb{Z}^{\ge 0}$ entonces concluimos que $(a, c) \in R_\sigma$.
+        \end{itemize}
+    \end{proof}
+
+    \parte Calcule $[3]/R_\sigma$ para todas las $\sigma \in \mathfrak{G}_3$\\
+    Primero, numerando el conjunto $\mathfrak{G}_3$ tendremos:
+    \begin{align*}
+        \mathfrak{G}_3 &= \{\\
+            &(1, 2, 3)\\
+            &(1, 3, 2)\\
+            &(2, 1, 3)\\
+            &(2, 3, 1)\\
+            &(3, 1, 2)\\
+            &(3, 2, 1)\\
+        \}
+    \end{align*}
+    Luego, en el orden en que aparecen anteriormente se númeraran como $\sigma_1, \dots, \sigma_6$. Se tendrá entonces:
+    \begin{itemize}
+        \item $[3]/R_{\sigma_1} = \{\{1\}, \{2\}, \{3\}\}$
+        \item $[3]/R_{\sigma_2} = \{\{1\}, \{2, 3\}\}$
+        \item $[3]/R_{\sigma_3} = \{\{1, 2\}, \{3\}\}$
+        \item $[3]/R_{\sigma_4} = \{\{1, 2, 3\}\}$
+        \item $[3]/R_{\sigma_5} = \{\{1, 2, 3\}\}$
+        \item $[3]/R_{\sigma_6} = \{\{1, 3\}, \{2\}\}$
+    \end{itemize}
+\end{partes}
+
+\question Pruebe que para $0 \le k \le n$ se tiene que $\binom{n}{k} \le n^k$. ¿Para qué valores de $n$ y $k$
+se tiene la igualdad?
+
+\begin{proof}
+    Denominando al conjunto $F$ como:
+    \begin{align*}
+        F := \{(x_1, \dots, x_n) \in \{0, 1\}^{n}: x_1 + x_2 + \dots + x_n = k\}
+    \end{align*}
+    Y se ha demostrado que $|F| = \binom{n}{k}$. Si se puede hacer una función inyectiva entre $F$ y $[n]^k$ se
+    puede demostrar la desigualdad de manera general. Para ello definiremos una función $f$ de la siguiente manera:
+    $$\begin{matrix}
+        f: & F & \to & [n]^k\\
+        & x & \mapsto & t_x\\
+    \end{matrix}$$
+    Para lo cúal definiremos lo siguiente:
+    \begin{itemize}
+        \item Para cada $n$-tupla $x$ de $F$, el conjunto $I_F$ se define como:
+        \begin{align*}
+            I_{Fx} = \{i \in [n] : x_i = 1\}
+        \end{align*}
+        Notese que $|I_{Fx}| = k$ dado que existen $k$ entradas iguales a $1$ en $x$ de forma que su suma sea $k$.
+        Además, tome en cuenta la númeración para $I_{Fx}$ como $i_1, i_2, \dots, i_k$ de forma que si $l < m$ entonces $i_l < i_m$ para $l, m \in [k]$.
+        \item Cada componente de la $k$-tupla $t_x$ será definida como:
+        \begin{align*}
+            t_{xj} &= i_j 
+        \end{align*} 
+        con $i_j \in I_{Fx}$ 
+    \end{itemize}
+    Luego, demostraremos que la función es inyectiva.
+    \begin{itemize}
+        \item \textbf{Inyectividad:} Sean $x, y \in F$ de forma que sus imagenes bajo $f$ son la misma. Entonces:
+        \begin{align*}
+            f(x) &= f(y)\\
+            t_x &= t_y\\
+            (t_{x1}, t_{x2}, \dots, t_{xk}) &= (t_{y1}, t_{y2}, \dots, t_{yk})
+        \end{align*} 
+        Eso quiere decir que para todo $j \in [k]$, $t_{xj} = t_{yj}$. Luego, eso quiere decir que $I_{Fx} = I_{Fy}$.
+        Con eso en mente, para cualquier $x_l$ si $l \in I_{Fx}$ entonces $x_l = 1$. Pero $l \in I_{Fy}$ entonces $y_l = 1$. Luego,
+        si $l \not \in I_{Fx}$ entonces $x_l = 0$ y entonces $l \not \in I_{Fy}$ por lo que también $y_l = 0$. Por tanto, para todo $l \in [n]$
+        concluimos que $x_l = y_l$ lo que permite concluir que $x = y$.
+
+        Luego, se asegura de esta manera que $\binom{n}{k} \le n^k$. Si se toma $n=3, k=2$ se tendrá una función que no es sobreyectiva,
+        por lo que no es posible decir que $\binom{n}{k} = n^k$ para todos valores de $n, k$. De manera general, para cualquier $n$, si se toma $k=1$ se tendrá la
+        igualdad gracias al punto 5. Para $n > 0$ al tomar $k=0$ también se tendrá la igualdad.
+    \end{itemize}
+\end{proof}
+\end{questions}
+
+% \begin{questions}[label=\protect\circled{\bfseries\arabic*}]
+% \end{questions}
+\end{document}

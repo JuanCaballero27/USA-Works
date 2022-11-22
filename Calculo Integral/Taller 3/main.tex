@@ -1,0 +1,132 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage{pstricks-add}
+\usepackage[top=1cm,left=1cm,right=1.5cm,bottom=2cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true,urlcolor=magenta,citecolor=red,linkcolor=violet,bookmarks=true]{hyperref}
+\usepackage[sort&compress,round,comma,authoryear]{natbib}
+\usepackage{makeidx}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{textcomp}
+\usepackage[many]{tcolorbox}
+\usepackage{empheq}
+\usepackage{tasks}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{lipsum}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{bookmark}
+\usepackage{pgfplots}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lastpage}
+\usepackage{epigraph}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
+\usetikzlibrary{arrows}
+\usepackage{subfiles} % Insert the commands.tex file which contains the majority of the structure behind the template
+\pgfplotsset{compat=1.15}
+
+\newlist{questions}{enumerate}{3}
+\setlist[questions]{label=\arabic*.}
+\newcommand{\question}{\item}
+\setlist[enumerate,1]{% (
+leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
+
+\newlist{partes}{enumerate}{3}
+\setlist[partes]{label=(\alph*)}
+\newcommand{\parte}{\item}
+%---
+\newlist{subpartes}{enumerate}{3}
+\setlist[subpartes]{label=\roman*)}
+\newcommand{\subparte}{\item}
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Cálculo Integral}
+\newcommand{\professor}{Fabio Molina}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{Taller 2}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+\pagestyle{plain}
+\linespread{1.5}
+\pagestyle{empty}
+\newtheorem*{definition*}{Definición}
+\newtheorem*{theorem*}{Teorema}
+\newtheorem*{axiom*}{Postulado}
+\newtheorem{theorem}{Teorema}[section]
+\renewcommand*{\proofname}{\textbf{Demostración}}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      Emcabezado                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+    \begin{tabular}[l]{@{}l@{}}
+        \textbf{\instituto}\\
+        \textbf{Disciplina: \disciplina}\\
+        \textbf{Profesor: \professor}\\ 
+    \end{tabular} & 
+    \begin{tabular}[l]{@{}l@{}}
+        {\curso}\\
+        {\alumnoI}\\
+    \end{tabular}
+\end{tabular*}
+\end{table}
+\begin{center}
+\rule[2ex]{\textwidth}{1pt}
+{\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+
+\section*{Sección 10.4}
+En los siguientes ejercicios, una secuencia $\{f(n)\}$ es definida por la formula dada. En cada caso, determinar si la secuencia converge o diverge, y dado el caso, determinar el limite la serie.
+\begin{questions}[label=\protect\circled{\bfseries\arabic*}]
+
+\subfile{Parte 1/parte1.tex}
+
+\section*{Sección 10.9}
+\subfile{Parte 2/parte2.tex}
+
+\section*{Sección 10.14}
+\subfile{Parte 3/parte3.tex}
+
+\section*{Sección 10.16}
+\subfile{Parte 4/parte4.tex}
+
+\section*{Sección 10.20}
+\subfile{Parte 5/parte5.tex}
+
+\section*{Sección 10.24}
+\subfile{Parte 6/parte6.tex}
+
+\section*{Sección 11.13}
+\subfile{Parte 7/parte7.tex}
+
+\section*{Sección 11.16}
+\subfile{Parte 8/parte8.tex}
+
+\end{questions}
+\end{document}

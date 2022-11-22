@@ -1,0 +1,364 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage{pstricks-add}
+\usepackage[top=1cm,left=1cm,right=1.5cm,bottom=2cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true,urlcolor=magenta,citecolor=red,linkcolor=violet,bookmarks=true]{hyperref}
+\usepackage[sort&compress,round,comma,authoryear]{natbib}
+\usepackage{makeidx}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{textcomp}
+\usepackage[many]{tcolorbox}
+\usepackage{empheq}
+\usepackage{tasks}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{lipsum}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{bookmark}
+\usepackage{pgfplots}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lastpage}
+\usepackage{epigraph}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
+\usetikzlibrary{arrows}
+\usepackage{subfiles} % Insert the commands.tex file which contains the majority of the structure behind the template
+\pgfplotsset{compat=1.15}
+
+\newlist{questions}{enumerate}{3}
+\setlist[questions]{label=\arabic*.}
+\newcommand{\question}{\item}
+\setlist[enumerate,1]{% (
+leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
+
+\newlist{partes}{enumerate}{3}
+\setlist[partes]{label=(\alph*)}
+\newcommand{\parte}{\item}
+%---
+\newlist{subpartes}{enumerate}{3}
+\setlist[subpartes]{label=\roman*)}
+\newcommand{\subparte}{\item}
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\pagestyle{plain}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Matemáticas Discretas}
+\newcommand{\professor}{Diego Villamizar}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{Taller 2}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+\linespread{1.5}
+\pagestyle{empty}
+\newtheorem*{definition*}{Definición}
+\newtheorem*{theorem*}{Teorema}
+\newtheorem*{axiom*}{Postulado}
+\newtheorem{theorem}{Teorema}[section]
+\renewcommand*{\proofname}{\textbf{Demostración}}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      Emcabezado                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+    \begin{tabular}[l]{@{}l@{}}
+        \textbf{\instituto}\\
+        \textbf{Disciplina: \disciplina}\\
+        \textbf{Profesor: \professor}\\ 
+    \end{tabular} & 
+    \begin{tabular}[l]{@{}l@{}}
+        {\curso}\\
+        {\alumnoI}\\
+    \end{tabular}
+\end{tabular*}
+\end{table}
+\begin{center}
+\rule[2ex]{\textwidth}{1pt}
+{\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+\begin{questions}[label=\protect\circled{\bfseries\arabic*}]
+    \question Encuentre la cantidad de enteros $n \in [10^{30}]$ tales que existe $x \in \mathbb{Z}$ que satisface que $x^2 = n$ o $x^3 = n$ o $x^5 = n$
+    \begin{proof}
+        Defina los siguientes conjuntos:
+        \begin{align*}
+            E_2 &= \{n \in [10^{30}] : \exists x \in \mathbb{Z} | x^2 = n\}\\
+            E_3 &= \{n \in [10^{30}] : \exists x \in \mathbb{Z} | x^3 = n\}\\
+            E_5 &= \{n \in [10^{30}] : \exists x \in \mathbb{Z} | x^5 = n\}
+        \end{align*}
+        Luego el cardinal de dichos conjuntos y sus intersecciones será:
+        \begin{itemize}
+            \item $|E_2| = 10^{15}$, ya que si $n \in E_2$ entonces existe un $x \in \mathbb{Z}$ tal que $x^2 = n$. Dicho $x^2$ no puede ser mayor que $10^30$ por lo que:
+            \begin{align*}
+                x^2 &\ge 10^{30}\\
+                x &\ge 10^{15}
+            \end{align*}
+            De manera similar podemos concluir que $|E_3| = 10^{10}$ y $|E_5| = 10^{6}$.
+            \item $|E_2 \cap E_3| = 10^5$ ya que si $n \in E_2 \cap E_3$ entonces se puede expresar $n$ como $x^6$ para algún $x \in \mathbb{Z}$, y luego similar a lo que se dedujo anteriormente tendremos que $|E_2 \cap E_3| = 10^5$, $|E_2 \cap E_5| = 10^3$, $|E_3 \cap E_5| = 10^2$ y $|E_2 \cap E_3 \cap E_5| = 10$.
+        \end{itemize}
+        Por lo que usando el \textit{Principio de Inclusión-Exclusión} tendremos:
+        \begin{align*}
+            |E_2 \cup E_3 \cup E_5| &= |E_2| + |E_3| + |E_5| - |E_2 \cap E_3| - |E_2 \cap E_5| - |E_3 \cap E_5| + |E_2 \cap E_3 \cap E_5|\\
+            &= 10^{15} + 10^{10} + 10^{6} - 10^5 - 10^3 - 10^2 + 10\\
+            &= 1000010000898910
+        \end{align*}
+        Por lo que la cantidad de enteros en $[10]^{30}$ que cumplen esa condición es $1000010000898910$.
+    \end{proof}
+    \question Pruebe, usando una biyección, que ${n\brace 2}=\frac{2^{n}-2}{2}$.\\
+    \textbf{Hint:} A los números del $1$ al $n$ asóciele un número $1$ o $2$ dependiendo de su bloque. 
+    \begin{proof}
+        Esto será equivalente a demostrar que:
+        \begin{align*}
+            {n \brace 2} \times 2 + 2 = 2^n
+        \end{align*}
+        Por lo que podremos escoger conjuntos que representen estos números de para demostrar esta igualdad. Para ello, demostraremos que:
+        \begin{align*}
+            \left({[n] \brace 2} \times \{1, 2\}\right) \cup \{1, 2\} \cong \{1, 2\}^{[n]}
+        \end{align*}
+        Para ello, definiremos una función $\varphi$ como:
+        $$\begin{matrix}
+            \varphi: & \left({[n] \brace 2} \times \{1, 2\}\right) \cup \{1, 2\} & \to & \{1, 2\}^{[n]}\\
+        \end{matrix}$$
+        Donde para un elemento $a \in \left({[n] \brace 2} \times \{1, 2\}\right) \cup \{1, 2\}$ definimos su imagen dependiendo de su estructura:
+        \begin{align*}
+            \varphi(a) &= \begin{cases}
+                f_a(x) = 1 \text{ para todo $x \in [n]$}, & a = 1\\
+                f_a(x) = 2 \text{ para todo $x \in [n]$}, & a = 2\\
+                f_a(x) = i \text{ si y solo si $x \in B_i$}, & a = (\pi, 1)\\
+                f_a(x) = i \text{ si y solo si $x \not\in B_i$}, & a = (\pi, 2)
+            \end{cases}
+        \end{align*}
+        Podemos demostrar que esta función es una biyección como:
+        \begin{itemize}
+            \item \textbf{Inyectividad:} Supongamos que existen $a, b \in \left({[n] \brace 2} \times \{1, 2\}\right) \cup \{1, 2\}$ de forma que $\varphi(a) = \varphi(b)$, por lo que las funciones $f_a$ y $f_b$ que genera $\varphi$ deben ser la misma. Luego, $f^{-1}_a(\{1\}) = f^{-1}_b(\{1\})$ y $f^{-1}_a(\{2\}) = f^{-1}_b(\{2\})$, por lo que los denotaremos como $f^{-1}(\{1\})$ y $f^{-1}(\{2\})$. Es evidente que ambos no pueden ser vacíos al tiempo, pero si uno solo de ellos. Luego, tendremos varios casos:
+            \begin{itemize}
+                \item Si $f^{-1}(\{1\}) = \emptyset$ entonces quiere decir que para todo $x \in [n]$, $f(x) = 2$. Luego, no es posible que $a = 1$ puesto que entonces $\varphi(a)$ generará una función de forma que a todos los elementos les asigna $1$, y de igual manera no puede ser una tupla de la forma $(\pi, 1)$ o $(\pi, 2)$ ya que entonces $B_1$ o $B_2$ serán vacíos contradiciendo el hecho de que $\pi$ es una partición, por lo que $a = 2$. Con un razonamiento similar se demuestra que $b = 2$ y por tanto $a = b$.
+                \item Si $f^{-1}(\{2\}) = \emptyset$ se puede usar un argumento similar para deducir que $a = b = 1$.
+                \item Si $f^{-1}(\{1\}) \neq \emptyset$ y $f^{-1}(\{2\}) \neq \emptyset$, entonces dado que se involucran dos particiones, tendremos la partición $A = \{A_1, A_2\}$ y $B = \{B_1, B_2\}$ en orden canónico y correspondientes a los objetos $a, b$. Ahora, si $1 \in f^{-1}(\{1\})$ entonces bajo los posibles escenarios solo es posible que $f(x) = i$ si y solo si $x \in B_i$ y dado que ambas particiones están ordenadas en orden canónico $f(A_1) = f(B_1) = \{1\}$ y $f(A_2) = f(B_2) = \{2\}$ para $A_1, A_2 \in \pi_a$ y $B_1, B_2 \in \pi_b$, y entonces $a = (\pi_a, 1)$ y $b = (\pi_b, 1)$. Ahora, supongamos que $x \in A_1$, por tanto $f_a(x) = 1$ pero a la vez $f_b(x) = 1$ y por la definción de la función entonces $x \in B_1$ y viceversa, por lo que $A_1 = B_1$, y de manera similar se prueba que $A_2 = B_2$, por lo que $\pi_1 = \pi_2$, por lo que $a = b$. Para cuando $1 \not \in f^{-1}(\{1\})$ y concluir que $a = b$ se usa el mismo argumento pero con $(\pi_1, 2)$ y $(\pi_2, 2)$.
+            \end{itemize}
+        
+            \item \textbf{Sobreyectividad:} Para las funciones que asigan todos los elementos a $1$ o a $2$ están los elementos $1$ y $2$ en el dominio para generar estas funciones. Si $f$ es una función de forma que $f^{-1}(\{1\})$ y $f^{-1}(\{2\})$ son no vacíos, entonces generaremos el conjunto:
+            \begin{align*}
+                \pi &:= \{f^{-1}(\{i\}) | i \in \{1, 2\}\}
+            \end{align*}
+            Y enumeraremos $\pi$ de forma que $\pi = \{B_1, B_2\}$ si y solo si $\min(B_1) < \min(B_2)$, y no es díficil ver que $\pi \in {[n] 2}$. Definiermos entonces $x$ como:
+            \begin{align*}
+                x &:= \begin{cases}
+                   (\pi, 1), & 1 \in f^{-1}(\{1\})\\
+                   (\pi, 2), & 1 \not\in f^{-1}(\{1\})
+                \end{cases}
+            \end{align*}
+            Y es fácil que $\varphi(x) = f$, por lo que la función es sobreyectiva.
+        \end{itemize}
+        Luego, la función definida es biyectiva y por tanto:
+        \begin{align*}
+            \left({[n] \brace 2} \times \{1, 2\}\right) \cup \{1, 2\} \cong \{1, 2\}^{[n]}
+        \end{align*}
+        Y tendremos que:
+        \begin{align*}
+            {n \brace 2} \times 2 + 2 = 2^n
+        \end{align*}
+    \end{proof}
+
+    \question Use el punto 2. para hallar una fórmula parecida para ${n\brace 3}$.
+    
+    \question Sea $B_n$ una sucesión definida por $$B_n = \sum _{k=0}^n{n\brace k} \text{ para }n\geq 1,$$
+    y $B_0=1$. Argumente que $B_n$ es la cantidad de particiones de $[n]$. Pruebe que $$B_{n+1}=\sum _{k = 0}^n\binom{n}{k}B_{n-k},$$
+    y concluya que $B_n$ es la cantidad de relaciones de equivalencia sobre $[n]$.\\
+    \textbf{Hint:} Considere el bloque donde está $n+1$ y quíteselo a la partición.
+    \begin{proof}
+        Denomine como $P_n$ como el conjunto de todas las particiones de $[n]$. Luego, podemos demostrar que:
+        \begin{align*}
+            \bigcup_{i \in [n]} {[n] \brace i} &= P_n
+        \end{align*}
+        Es evidente que $\bigcup_{i \in [n]} {[n] \brace i} \subseteq P_n$. Luego, si $\pi \in P_n$ es claro que por definción $\pi \neq \emptyset$ y $\pi$ es un conjunto finito, por lo que debe existir $i \in [n]$ tal que $|\pi| = i$(Si no fuera así y tuvieramos que $i > n$ entonces $\pi = \emptyset$), y por definción $\pi \in \bigcup_{i \in [n]} {n \brace i} $, por lo que ambos conjuntos son iguales. Es evidente que si $i, j \in [n]$ y $i \neq j$ entonces ${[n] \brace i} \cap {[n] \brace j} = \emptyset$ puesto que un conjunto no puede poseer dos cardinales distinos al tiempo. Luego, el cardinal de la unión de los conjuntos será:
+        \begin{align*}
+            \left|\bigcup_{i \in [n]} {[n] \brace i}\right| &= \sum_{i = 1}^n \left|{[n] \brace k}\right|\\
+            &= \sum_{i = 1}^n {n \brace i}\\
+            &= \sum_{i = 0}^n {n \brace i}
+        \end{align*}
+        Pero dicho cardinal también será el cardinal de $P_n$ y al tiempo es por definción del problema $B_n$, por lo que $|P_n| = B_n$. 
+       
+       Para cada partición $\pi$ vamos a definir $S$ como el conjunto $S \in \pi$ tal que $n+1 \in S$, y definiremos las funciones $T: [n] \to [n-|S|]$ de forma que:
+    \begin{align*}
+        T(x) &= \begin{cases} x, & x \le n-|S|-1\\ x-|S|-1, & x \ge n-|S|-1 \end{cases}
+    \end{align*}
+    Y la función $R: \mathbb{P}([n]) \to \mathbb{P}([n-|S|-1])$ definida por:
+    \begin{align*}
+        R(B) &= \{T(x) : x \in B\}
+    \end{align*}
+    Por lo que $\phi := \{R(B) : B \in \pi \wedge B \neq S\}$Y luego definiremos la función $\varphi: P_{n+1} \to \bigcup\limits_{i = 0}^n \binom{n}{i} \times P_{n-i}$ de forma que:
+    \begin{align*}
+        \varphi(\pi) &= (S\setminus\{n+1\}, \phi)
+    \end{align*}
+    Esta función es una biyección, pero para demostrarla definiremos la función $\psi:  \bigcup\limits_{i = 0}^n \binom{n}{i} \times P_{n-i} \to P_{n+1}$ de forma que:
+    \begin{align*}
+        \psi(S, \phi) &= \phi' \cup \{ S \cup \{n+1\} \}
+    \end{align*}
+    definiendo $\phi' = \{x : T(x) \in \phi\}$
+    Luego, componiendo ambas funciones:
+    \begin{itemize}
+        \item $(\psi(\varphi))(\pi) = \psi(S\setminus \{n+1\}, \phi)$, y queremos demostrar que la partición generada por $\psi$ será $\pi$. Para ello, recordemos que $(S \setminus \{n+1\}) \cup \{n+1\} = S$. Luego, al unir $S$ al conjunto $\phi'$ generará de nuevo la partición $\pi$.
+        \item $(\varphi(\psi(S, \phi)) = \varphi(\pi)$ y queremos demostrar que $\pi$ generará $S$ y $\phi$. Dada la definición de $\pi$ sabemos que $(S \cup \{n+1\}) \setminus \{n+1\} = S$ y para entender que $\phi'$ es la partición generada por $\pi$, basta entender que $\phi'$ es generada por la función inversa de $R$, y al volver a aplicarse dentro de $\pi$, vuelve a generar $\phi$. Por tanto, $\varphi(\pi) = (S, \phi)$.
+    \end{itemize} 
+    Otra forma es definir una biyección donde a cada partición $\pi$ de $[n+1]$ le asignaremos una pareja ordenada definida $(S \setminus \{n+1\}, \pi \setminus \{S\})$ donde:
+\begin{itemize}
+\item $S$ se define como el conjunto que pertenece a $\pi$ de forma que $n+1 \in S$(Garantizado por las propiedades de una partición)
+\item $\pi \setminus \{S\}$ es una partición del conjunto $[n] \setminus S$, el cual tiene cardinal $n-k$ cuando $|S| = k+1$ con $0 \le k \le n$. (Esto por la inclusión de $n+1$ en el conjunto $S$ pero no en la partición)
+\end{itemize}
+Es fácil ver que la función es inyectiva ya que si para dos particiones $\pi_1$ y $\pi_2$ la imagen es la misma, es decir $(S_1 \setminus \{n+1\} , \pi_1 \setminus \{S_1\}) = (S_2 \setminus \{n+1\}, \pi_2 \setminus \{S_2\})$ entonces por la propiedad:
+\begin{quote}
+Si $A, B, C$ son conjuntos sales que $A \setminus C = B \setminus C$ entonces $A=B$
+\end{quote}
+se puede concluir que $S_1 = S_2$ y luego que $\pi_1 = \pi_2$. Para ver la función es sobreyectiva solo hace falta ver que dado un conjunto $S \in \binom{[n]}{k}$ y una partición $\pi$ de $[n]\setminus S$ podremos determinar una partición $\pi \cup \{S \cup \{n+1\}\}$ de forma que su imagen es $(S, \pi)$ de manera sencilla.\\
+
+        Para concluir que $B_n$ es la cantidad de relaciones de equivalencia sobre $[n]$ basta recordar que toda partición de un conjunto genera una relación de equivalencia y toda relación de equivalencia genera una partición, y dado que $B_n$ es el número de particiones sobre $[n]$ entonces $B_n$ será también el número de relaciones de equivalencia sobre $[n]$.
+    \end{proof}
+    
+    \question Denote por $D_n$ el número de desarreglos en $[n]$. O sea $$D_n = \left | \{\pi \in \mathfrak{S}_n:\pi(i)\neq i\text{ para todo }i\in [n]\}\right |.$$
+    Defina $D_0 = 1$. Pruebe que para $n\geq 2$ se tiene que 
+    $$D_n = (n-1)\left (D_{n-1}+D_{n-2}\right ).$$
+    \begin{proof}
+        Para esto, tenga en cuenta que $A \times (B \cup C) = (A \times B) \cup (A \times C)$ y que $\mathbb{D}_[n-1] \times [n]$ está en biyección con las permutaciones en $[n]$ que poseen $1$ punto fijo(Notese por $A_{n, k}$). Fijese que:
+        \begin{align*}
+            (n-1)(D_{n-1} + D_{n+2}) &= \left|[n-1] \times (\mathbb{D}_{n-1} \cup \mathbb{D}_{n-2}\right|\\
+            &= \left|([n-1] \times \mathbb{D}_{n-1}) \cup ([n-1] \times \mathbb{D}_{n-2}) \right|\\
+            &= \left|([n-1] \times \mathbb{D}_{n-1}) \cup A_{n-1, 1} \right|\\
+        \end{align*}
+        Defina ahora una función $\varphi: \mathbb{D}_n \to ([n-1] \times \mathbb{D}_{n-1}) \cup A_{n-1, 1}$ de forma que para $\pi \in \mathbb{D}_n$ definiremos una biyección $\sigma_\pi: [n-1] \to [n-1]$ tal que:
+        \begin{align*}
+            \sigma_\pi(k) &= \begin{cases}\pi(n), & k = \pi^{-1}(n)\\ \pi(k), & k \neq \pi^{-1}(n) \end{cases}
+        \end{align*}
+        Y podremos definir:
+        \begin{align*}
+            \varphi(\pi) &= \begin{cases} (\pi^{-1}(n), \sigma_\pi) ,& \sigma_\pi \in \mathbb{D}_{n-1}\\ \sigma_\pi ,& \sigma_\pi \not\in \mathbb{D}_{n-1} \end{cases}
+        \end{align*}
+        Note que si $\sigma_\pi$ no es un desarreglo de $\mathbb{D}_{n-1}$ entonces tiene que pertenecer a $A_{n-1, 1}$ ya que si tuviera más de un punto fijo, $\pi$ no sería un desarreglo.
+        \begin{itemize}
+            \item \textbf{Inyectividad:} Note que ambos casos son mutuamente excluyentes ya que los conjuntos son disyuntos y no es posible que una pareja ordenada sea al tiempo una biyección. Para el caso donde para dos desarreglos $\pi_1, \pi_2 \in \mathbb{D}_{n}$ tales que $\varphi(\pi_1) = \varphi(\pi_2) = \sigma_{\pi_1} = \sigma_{\pi_2}$. Luego, para todo $k \neq \pi_1^{-1}$ y $k \neq \pi_2^{-1}$ tendremos que $\sigma_{\pi_1}(k) = \pi_1(k) = \sigma_{\pi_2}(k) = \pi_2(k)$. Además, es descartable que $k \neq \pi_1^{-1}$ y $k = \pi_2^{-1}$ ya que esto implicaría que $\pi_1(n) = \pi_2(k)$ lo que haría que $k = n$ y $\pi_1$ dejará de ser un desarreglo. Por esa razón concluiremos que $\pi_1(n) = \pi_2(n)$ y dado que para todo $i \in [n]$, $\pi_1(i) = \pi_2(i)$ entonces $\pi_1 = \pi_2$. Mediante un argumento similar concluiremos que $\pi_1 = \pi_2$ cuando $\varphi(\pi_1) = \varphi(\pi_2) = (\pi_1^{-1}(n), \sigma_{\pi_1}) = (\pi_2^{-1}(n), \sigma_{\pi_2})$ tendremos que $\pi_1 = \pi_2$, por lo que la función es sobreyectiva.
+            \item \textbf{Sobreyectividad:} Para una pareja ordenada $(i, \sigma)$ de $[n-1] \times \mathbb{D}_{n-1}$ podremos construir una biyección $\pi: [n] \to [n]$ definida por:
+            \begin{align*}
+                \pi(k) = \begin{cases} n, & k = i\\ \sigma(i), & k = n\\ \sigma(k), & k \neq i \wedge k \neq n\end{cases}
+            \end{align*}
+            Fijese que luego por la definición de $\pi$, $\pi^{-1}(n) = i$ y por la definición de $\sigma_\pi$ tendremos que $\sigma(k) = \sigma_\pi(k)$ para todo $k$, por lo que $\varphi(\pi) = (i, \sigma)$. Ahora, si tomamos una permutación $\sigma$ en $A_{n-1, 1}$ y denominamos $i$ su punto fijo defina $\pi: [n] \to [n]$ como:
+            \begin{align*}
+                \pi(k) &= \begin{cases} n, & k = i\\ i, & k = n\\\sigma(k), & k \neq i \wedge k \neq n \end{cases}
+            \end{align*}
+            Y por la propia definición de $\pi$, tendremos que $\varphi(\pi) = \sigma$. Concluimos entonces que la función es sobreyectiva.
+        \end{itemize}
+        Luego, la función será biyectiva y por tanto:
+        \begin{align*}
+            D_n = (n-1)\left (D_{n-1}+D_{n-2}\right )
+        \end{align*}
+    \end{proof}
+    
+    \question Pruebe que si $X$ es un conjunto finito, entonces
+    $$\sum _{x\in X}1=|X|.$$
+    \begin{proof}
+        Si $X$ es un conjunto finito entonces $X \cong [n]$, es decir $|X| = n$ para algún $n \in \mathbb{Z}^{\ge 0}$. Luego, defina:
+        \begin{align*}
+            A_i := \{i\}
+        \end{align*}
+        para todo $i \in [n]$. Ningúno de estos conjuntos es vacío, si $i \neq j$ es evidente que $A_i \cap A_j = \emptyset$ y demostraremos que la unión de todos estos conjunto es $[n]$.
+        \begin{itemize}
+            \item[$\subseteq)$] Si $x \in \bigcup\limits_{i \in [n]} A_i$ entonces $x \in A_i$ para algún $i \in [n]$, pero por la definición de $A_i$ tiene que pasar que $x = i$ y por tanto $x \in [n]$.
+            \item[$\supseteq)$] Si $x \in [n]$ entonces tendremos definido $A_x = \{x\}$, y luego dado que $x \in A_x$ entonces $x \in \bigcup\limits_{i \in [n]} A_i$. 
+        \end{itemize}
+        Por lo la colección $\{A_i\}_{i \in [n]}$ es una partición de $[n]$ y por tanto la suma de los cardinales de estos conjuntos será el cardinal de $[n]$, es decir $n$. Pero note que $|A_i| = 1$ para todo $i \in [n]$, y dado que son disyuntos 2 a 2:
+        \begin{align*}
+            \left|\bigcup_{i \in [n]} A_i\right| &= \sum_{i = 1}^n |A_i|\\
+            &= \sum_{i = 1}^n 1\\
+            &= |[n]|\\
+            &= |X|\\
+            &= n
+        \end{align*}
+    \end{proof}
+    
+    \question Pruebe que si $m\leq n$, entonces
+    $$\sum _{k= 0}^m(-1)^k\binom{n}{k}\binom{n-k}{m-k}=0.$$
+    \textbf{Hint:} Separe el término $k=0$ de la suma y considere $A_i = \{B\in \binom{[n]}{m}:i\in B\}$. Use incl-excl.
+    \begin{proof}
+        Para esta demostración, empezaremos definiendo justamente el siguiente conjunto:
+        \begin{align*}
+            A_i &:= \{B\in \binom{[n]}{m}:i\in B\}
+        \end{align*}
+        Para todo $i \in [n]$. Luego, nos gustaría usar \textit{Principio de inclusión-exclusión} por lo que nuestro objetivo será determinar el cardinal de $\bigcap\limits_{x \in X} A_x$ si $X \in \binom{n}{k}$.
+        \begin{itemize}
+            \item Para empezar, de manera intuitiva para $A_1$, tenemos que todo conjunto en $A_1$ incluye a $1$ como su elemento. Luego, sabemos que si $B \in A_1$ entonces $|B| = m$. Para determinar el cardinal de $A_1$, ya sabemos que $1 \in B$ por lo que en realidad estamos organizando conjuntos de $m-1$ elementos que no son fijos, y aunque los elementos de $B$ son de $[n]$, dado que $1$ ya es un elemento, y en un conjunto no hay elementos repetidos, tendremos que seleccionarlos de $[n]\setminus \{1\}$, lo que al final nos da a concluir que $|A_1| =\binom{n-1}{m-1}$. De manera similar podemos determinar que para cualquier $A_i$, su cardinal es $\binom{n-1}{m-1}$.
+            \item Para $A_1 \cap A_2$, tenemos conjuntos $B$ donde es fijo que $1 \in B$ y $2 \in B$. De nuevo, $|B| = m$, aunque dado que todos estos conjuntos poseen $m$ elementos y dos de ellos son fijos, nos importa en sí escoger $m-2$ elementos, y dado que $1, 2 \in B$ y no queremos elementos repetidos, entonces tendremos que tomarlos de $[n] \setminus \{1, 2\}$. Luego, podremos concluir que $|A_1 \cap A_2| = \binom{n-2}{m-2}$, y en general para $i, j \in [n]$ tal que $i \neq j$, tendremos que $|A_i \cap A_j| = \binom{n-2}{m-2}$.
+            \item En general aplicando el razonamiento anterior podemos deducir que $|\bigcap\limits_{x \in X} A_x| = \binom{n-k}{m-k}$ si $X \in \binom{n}{k}$.
+            \item Una demostración más rigurosa de esto puede hacerse mediante biyecciones. Sea $X \in \binom{n}{k}$ defina la función:
+            $$\begin{matrix}
+                \varphi: & \bigcap\limits_{x \in X} A_x & \to & \binom{[n] \setminus X}{m-k}\\
+                & B & \mapsto & B \setminus X
+            \end{matrix}$$
+        \end{itemize}
+
+        Luego, usando \textit{Principio de inclusión-exclusión} podremos derivar la siguiente formula:
+        \begin{align*}
+            \left|\bigcup_{i \in [n]} A_i\right| &= \sum_{k = 1}^n (-1)^{k-1} \cdot \sum_{X \in \binom{[n]}{k}} \left|\bigcap\limits_{x \in X} A_x\right|\\
+            &= \sum_{k = 1}^n (-1)^{k-1} \cdot \sum_{X \in \binom{[n]}{k}} \binom{n-k}{m-k}\\
+            &= \sum_{k = 1}^n (-1)^{k-1} \cdot \binom{n-k}{m-k} \cdot \sum_{X \in \binom{[n]}{k}} 1\\
+            &= \sum_{k = 1}^n (-1)^{k-1} \cdot \binom{n-k}{m-k} \binom{n}{k}
+        \end{align*}
+        Luego, note que esta suma puede separarse como:
+        \begin{align*}
+            \sum_{k = 1}^n (-1)^{k-1} \cdot \binom{n-k}{m-k} \binom{n}{k} &= \sum_{k = 1}^{m} (-1)^{k-1} \cdot \binom{n-k}{m-k} \binom{n}{k} + \sum_{k = m+1}^n (-1)^{k-1} \cdot \binom{n-k}{m-k} \binom{n}{k}
+        \end{align*}
+        Note que para la segunda suma, todo valor que toma $k$ es mayor que $m$, por lo que siempre quedará algo de la forma:
+        \begin{align*}
+            \binom{n-k}{-s}
+        \end{align*}
+        Donde $s \in \mathbb{Z}^{\ge 0}$, por lo que estaremos hablando de conjuntos de cardinal negativo, y dado que no tiene sentido esto, todos estos valores serán $0$, por lo que la segunda suma es $0$ y:
+        \begin{align*}
+            \left|\bigcup_{i \in [n]} A_i\right| &= \sum_{k = 1}^{m} (-1)^{k-1} \cdot \binom{n-k}{m-k} \binom{n}{k}
+        \end{align*}
+        Ahora, notese que:
+        \begin{align*}
+            \bigcup_{i \in [n]} A_i &= \binom{n}{m}
+        \end{align*}
+        Si $m = 0$, entonces la igualdad es evidente, así que para el caso donde $m \ge 1$ tendremos que demostrar una doble contenecia:
+        \begin{itemize}
+            \item[$\subseteq)$] Supongamos que $A \in \bigcup\limits_{i \in [n]} A_i$, por Definición existe $i \in [n]$ tal que $A \in A_i$, y luego por definción de $A_i$ tendremos que $A \in \binom{[n]}{m}$.
+            \item[$\supseteq)$] Supongamos que $A \in \binom{[n]}{m}$, y dado que $m \ge 1$ sabemos que $A \neq \emptyset$, por lo que existe $i \in [n]$ de modo que $i \in A$, y por definción $A \in A_i$, de manera que concluimos que $A \in \bigcup\limits_{i \in [n]} A_i$.
+        \end{itemize}
+    \end{proof}
+    Luego, tendremos la igualdad:
+    \begin{align*}
+        \left|\bigcup_{i \in [n]} A_i\right| &= \binom{n}{m}
+    \end{align*}
+    Y combinando y reorganizando tendremos:
+    \begin{align*}
+        \left|\bigcup_{i \in [n]} A_i\right| &= \binom{n}{m}\\
+        \binom{n}{m} - \left|\bigcup_{i \in [n]} A_i\right| &= 0\\
+        \binom{n}{m} - \sum_{k = 1}^{m} (-1)^{k-1} \cdot \binom{n-k}{m-k} \binom{n}{k} &= 0\\
+        \binom{n}{m} + \sum_{k = 1}^{m} (-1)^{k} \cdot \binom{n-k}{m-k} \binom{n}{k} &= 0\\
+        \sum_{k = 0}^{m} (-1)^{k} \cdot \binom{n-k}{m-k} \binom{n}{k} &= 0\\
+    \end{align*}
+    Demostrando la igualdad deseada.
+\end{questions}
+\end{document}

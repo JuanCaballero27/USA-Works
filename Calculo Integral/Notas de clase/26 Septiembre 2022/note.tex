@@ -1,0 +1,196 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage{notesconfig}
+
+
+% \pagestyle{plain}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Cálculo Integral}
+\newcommand{\professor}{Fabio Molina}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{26 Septiembre 2022}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+
+\linespread{1.5}
+
+\begin{document}
+%-----------------------------------------------------------
+%                       Encabezado
+%-----------------------------------------------------------
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+    \begin{tabular}[l]{@{}l@{}}
+        \textbf{\instituto}\\
+        \textbf{Disciplina: \disciplina}\\
+        \textbf{Profesor: \professor}\\ 
+    \end{tabular} & 
+    \begin{tabular}[l]{@{}l@{}}
+        {\curso}\\
+        {\alumnoI}\\
+        % {\alumnoII}\\
+    \end{tabular}
+\end{tabular*}
+\end{table}
+\begin{center}
+\rule[2ex]{\textwidth}{1pt}
+
+{\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+%--------------------------------------------------------
+%                       Contenido                      
+%--------------------------------------------------------
+\section*{Repaso sobre polinomios de Taylor}
+Los polinomios de Taylor son una forma importante de aproximar funciones reales en cierto punto, lo que permite que sea más trabajable dado que las funciones polinomicas son fáciles de derivar, integral, etc.
+
+\begin{problem}
+    Determinar el polinomio de Taylor de grado $n$ para $f(x) = \cos(x)$ en $a = 0$\\
+
+    Para empezar, es conviente analizar las derivadas de la función $\cos(x)$:
+    \begin{align*}
+        f(x) &= \cos(x)\\
+        \frac{d}{dx} f(x) &= -\sin(x)\\
+        \frac{d^2}{dx^2} f(x) &= -\cos(x)\\
+        \frac{d^3}{dx^3} f(x) &= \sin(x)\\
+        \frac{d^4}{dx^4} f(x) &= \cos(x)
+    \end{align*}
+    De nuevo, podemos observar un patrón similar a la función $\sin$ donde de manera modular las derivadas forman un cíclo. Notese que dado que nuestro interes es el punto $a = 0$ entonces todos terminos de indice impar son irrelvantes, puesto que $\sin(0) = 0$.
+
+    Con esto en mente, podemos ver que nuestro objetivo será determinar el valor en las potencias pares, donde si recordamos $\cos(x) = 1$, por lo que en general se tendrá:
+    \begin{align*}
+        P_{2n, 0, f}(x) &= \sum_{k = 0}^n \frac{(-1)^k}{(2k)!} \cdot x^{2k}
+    \end{align*}
+\end{problem}
+
+\begin{problem}
+    Determinar el polinimio de Taylor de grado $n$ para la función $f(x) = \ln(x+1)$ para $a = 0$\\
+
+    De nuevo, empezaremos analizando las derivadas de la función:
+    \begin{align*}
+        f(x) &= \ln(x+1)\\
+        \frac{d}{dx} f(x) &= \frac{1}{x+1}\\
+        \frac{d^2}{dx^2} f(x) &= -\frac{1}{(x+1)^2}\\
+        \frac{d^3}{dx^3} f(x) &= \frac{2}{(x+1)^3}\\
+        \frac{d^4}{dx^4} f(x) &= -\frac{6}{(x+1)^4}\\
+        \dots & \dots\\
+        \frac{d^k}{dx^k} f(x) &= (-1)^{k+1} \cdot \frac{(k-1)!}{(x+1)^k}
+    \end{align*}
+    Luego, cuando se evaluan directamente en $0$ se tendrá:
+    \begin{align*}
+        f(0) &= 0\\
+        \frac{d}{dx} f(0) &= 1\\
+        \frac{d^2}{dx^2} f(0) &= -1\\
+        \frac{d^3}{dx^3} f(0) &= 2\\
+        \frac{d^4}{dx^4} f(0) &= -6\\
+        \dots & \dots\\
+        \frac{d^k}{dx^k} f(0) &= (-1)^{k+1} \cdot (k-1)!
+    \end{align*}
+    Por lo que el polinimio de Taylor se expresará como:
+    \begin{align*}
+        P_{n, 0, f}(x) &= \sum_{k = 1}^n \frac{(-1)^{k+1} (k-1)!}{k!} x^k\\
+        &= \sum_{k = 1}^n \frac{(-1)^{k+1}}{k} x^k
+    \end{align*}
+    Desarrollando la sumatoria tendremos:
+    \begin{align*}
+        P_{n, 0, f}(x) &= x - \frac{1}{2}x^2 + \frac{1}{3}x^3 + \dots + \frac{1}{n} x^n 
+    \end{align*}
+\end{problem}
+
+\begin{problem}
+    Determinar el polinimio de Taylor de orden $n$ para $f(x) = e^x$ en $a = 0$.\\
+
+    Este problema llega a ser trivial, puesto que toda derivada de $e^x$ seguirá siendo $e^x$ y al evaluarla en $0$ se tendrá siempre $1$. Por lo que el Polinomio de Taylor de $f$ será:
+    \begin{align*}
+        P_{n, 0, f}(x) = \sum_{k = 0}^n \frac{1}{k!} x^k\\
+    \end{align*}
+\end{problem}
+
+
+\begin{problem}
+    Determinar el polinomio de grado $3$ para $f(x) = \arctan(x)$ en $a=0$.\\
+
+    Como de costumbre, empezaremos determinando las derivadas necesarias:
+    \begin{align*}
+        f(x) &= \arctan(0)\\
+        \frac{d}{dx} f(x) &= \frac{1}{1+x^2}\\
+        \frac{d^2}{dx^2} f(x) &= -\frac{2x}{(1+x^2)^2}\\
+        \frac{d^3}{dx^3} f(x) &= -\frac{2(1+x^2)^2 - 2x \cdot 2 \cdot (1+x^2) \cdot 2x}{(1+x^2)^4}
+    \end{align*}
+    Y luego al evaluarse en $0$ se tendrá:
+    \begin{align*}
+        f(0) &= 0\\
+        \frac{d}{dx} f(0) &= 1\\
+        \frac{d^2}{dx^2} f(x) &= 0\\
+        \frac{d^3}{dx^3} f(x) &= -2
+    \end{align*}
+    Por lo que el polinomio de Taylor se expresará como:
+    \begin{align*}
+        P_{3, 0, f} &= 0 + x + 0 \cdot x^2 - \frac{2}{3!} x^3\\
+        &= x - \frac{x^3}{3} 
+    \end{align*}
+\end{problem}
+
+\section*{Teoremas de Taylor Parte 1}
+Los resultados obtenidos nos ayudan en gran parte a tener teoremas de suma importancia. En este caso, veremos dos de ellos, los cúales nos hablarán del comportamiento del polinomio de Taylor con respecto a la función original y un criterio sobre puntos críticos en una función.
+
+\begin{theorem}
+    Sea $f$ una función de variable real de forma que para algún punto $a$ de su dominio, existen $\frac{d}{dx} f(x)$, $\frac{d^2}{dx^2} f(x)$, $\dots$, $\frac{d^n}{dx^n} f(x)$ de forma que está definido $P_{n, a, f}(x)$, entonces:
+    \begin{align*}
+        \lim_{x \to a} \frac{f(x) - P_{n, a, f}(x)}{(x-a)^n} &= 0
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    Notese que al revisar que es $f(x) - P_{n, a, f}(x)$ se tendrá:
+    \begin{align*}
+        f(x) - P_{n, a, f}(x) &= f(x) - (a_0 + a_1(x-a) + a_2(x-a)^2 + \dots + a_n(x-a)^n)
+    \end{align*}
+    Luego, el limite original lo separaremos como:
+    \begin{align*}
+        \lim_{x \to a} \frac{f(x) - (a_0 + a_1(x-a) + a_2(x-a)^2 + \dots + a_n(x-a)^n)}{(x-a)^n}\\= \lim_{x \to a} \frac{f(x) - (a_0 + a_1(x-a) + a_2(x-a)^2 + \dots + a_{n-1}(x-a)^{n-1})}{(x-a)^n} - \lim_{x \to a} \frac{a_n(x-a)^n}{(x-a)^n}
+        \\= \lim_{x \to a} \frac{f(x) - (a_0 + a_1(x-a) + a_2(x-a)^2 + \dots + a_{n-1}(x-a)^{n-1})}{(x-a)^n} - a_n
+    \end{align*}
+    Luego, si se aplica la regla de \textit{L'Hospital} $n-1$ veces en el limite de la izquierda se tendrá:
+    \begin{align*}
+        \lim_{x \to a} \frac{\frac{d^{n-1}}{dx^{n-1}}f(x) - a_{n-1} \cdot (n-1)}{(x-a)\cdot n!} - \frac{\frac{d^n}{dx^n} f(x)}{n!} &= \lim_{x \to a} \frac{\frac{d^{n-1}}{dx^{n-1}}f(x) - \frac{d^{n-1}}{dx^{n-1}} f(a)}{(x-a)\cdot n!} - \frac{\frac{d^n}{dx^n} f(x)}{n!}\\
+        &= \frac{\frac{d^n}{dx^n} f(x)}{n!} - \frac{\frac{d^n}{dx^n} f(x)}{n!}\\
+        &= 0
+    \end{align*}
+\end{proof}
+
+Otra aplicación importante sobre los polinomios de Taylor tiene que ver con máximos y minimos de una función. Este teorema puede ser de utilidad en funciones donde la derivada es muy fácil de determinar pero a la hora de evaluar no se nos da ninguna información útil.
+
+\begin{theorem}
+    Sea $f$ una función tal que $\frac{d}{dx} f(a) = 0$, $\frac{d^2}{dx^2} f(a) = 0$, $\dots$, $\frac{d^{n-1}}{dx^{n-1}} f(a) = 0$ y $\frac{d^n}{dx^n} f(a) \neq 0$ entonces:
+    \begin{itemize}
+        \item Si $n$ es impar entonces en $a$ hay un punto de inflexión
+        \item Si $n$ es par y $\frac{d^n}{dx^n} f(a) > 0$ entonces en $a$ hay un punto mínimo local
+        \item Si $n$ es par y $\frac{d^n}{dx^n} f(a) < 0$ entonces en $a$ hay un punto máximo
+    \end{itemize}  
+\end{theorem}
+\begin{proof}
+    Para el valor de $f(a)$ hay dos opciones, y es que $f(a) = 0$ o $f(a) \neq 0$. Para el primer caso definiremos la función $F$ como $F = f$, y para el segundo caso, $F(x) = f(x) - f(a)$ para cualquier $x \in D_f$. Luego, el Polinomio de Taylor de grado $n$ con respecto a $F$ en $a$ será:
+    \begin{align*}
+        P_{n, a, F}(x) &= a_0 + a_1x + \dots + a_nx^n
+    \end{align*}
+    Notese que $\frac{d}{dx} F(x) = \frac{d}{dx} f(x)$ por lo que:
+    \begin{align*}
+        P_{n, a, f}(x) = P_{n, a, F} &= a_nx^n\\
+        &= \frac{\frac{d^n}{dx^n} f(a)}{n!}
+    \end{align*}
+    Luego, gracias al teorema anterior sabemos que:
+    \begin{align*}
+        \lim_{x \to a} \frac{f(x) - P_{n, a, f}}{(x-a)^n} &= 0
+    \end{align*}
+    Separando los limites tendremos:
+    \begin{align*}
+        \lim_{x \to a} \frac{f(x)}{(x-a)^n} - \frac{\frac{d^n}{dx^n} f(a)}{n!}
+    \end{align*}
+    Luego, es necesario que $ \frac{f(x)}{(x-a)^n}$ y $\frac{\frac{d^n}{dx^n} f(x)}{n!}$ tengan el mismo signo, y dado que el signo de $\frac{\frac{d^n}{dx^n} f(x)}{n!}$ no depende de $n!$ estará puramente determinado por $\frac{d^n}{dx^n}f(a)$.
+    \begin{itemize}
+        \item Si $n$ es par y $\frac{d^n}{dx^n} f(a) > 0$ es fácil determinar que el signo de $(x-a)^n$ siempre será positivo y por tanto $f(x)$ tendrá que ser positivo en las cercanías de $a$. Esto quiere decir que en $F$, $f(x) > 0$ para $x$ cercanos a $a$ y dado que $F(a) = 0$ entonces $a$ es un minimo.
+        \item Si $n$ es par y $\frac{d^n}{dx^n} f(a) < 0$ entonces es fácil determinar que el signo de $(x-a)^n$ siempre será positivo y por tanto $f(x)$ tendrá que ser negativo en las cercanías de $a$. En terminos de $F$, $F(x) < 0$ para $x$ cercanos a $a$ y dado que $F(a) = 0$ entonces $a$ es un máximo.
+        \item Si $n$ es impar y $\frac{d^n}{dx^n} f(a) > 0$ entonces hay que notar que $ \frac{f(x)}{(x-a)^n}$ tendrá que ser positivo y por tanto, dado que $n$ es impar, a la izquierda de $a$ $(x-a)^n$ será negativo y luego $f(x)$ tendrá que ser negativo. De igual manera $(x-a)^n$ y $f(x)$ serán positivos por la derecha de $a$ y gracias a que $F(a) = 0$ entonces $a$ tiene que ser un punto de inflexión. De igual manera se puede razonar para cuando $\frac{d^n}{dx^n} f(a) < 0$.
+    \end{itemize}
+\end{proof}
+\end{document}

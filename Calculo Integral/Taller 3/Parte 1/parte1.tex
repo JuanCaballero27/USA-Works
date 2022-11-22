@@ -1,0 +1,52 @@
+% !TEX root = ../main.tex
+
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\question $f(n) = \cos \left(\frac{n\pi}{2}\right)$\\
+
+Note que algunos valores de la secuencia son:
+\begin{itemize}
+    \item $f(1) = \cos\left(\frac{\pi}{2}\right) = 0$
+    \item $f(2) = \cos\left(\frac{2\pi}{2}\right) = -1$
+    \item $f(3) = \cos\left(\frac{3\pi}{2}\right) = 0$
+    \item $f(4) = \cos\left(\frac{4\pi}{2}\right) = 1$
+\end{itemize}
+
+Y la secuencia siempre oscilara entre estos valores dependiendo para cada $n$ de $n \mod{4}$. Luego, no existe un limite definido para el cúal la secuencia converga.
+
+\question $f(n) = \frac{n}{2^n}$\\
+
+Esta secuencia es una secuencia monotona, dado que es decreciente. Esto puede ser fácilmente demostrado tomando:
+\begin{align*}
+    1 &\le n\\
+    n + 1 &\le n + n\\
+    n + 1 &\le 2n\\
+    n + 1 &\le \frac{n}{2^n} \cdot 2^{n+1}\\
+    \frac{n+1}{2^{n+1}} &\le \frac{n}{2^n}
+\end{align*}
+Note que el único caso donde se tiene la igualdad es con $n = 1$. Luego, dado que la serie es acotada inferiormente por $0$ tiene un valor de convergencia. Dicho valor, llega a ser $0$.
+
+\question $f(n) = \frac{n^{\frac{2}{3}} \sin(n!)}{n+1}$\\
+Note que la convergencia dependerá 
+
+\question $f(n) = \frac{3^n + (-2)^n}{3^{n+1} + (-2)^{n+1}}$
+
+\question $f(n) = \left(1 + \frac{2}{n}\right)^n$
+
+Cada una de las siguientes series es convergente. Mediante la definición formal, determine valores de $N$ que cumplen la definición para $\epsilon = 1, 0.1, 0.01, 0.001, 0.0001$.
+
+\question $a_n = \frac{n}{n+1}$
+
+\question $a_n = (-1)^n \left(\frac{9}{10}\right)^n$
+
+Si $\alpha$ es un número real y $n$ es un entero no negativo, el coeficiente binomial $\binom{\alpha}{n}$ se define por:
+\begin{align*}
+    \binom{\alpha}{n} &= \frac{\alpha (\alpha - 1)(\alpha - 2) \dots (\alpha - n + 1)}{n!}
+\end{align*}
+\begin{partes}
+    \parte Cuando $\alpha = -\frac{1}{2}$ demuestre que:
+    $$\binom{\alpha}{1} = -\frac{1}{2}, \binom{\alpha}{2} = \frac{3}{8}, \binom{\alpha}{3} = -\frac{5}{16}, \binom{\alpha}{4} = \frac{35}{128}, \binom{\alpha}{5} = -\frac{63}{256}$$
+
+    \parte Sea $a_n = (-1)^n \binom{-\frac{1}{2}}{n}$. Demostrar que $a_n > 0$ y que $a_{n+1} < a_n$ para todo $n \in \mathbb{N}$.
+\end{partes}
+\end{document}

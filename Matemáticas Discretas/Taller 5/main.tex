@@ -1,0 +1,267 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage{pstricks-add}
+\usepackage[top=1cm,left=1cm,right=1.5cm,bottom=2cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true,urlcolor=magenta,citecolor=red,linkcolor=violet,bookmarks=true]{hyperref}
+\usepackage[sort&compress,round,comma,authoryear]{natbib}
+\usepackage{makeidx}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{textcomp}
+\usepackage[many]{tcolorbox}
+\usepackage{empheq}
+\usepackage{tasks}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage[T1]{fontenc}
+\usepackage{ae}
+\usepackage{lipsum}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{bookmark}
+\usepackage{pgfplots}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lastpage}
+\usepackage{epigraph}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+
+\usetikzlibrary{arrows}
+\usepackage{subfiles} % Insert the commands.tex file which contains the majority of the structure behind the template
+\pgfplotsset{compat=1.15}
+
+\newlist{questions}{enumerate}{3}
+\setlist[questions]{label=\arabic*.}
+\newcommand{\question}{\item}
+\setlist[enumerate,1]{% (
+leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
+
+\newlist{partes}{enumerate}{3}
+\setlist[partes]{label=(\alph*)}
+\newcommand{\parte}{\item}
+%---
+\newlist{subpartes}{enumerate}{3}
+\setlist[subpartes]{label=\roman*)}
+\newcommand{\subparte}{\item}
+
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\pagestyle{plain}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Matemáticas Discretas}
+\newcommand{\professor}{Diego Villamizar}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{Taller 4}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+\linespread{1.5}
+\pagestyle{empty}
+\newtheorem*{definition*}{Definición}
+\newtheorem*{theorem*}{Teorema}
+\newtheorem*{axiom*}{Postulado}
+\newtheorem{theorem}{Teorema}[section]
+\renewcommand*{\proofname}{\textbf{Demostración}}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      Emcabezado                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[H]
+    \centering
+    \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+        \begin{tabular}[l]{@{}l@{}}
+            \textbf{\instituto}              \\
+            \textbf{Disciplina: \disciplina} \\
+            \textbf{Profesor: \professor}    \\
+        \end{tabular} &
+        \begin{tabular}[l]{@{}l@{}}
+            {\curso}   \\
+            {\alumnoI} \\
+        \end{tabular}
+    \end{tabular*}
+\end{table}
+\begin{center}
+    \rule[2ex]{\textwidth}{1pt}
+    {\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+\begin{questions}[label=\protect\circled{\bfseries\arabic*}]
+    \question Demuestre que el número de caminatas de $v_1$ a $v_2$ en el grafo
+    $$G = (\{v_1, v_2\}, \{(v_1, v_1), (v_1, v_2), (v_2, v_1)\})$$
+    de longitud $n$ es $F_n$.
+
+    \begin{proof}
+        Denote como $L_n$ el conjunto de caminatas de $v_1$ a $v_2$ de longitud $n$. Para $n = 0$ no existe ningún camino de $v_1$ a $v_2$ de longitud $0$ ya que dicho caminata sería $\{v_1\}$ lo cúal nunca llega a $v_2$. Luego, $|L_0| = 0$. Además, para $n = 1$ el único caminata posible es $\{v_1, v_2\}$, ya que cualquier otra caminata tendría más elementos, por lo que $|L_1| = 1$. Con esto, ya tenemos que el caso base de $F_n$ y de $|L_n|$ son iguales. Solo es necesario probar que para $n \ge 2$ se tiene que $F_n = |L_n|$. Para ello, considere la siguiente biyección:
+        $$\begin{matrix}
+            \varphi: & L_{n} \cup L_{n+1} & \to & L_{n+2}\\
+            & C = \{v_{i}\} & \mapsto & \varphi(C)
+        \end{matrix}$$
+        Donde si $C \in L_{n}$ entonces $\varphi(C) = \{u_i\}_{i \in [n+3]}$ donde $u_1 = 1$, $u_2 = 2$ y $u_i = v_{i-2}$ para todo $i \ge 3$, y si $C \in L_{n+1}$ entonces $\varphi(C) = \{w_i\}_{i \in [n+3]}$ de forma que $w_1 = 1$ y $w_i = v_{i-1}$ para todo $i \ge 2$.
+        \begin{itemize}
+            \item \textbf{Inyectividad:} Note que no pueden existir elementos que pertenezcan a $L_n$ y $L_{n+1}$ al tiempo, ya que eso implicaría que $n = n+1$. Suponga que $C = \{a_i\}_{i \in [n]}$ y $D = \{b_i\}_{i \in [n]}$ son caminatas de $L_n$ de forma que $\varphi(C) = \varphi(D)$. Eso quiere decir que las sucesiones $\{v_i\}_{i \in [n+3]}$ y $\{u_i\}_{i \in [n+3]}$ son iguales(En correspondencia con $\varphi(C)$ y $\varphi(D)$). Luego, quiere decir que $v_{i} = u_i$ para todo $i \in [n+3]$. Ya es fácil determinar $v_1 = u_1 = 1$ y que $v_2 = u_2 = 2$. Suponga que $i \ge 3$ y llame ahora $k = i-2$ y dado que $3 \le i \le n+3$ entonces $1 \le k \le n+1$ y $v_i = u_i$ entonces $a_{k} = b_k$ para todo $k \in [n+1]$, por lo que $C = D$. De manera similar se concluye que si $C, D \in L_{n+1}$ y $\varphi(C) = \varphi(D)$ entonces $C = D$(Reemplazando $k = i - 1$).
+            \item \textbf{Sobreyectividad:} Note que siempre que tome $C = \{v_i\}_{i \in [n+3]}$ una caminata de longitud $n+2$, $v_1 = 1$, pero $v_2$ puede tomar dos valores. Si $v_2 = 1$ entonces definida la caminata $A = \{u_i\}_{i \in [n+2]}$ con $u_i = v_{i+1}$, y esta es una caminata de $v_1$ a $v_2$ de longitud $n+1$, y luego $\varphi(A) = C$. Si $v_2 = 2$ entonces defina $B = \{u_i\}_{i \in [n+1]}$ de forma que $u_i = v_{i + 2}$ y esta será una caminata de $v_1$ a $v_2$ de longitud $n$, para obtener que $\varphi(B) = C$. 
+        \end{itemize} 
+        Luego, gracias a que demostramos que $L_{n} \cup L_{n+1} \cong L_{n+2}$ y gracias al hecho de que $L_{n} \cap L_{n+1} = \emptyset$ demostramos que $|L_n| + |L_{n+1}|  = |L_{n+2}|$, por lo que al comprobar los casos bases y la recursión de $F_n$ con $L_{n}$, podemos concluir que en general $|L_{n}| = F_n$.
+    \end{proof}
+
+    \question Recuerde que dada una relación binaria $R \subseteq X^2$ con $X$ un conjunto finito de la forma $\{x_1, x_2, \dots, x_n\}$ puede
+    representarse de forma gráfica como una matriz $A_R$ de la siguiente forma:
+    \begin{align*}
+        A & =
+        \begin{pmatrix}
+            a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+            a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+            \vdots  & \vdots  & \ddots & \vdots  \\
+            a_{n,1} & a_{n,2} & \cdots & a_{n,n}
+        \end{pmatrix},
+    \end{align*}
+    donde:
+    \begin{align*}
+        a_{i, j} & = \begin{cases}
+            1, & (x_i, x_j) \in R    \\
+            0, & (x_i, x_j)\not\in R \\
+        \end{cases}
+    \end{align*}
+    \begin{partes}
+        \parte ¿Que matriz representa la relación de aristas del grafo G del punto anterior?\\
+        La matriz definida por:
+        \begin{align*}
+            A_G &= \begin{pmatrix}
+                1 & 1\\
+                1 & 0
+            \end{pmatrix}
+        \end{align*}
+        \parte Si $A$ y $B$ son de la forma:
+        \begin{equation*}
+            A =
+            \begin{pmatrix}
+                a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+                a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+                \vdots  & \vdots  & \ddots & \vdots  \\
+                a_{n,1} & a_{n,2} & \cdots & a_{n,n}
+            \end{pmatrix},\, B =
+            \begin{pmatrix}
+                b_{1,1} & b_{1,2} & \cdots & b_{1,n} \\
+                b_{2,1} & b_{2,2} & \cdots & b_{2,n} \\
+                \vdots  & \vdots  & \ddots & \vdots  \\
+                b_{n,1} & b_{n,2} & \cdots & b_{n,n}
+            \end{pmatrix},
+        \end{equation*}
+        entonces $A\cdot B$ es la matriz
+        \begin{equation*}
+            A\cdot B =
+            \begin{pmatrix}
+                c_{1,1} & c_{1,2} & \cdots & c_{1,n} \\
+                c_{2,1} & c_{2,2} & \cdots & c_{2,n} \\
+                \vdots  & \vdots  & \ddots & \vdots  \\
+                c_{n,1} & c_{n,2} & \cdots & c_{n,n}
+            \end{pmatrix}
+        \end{equation*}
+        con $c_{i, j} = \sum_{k = 1}^n a_{i, k} b_{k, j}$. Pruebe usando inducción que si $G = (V, E)$ es un grafo con $E \subseteq V^2$ entonces:
+        $$A_E ^n=\underbrace{A_E\cdot A_E\cdots A_E\cdot A_E}_{n\text{ veces}}=\begin{pmatrix}
+                a^{(n)}_{1,1} & a^{(n)}_{1,2} & \cdots & a^{(n)}_{1,n} \\
+                a^{(n)}_{2,1} & a^{(n)}_{2,2} & \cdots & a^{(n)}_{2,n} \\
+                \vdots        & \vdots        & \ddots & \vdots        \\
+                a^{(n)}_{n,1} & a^{(n)}_{n,2} & \cdots & a^{(n)}_{n,n}
+            \end{pmatrix}$$
+        contiene como entradas, $a^{(n)}_{i, j}$ que cuenta el número de caminatas de $v_i$ a $v_j$ de longitud $n$.
+
+        \begin{proof}
+            El caso $k = 1$ es trivial, ya que la cantidad de caminatas de $v_i$ a $v_k$ de longitud $1$ será la arista que los conecte o no. Supongamos que en $A_E^{k} = (a^{(k)}_{i, j})$, la entrada $a^{(k)}_{i, j}$ representa la cantidad de caminatas de $v_i$ a $v_j$ de longitud $k$. Luego, para el producto $A_E^{k} \cdot A$ cada entrada estará dada, gracias a la definición del producto de matrices como:
+            \begin{align*}
+                a^{(k+1)}_{i, j} &= \sum_{l = 1}^k a_{i, l}^{(n)} \cdot a_{l, j}
+            \end{align*} 
+            Ahora, la entrada $a_{i, l}^{(k)}$ es la cantidad de caminatas desde $v_i$ hasta $v_l$ de longitud $l$. Luego, si hay caminatas de $v_i$ a $v_l$, esta servirá para llegar a $v_j$ solo si $v_l$ esta conectado con $v_j$. En caso de que sí, $a_{l, j}$ será un $1$ contando que por los $a_{i, l}^{(k)}$ caminos se puede llegar a $v_j$, y note que será de longitud $k+1$ ya que el camino anterior era de longitud $k$ y le agregamos un vertice más. En caso de que alguno de los dos valores sea $0$ quiere decir que no se puede llegar a $v_j$ através de $v_l$. Luego, al verificar esto para $1 \le l \le k$ y sumarlo, serán los posibles caminos de $v_i$ a $v_j$ de longitud $k+1$.
+        \end{proof}
+
+        \parte Pruebe que si $G$ es el grafo del problema 1, entonces:
+        \begin{align*}
+            A^n_G & = \begin{pmatrix}
+                          F_{n+1} & F_n     \\
+                          F_n     & F_{n-1}
+                      \end{pmatrix}
+        \end{align*}
+        \begin{proof}
+            Ya determinamos en el punto anterior que la entrada de la matriz anterior son las caminatas de $v_i$ a $v_j$ de longitud $n$. Recordemos por el punto 1, que el número de caminatas de $v_1$ a $v_2$ de longitud $n$ es $F_n$ lo que explica las entradas $a_{1, 2}$ y $a_{2, 1}$(Note que las caminatas de $v_2$ a $v_1$ de longitud $n$ es invertir aquellas de $v_1$ a $v_2$). 
+        \end{proof}
+    \end{partes}
+
+
+
+    \question Sea $G$ un grafo no dirigido y conexo. Suponga que $e \in E$ es una arista que está contenida en un cíclo. Pruebe que el grafo $G' = (V, E \setminus \{e\})$ es conexo.
+
+    \begin{proof}
+        Dado que $e$ pertenece a un cíclo, quiere decir que existe un ciclo(Como sucesión de vertices) $\{v_i\}_{i \in [k+1]}$ donde para algún $n$, $(v_n, v_{n+1}) = e$. Supongamos que en realidad $G'$ no es convexo, es decir $|V \backslash R_{G'}| = 2$. Esto quiere decir que existen dos clases distintas de equivalencia, $[[u]]$ y $[[v]]$. De esto, podemos derivar dos posibles escenarios:
+        \begin{itemize}
+            \item $v_n \in [[u]]$ y $v_{n+1} \in [[v]]$, es decir, no existe una caminata desde $v_n$ hasta $v_{n+1}$ en $G'$. Pero gracias a la existencia del ciclo donde pertenece $e$, y gracias a que $G$ es no dirigido, podemos generar dos caminos:
+            \begin{align*}
+                \{v_n, v_{n-1}, \dots, v_1\} & & \{v_1, v_{k}, \dots v_{n+1}\}
+            \end{align*}
+            Pero esto quiere decir que existe un camino desde $v_n$ a $v_{n+1}$(Por la transitividad de la relación), concluyendo que $[[u]] \cap [[v]] \neq \emptyset$ lo que contradice el hecho de que sean clases de equivalencia distintas.
+
+            \item Con lo anterior concluimos que sin perdida de generalidad, $v_n, v_{n+1} \in [[u]]$. Ahora, por lo menos $v \in [[v]]$, por lo que no debería existir ninguna caminata de $v_n$ a $v$ en $G'$. Recordemos que dicho caminata si debe existir en el grafo $G$ ya que era conexo, es decir existe $\{a_i\}_{i \in [x+1]}$ una caminata de forma que $a_i = v_n$ y $a_{x+1} = v \neq v_{n+1}$. Note que $a_{2} = v_{n+1}$ ya que si no fuese así, $e$ nunca estará en esta caminata, por lo que será totalmente valido en $G'$, contradiciendo que no hay caminata de $v_n$ a $v$(De manera más general, podemos concluir que el número de veces que $a_i = v_n$ y $a_{i+1} = v_{n+1}$ debe ser mayor que el número de veces que $a_i = v_{n+1}$ y $a_{i+1} = v_n$ ya que si no fuera así, podríamos encontrar una caminata directa desde $v_n$ a $v$, de nuevo, una contradicción). Podemos deducir entonces que existe un caminata de $v_{n+1}$ y $v$, pero esto contradice el hecho de que $[[u]] \cap [[v]] = \emptyset$, ya que existiría una caminata desde $v_{n+1}$ hasta $v$, y por extensión, una caminata de $v_n$ hasta $v$.
+        \end{itemize}
+        Hemos visto que suponer que existen dos clases de equivalencia distintas genra una contradicción, por lo que podemos concluir que $[[u]] = [[v]]$(De manera inductiva, para más de dos clases de equivalencia distintas, podemos concluir dos a dos que son iguales). Por lo que $ |V \backslash R_{G'}| = 1$ y por tanto $G'$ es conexo.
+    \end{proof}
+
+
+    \question Sea $G$ un grafo no dirigido y sin loops. Si $|V| = n$, $|Deg(x)| = k$ para todo $x \in V$ y:
+    \begin{align*}
+        \begin{cases}
+            k \ge \frac{n-3}{2} & \text{ Si $n-1$ es divisible por 4}\\
+            k \ge \frac{n-1}{2} & \text{ Si $n-1$ no es divisible por 4}
+        \end{cases}
+    \end{align*}
+    entonces $G$ es un grafo conexo.
+    \begin{proof}
+        
+    \end{proof}
+
+    Un $r-$coloramiento de un grafo no dirigido $G = (V, E)$ con $E \subseteq \binom{V}{2}$ es una función $f: V \to [r]$ tal que $f(x) \neq f(y)$ si $\{x, y\} \in E$. Un grafo se dice $r-$coloreable si existe un $r-$coloramiento en él.
+
+    \question ¿Qué tipo de grafos son $1-$coloreables?\\
+    Para que un grafo sea $1-$coloreable, quiere decir que existe una función $f: V \to [1]$, tal que $f(x) \neq f(y)$ si $\{x, y\} \in E$. Pero note que $f(x) = 1$ para todo $x \in V$, por lo que el contrareciproco de la condición nos diría que \textit{$f(x) = f(y)$ entonces $\{x, y\} \not\in E$}, lo que permite concluir que $\{u, v\} \not\in E$ para todo $u, v \in V$, por lo que $E = \emptyset$ y por tanto los únicos grafos que son $1-$coloreable son los grafos vácios $V_n$.
+    
+    \question Pruebe que si $T = (V, E)$ es arbol, entonces es $2-$coloreable. ¿Cuantos $2-$coloreamientos del arbol hay?
+    \begin{proof}
+        Recuerde que para un arbol $T$, existe una función $d: V^2 \to \mathbb{Z}^{\ge 0}$ que representa la distancia entre dos vertices del arbol. Tome cualquier elemento arbitrario $r \in V$, y considere $T_r$. Definiremos una función $f: V \to \{1, 2\}$ de forma que $f(x) = f(y)$ si y solo si $d(r, x) = d(r, y)$. Esta función es un coloreamiento. Supongamos que $f(x) = f(y)$ pero $\{x, y\} \in E$. Nombre $k$ como $d(x, r), d(y, r)$, entonces existen dos caminos $\{v_i\}_{i \in [k+1]}$ y $\{u_i\}_{i \in [k+1]}$, tal que $v_1 = x, u_1 = y, v_{k+1} = u_{k+1}$. Pero se puede hacer un nuevo camino $\{w_i\}_{i \in [k+2]}$ de forma que $w_i = v_{k+1-i+1}$ para $ 1 \le i \le k+1$ y $w_{k+2} = x$. Y al combinar los caminos $\{v_i\}_{i \in [k+1]}$ y $\{w_i\}_{i \in [k+2]}$ formamos un cíclo dentro del arbol, lo cúal es una contradicción con la definición de arbol. Por tanto, si $f(x) = f(y)$, $\{x, y\} \not \in E$, lo que por definición nos muestra que $f$ es un 2-coloreamiento de $T$.
+
+        Note que de manera más general $f(x) = f(y)$ si y solo si $d(r, x) \equiv d(r, y) (\mod 2 \,)$. Moralmente, esto indica que el coloreamiento los "niveles" o profundidad de un "arbol", en base a si la profundidad es par o impar. Luego, solo hay dos formas que intercambiar ambos estados, por lo que existen únicamente 2 $2-$coloreamientos para $T_r$. Pero note que la elección de $r$ no afecta el coloreamiento de $T$, por lo que en general para $T$ existen 2 $2-$coloreamientos.
+    \end{proof}
+
+    \question De una expresión en terminos de $n$ y $m$ para el número de $m-$coloreamientos de:
+    \begin{itemize}
+        \item $V_n$: $\to m^n$
+        \item $G = ([n], E)$ con $E = \{(i, i+1): i \in [n-1]\}$: $\to m \cdot (m-1)^{n-1}$
+        \item $K_n$: $\to \binom{m}{n} \cdot n!$ 
+    \end{itemize}
+
+    \question Note que si un grafo es $k-$coloreable, entonces es $(k+1)-$coloreable. Denote $\chi(G)$ el minimo número $k$ tal que $G$ es $k-$coloreable.
+    \begin{partes}
+        \parte Cálcule $\chi(G)$ para los grafos del punto anterior.
+        \begin{itemize}
+            \item $\chi(V_n)$ es $1$ dado que como se demostró en la primera parte del punto, $V_n$ es $1-$coloreable y dado que $1$ es el minimo número natural, $\chi(V_n) = 1$.
+            \item $\chi(G)$ con $G = ([n], E)$ con $E = \{(i, i+1): i \in [n-1]\}$ es $2$ para todo $n \ge 2$, ya que no puede ser $1$ coloreable, ya que $(1, 2) \in E$ por lo que $f(1) \neq f(2)$. El coloreamiento será una función tal que $f(x) = f(y)$ si y solo si $f(x) \equiv f(y) (\mod{2})$. Para $n = 1$ será $1$, ya que es directamente $V_1$.
+            \item $\chi(K_n)$ es $n$ ya que tomando un $v$ arbitrario en $V$, sabemos que $|Deg(v)| = n-1$, por lo que tendremos que tener $n-1$ valores para los vertices, y añadiendo el propio valor de $v$, necesitaremos $n$ valores distintos. Luego, $\chi(K_n) = n$. 
+        \end{itemize}
+
+        \parte Pruebe que $\chi(G) \le \Delta(G) + 1$ si $\Delta(G)$ es el máximo grado de $G$ i.e, $\Delta(G) = \max\limits_{x\in V} |Deg(x)|$
+    \end{partes}
+\end{questions}
+\end{document}

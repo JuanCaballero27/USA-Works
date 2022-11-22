@@ -1,0 +1,167 @@
+% !TEX root = ../main.tex
+
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+    \question \textbf{Ejercicio 1:} Determinar la derivada de cada una de las siguientes funciones
+    \begin{partes}
+        \parte $F(x) = \int_{a}^{x^3} \sin^3t dt$\\
+        Resolviendo la siguiente integral será:
+        \begin{align*}
+            \int \sin^3x dx &= \int \sin^2x \cdot \sin x dx\\
+            &= \int (1-\cos^2x) \cdot \sin x dx\\
+            &= \int (\cos^2x-1) \cdot (-\sin x) dx\\
+            &= \int u^2-1 du & \text{ Con $u = \cos x$ }\\ 
+            &= \int u^2 du - \int 1 du\\
+            &= \frac{u^3}{3} - u + C\\
+            &= \frac{\cos^3x}{3} - \cos x + C
+        \end{align*}
+        Luego, la integral de la función puede ser escrita gracias al Teorema Fundamental del cálculo:
+        \begin{align*}
+            \int_{a}^{x^3} \sin^3t dt &= \frac{\cos^3(x^3)}{3} - \cos(x^3) - \frac{\cos^3(a)}{3} + \cos(a)
+        \end{align*}
+        Y derivando la expresión será:
+        \begin{align*}
+            \frac{d}{dx} \left(\frac{\cos^3(x^3)}{3} - \cos(x^3) - \frac{\cos^3(a)}{3} + \cos(a)\right) &= \frac{d}{dx}\left(\frac{\cos^3(x^3)}{3} - \cos(x^3)\right)\\
+            &= \frac{1}{3} \left(-3\cos^2(x^3)\sin(x^3) \cdot 3x^2 \right) + (\sin^2(x^3) \cdot 3x^2)\\
+            &= \left(-3x^2 \cos^2(x^3)\sin(x^3)\right) + (3x^2 \cdot \sin^2(x^3))\\
+            &= 3x^2(-\cos^2(x^3)\sin(x^3) + \sin^2(x^3))\\
+            &= 3x^2\sin(x^3)(-\cos^2(x^3)+1)\\
+            &= 3x^2\sin(x^3)(\sin^2(x^3))\\
+            &= 3x^2\sin^3(x^3)
+        \end{align*}
+
+        \parte $F(x) = \int_{15}^{x} \left(\int_{8}^y \frac{1}{1+t^2+\sin^2t} dt\right) dy$\\
+        La expresión $g(y) = \int_{8}^y \frac{1}{1+t^2+\sin^2t}$ entonces:
+        \begin{align*}
+            F(x) &= \int_{15}^x g(y) dy\\
+        \end{align*} 
+        Luego, por el Teorema Fundamental del Calculo se puede determinar la derivada de $F(x)$ como sigue:
+        \begin{align*}
+            F'(x) &= \int_{8}^x \frac{1}{1+t^2+\sin^2t} dt\\
+        \end{align*}
+        Dicho cambio de variable dentro de la integral permite que al derivar $g(15)$ al ser una constante su derivada será $0$.
+        Luego, solo quedará la expresión $g(x)$ de forma que queda la expresión anteriormente descrita.
+        \parte $F(x) = \sin\left(\int_0^x \sin \left(\int_0^y \sin^3t dt\right)dy \right)$
+        Es conveniente definir las siguientes funciones en terminos de $x$ y $y$:
+        \begin{align*}
+            f(x) &= \int_0^x g(y) dy\\
+            g(y) &= \sin\left(\int_0^y \sin^3t dt\right)
+        \end{align*}
+        Lo que permitirá escribir la función original como:
+        \begin{align*}
+            F(x) &= sin(f(x))
+        \end{align*}
+        Y aplicando la regla de la cadena tendremos:
+        \begin{align*}
+            \frac{d}{dx} F(x) &= \cos(f(x)) \cdot \frac{d}{dx} f(x)
+        \end{align*}
+        Luego, podemos calcular la derivada de $f$ con respecto a $x$ gracias al Teorema Fundamental del Calculo. Esto será:
+        \begin{align*}
+            \frac{d}{dx} f(x) &= g(x)\\
+            &= \sin\left(\int_0^x \sin^3 t dt\right)
+        \end{align*}
+        Lo que nos dejará con la siguiente expresión:
+        \begin{align*}
+            \frac{d}{dx} F(x) &= \cos\left(\int_0^x \sin\left(\int_0^y \sin^3t dt\right) dy\right) \cdot \sin\left(\int_0^x \sin^3t dt\right)\\
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 2:} Para cada una de las siguientes funciones $f$, si $F(x) = \int_{0}^x f$,
+    ¿En que puntos $x$ ocurre que $F'(x) = f(x)$?
+    \begin{partes}
+        \parte $f(x) = \begin{cases}
+            0 & x \le 1\\
+            1 & x > 1\\
+        \end{cases}$\\
+
+        Note que la función $f$ es continua en $\mathbb{R} \setminus \{1\}$. Eso quiere decir que por lo menos para todo $x \in \mathbb{R}$ tal que
+        $x \neq 1$ se tendrá que $F'(x) = f(x)$. Luego, gracias a que la función $F$ no es continua en $1$ se puede afirmar que no es diferenciable en dicho
+        punto y por tanto $F'(1) \neq f(1)$.
+
+        \parte $f(x) = \begin{cases}
+            0 & x \neq 1\\
+            1 & x = 1\\
+        \end{cases}$\\
+
+        Dado que de nuevo, la función es continua en todo número real a excepción de $1$, está asegurado al menos que $F'(x) = f(x)$ para $x \neq 1$.
+        Luego, de nuevo como $F$ es discontinua en $x = 1$ concluimos que no es diferenciable y por tanto $F'(1) \neq f(1)$
+
+
+        \parte $f(x) = \begin{cases}
+            0 & x\le 0 \text{ o } x > 1\\
+            \frac{1}{\left[\frac{1}{x}\right]} & 0 < x \le 1\\
+        \end{cases}$\\
+
+        Esta función es continua en todos los números reales, a excepción de $1$.Incluso es notorio que es continua en $0$
+        puesto que tant por derecha como por izquierda, los valores tienden a $0$. 
+    \end{partes}
+
+    \question Determinar $(f^{-1})'(0)$ de:
+    \begin{partes}
+        \parte $f(x) = \int_{0}^x 1 + \sin(\sin t) dt$\\
+        Primero, igualemos la expresión a $0$. Esto quiere decir:
+        \begin{align*}
+            \int_{0}^x 1 + \sin(\sin t) dt &= 0\\
+            x &= 0
+        \end{align*}
+        Es de tener en cuenta que $x$ solo puede ser $0$ puesto que si se intenta resolver la ecuación $\sin(\sin t) = -1$ se llegará a un valor no definido por la función $\sin^{-1}$. El valor
+        de la función nos indica que dentro del conjunto que representa la función tendremos la pareja ordenada $(0, 0)$, por lo que la función inversa tendrá la pareja ordenada $(0, 0)$\\
+        Luego, gracias al Teorema Fundamental del Calculo sabemos que al ser la función continua en todo punto, incluyendo $0$ se tendrá que:
+        $f'(x) = 1 + \sin(\sin t)$
+        Reemplazando con $0$ tendremos:
+        \begin{align*}
+            f'(0) &= 1 + \sin(\sin 0)\\
+            &= 1 + \sin(0)\\
+            &= 1 + 0\\
+            &= 1
+        \end{align*}
+        Luego, por la regla de la derivada de la función inversa:
+        \begin{align*}
+            (f^{-1})'(0) &= \frac{1}{f'(f^{-1}(0))}\\
+            &= \frac{1}{f'(0)}\\
+            &= \frac{1}{1}\\
+            &= 1
+        \end{align*}
+        \parte $f(x) = \int_{1}^x \cos(\cos t) dt$\\
+        Primero igualemos de nuevo la expresión a $0$, es decir:
+        \begin{align*}
+            \int_{1}^x  \cos(\cos t) dt &= 0\\
+            x &= 1
+        \end{align*}
+        Es de tener en cuenta que $x$ solo puede ser $1$ puesto que si se intenta resolver la ecuación $\cos(\cos t) = 0$ se llegará a un valor no definido por la función $\cos^{-1}$. El valor
+        de la función nos indica que dentro del conjunto que representa la función tendremos la pareja ordenada $(1, 0)$, por lo que la función inversa tendrá la pareja ordenada $(0, 1)$\\
+        Luego, gracias al Teorema Fundamental del Calculo sabemos que al ser la función continua en todo punto, incluyendo $0$ se tendrá que:
+        $f'(x) = \cos(\cos t)$
+        Por lo que reemplazando dicho valor se tendrá:
+        \begin{align*}
+            f'(1) &= \cos(\cos 1)
+        \end{align*}
+        Luego, por la regla de la derivada de la función inversa:
+        \begin{align*}
+            (f^{-1})'(0) &= \frac{1}{f'(f^{-1}(0))}\\
+            &= \frac{1}{f'(1)}\\
+            &= \frac{1}{\cos(\cos 1)}\\
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 6}: Encontrar una función $g$ de forma que:
+    \begin{align*}
+        \int_{0}^{x^2} t \cdot g(t) dt &= x + x^2\\
+    \end{align*}
+    Derivando en ambos lados de la igualdad se tendrá:
+    \begin{align*}
+        \frac{d}{dx} \int_{0}^{x^2} t \cdot g(t) dt &= \frac{d}{dx} x+x^2\\
+        x^2 \cdot g(x^2) \cdot 2x &= 1 + 2x\\
+    \end{align*}
+    Y despejando en terminos de $g(x^2)$ se tendrá:
+    \begin{align*}
+        x^2 \cdot g(x^2) \cdot 2x &= 1 + 2x\\
+        2x^3 \cdot g(x^2) &= 1 + 2x\\
+        g(x^2) &= \frac{1+2x}{2x^3}\\
+    \end{align*}
+    Por lo que sí $t = x^2$ se tendrá:
+    \begin{align*}
+        g(t) &= \frac{1+2\sqrt{t}}{2\sqrt{t^3}}
+    \end{align*}
+    Con $t \ge 0$.
+\end{document}

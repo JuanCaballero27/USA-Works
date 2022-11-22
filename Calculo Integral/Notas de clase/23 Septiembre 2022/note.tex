@@ -1,0 +1,163 @@
+\documentclass[12pt,a4paper,oneside]{memoir}
+\usepackage{notesconfig}
+
+
+% \pagestyle{plain}
+\newcommand{\instituto}{Universidad Sergio Arboleda}
+\newcommand{\curso}{Cálculo Integral}
+\newcommand{\professor}{Fabio Molina}
+\newcommand{\disciplina}{Matemáticas}
+\newcommand{\titulo}{23 Septiembre 2022}
+\newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
+\newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
+
+\linespread{1.5}
+
+\begin{document}
+%-----------------------------------------------------------
+%                       Encabezado
+%-----------------------------------------------------------
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}l@{\extracolsep{\fill}}}
+    \begin{tabular}[l]{@{}l@{}}
+        \textbf{\instituto}\\
+        \textbf{Disciplina: \disciplina}\\
+        \textbf{Profesor: \professor}\\ 
+    \end{tabular} & 
+    \begin{tabular}[l]{@{}l@{}}
+        {\curso}\\
+        {\alumnoI}\\
+        % {\alumnoII}\\
+    \end{tabular}
+\end{tabular*}
+\end{table}
+\begin{center}
+\rule[2ex]{\textwidth}{1pt}
+
+{\Large{\titulo}}
+\end{center}
+\rule[2ex]{\textwidth}{1pt}
+%--------------------------------------------------------
+%                       Contenido                      
+%--------------------------------------------------------
+\section*{Un poco sobre limites}
+Antes de empezar a ver series y sucesiones lo mejor será repasar un poco sobre limites. Para ello, practicaremos con las siguientes proposiciones:
+\begin{lemma}
+    Para todo $x \in \mathbb{R}$, $x < e^{x}$
+\end{lemma}
+\begin{proof}
+    Sea $x \in \mathbb{R}$, puede suceder que:
+    \begin{itemize}
+        \item $x < 0$: En este caso, dado que $e^{x} > 0$ para todo valor real, es fácil deducir que $x < e^{x}$
+        \item $x = 0$: En este punto se sabe que $e^{0} = 1$ y es evidente que $0 < 1$
+        \item $x > 0$: Para este caso, primero demostraremos que $\ln(x) < x$ para todo valor de $x$ positivo. Si $0 < x < 1$ entonces por definción $ln(x) < 0 < x$. En el caso en que $x > 1$ tome $P = \{1, x\}$ una partición de $[1, x]$. Si se toma la suma superior de $P$ con respecto a la función $\frac{1}{x}$ dicho valor será $x$ (¿Por qué?), y recordemos que:
+        \begin{align*}
+            \int_{a}^b f(x) dx \le U(f, P)
+        \end{align*}
+        para toda partición $P$, por lo que concluimos que $ln(x) < x$. Con esto en mente, podemos partir de dicha desigualdad:
+        \begin{align*}
+            ln(x) &< x\\
+            e^{ln(x)} &< e^{x}\\
+            x &< e^{x}
+        \end{align*}
+    \end{itemize}
+    Por lo que para todo $x \in \mathbb{R}$, $x < e^{x}$.
+\end{proof}
+
+\begin{lemma}
+    \begin{align*}
+        \lim_{x \to \infty} \frac{e^x}{x} = \infty
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    Considere la siguiente manipulación álgebraica:
+    \begin{align*}
+        \lim_{x \to \infty} \frac{e^x}{x} &= \lim_{x \to \infty} \frac{e^{\frac{x}{2}}}{x} \cdot e^{\frac{x}{2}}\\
+        &= \lim_{x \to \infty} \frac{e^{\frac{x}{2}}}{x} \cdot \lim_{x \to \infty} e^{\frac{x}{2}}\\
+        &= \lim_{x \to \infty} e^{\frac{x}{2}} \cdot \frac{1}{2} \cdot \lim_{x \to \infty} e^{\frac{x}{2}}\\
+        &= \frac{1}{2} \lim_{x \to \infty} e^{\frac{x}{2}} \cdot \lim_{x \to \infty} e^{\frac{x}{2}}\\
+        &= \frac{1}{2} \lim_{x \to \infty} e^x\\
+        &= \infty
+    \end{align*}
+\end{proof}
+
+\begin{theorem}
+    Para todo $n \in \mathbb{Z}^+$ se tiene que:
+    \begin{align*}
+        \lim_{x \to \infty} \frac{e^x}{x^n} &= \infty
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    Para dicho limite, conviene alterar la expresión como sigue:
+    \begin{align*}
+        \lim_{x \to \infty} \frac{e^x}{x^n} &= \lim_{x \to \infty} \left(\frac{e^{\frac{x}{n}}}{x}\right)^n\\
+        &= \infty^n\\
+        &= \infty
+    \end{align*}
+\end{proof}
+
+\section*{Polinomios de Taylor}
+En un curso general de cálculo, las mejores funciones son las funciones polinomicas puesto que son fáciles de derivar, integrar, aproximar resultados, etc. Pero hay muchas funciones que no pueden ser expresadas de formas polinomica como las funciones trigonometricas o las funciones logaritmicas. Es entonces donde conviene buscar una forma de aproximar estas funciones con polinomios.\\
+
+Si por ejemplo tenemos un polinomio $P(x) = a_0 + a_1x + \dots + a_nx^n$ entonces es fácil ver que $P(0) = a_0$. Luego, si aplicamos la primera derivada tendremos:
+\begin{align*}
+    \frac{d}{dx} P(x) = a_1 + 2a_2x+ \dots + na_nx^{n-1}
+\end{align*}
+Y en esta ocasión al evaluar en cero tendremos:
+\begin{align*}
+    \frac{d}{dx} P(0) = a_1
+\end{align*}
+Luego,si continuamos con la segunda derivada tendremos:
+\begin{align*}
+    \frac{d^2}{dx^2} P(x) = 2a_2 + 6a_3x + \dots + n(n-1) a_n x^{n-2}
+\end{align*}
+Y al evaluar en cero tendremos:
+\begin{align*}
+    \frac{d^2}{dx^2} P(0) = 2a_2
+\end{align*}
+Y si continuamos podremos darnos cuenta de un patrón, donde:
+\begin{align*}
+    \frac{d^k}{dx^k} P(0) = a_k \cdot k!
+\end{align*}
+Donde $k$ es un número entre $0$ y $n$. De aquí, podriamos determinar que en general para determinar cualquier coeficiente dentro del polinimio podríamos usar la formula:
+\begin{align*}
+    a_k = \frac{\frac{d^k}{dx^k} P(0)}{k!}
+\end{align*}
+¿Y si pudieramos aplicar una formula similar pero con cualquier tipo de función? Obtendriamos una aproxiamación de dicha función en un punto arbitrario, y justamente este concepto es un \textit{Polinomio de Taylor}:
+\begin{definition}[Polinomio de Taylor]
+    Sea $f$ una función de variable real, y sea $a$ un elemento del dominio de $f$. El \textit{Polinomio de Taylor} de orden $n$ se define por:
+    \begin{align*}
+        P_{n, a, f}(x) &:= \sum_{k=0}^n a_k \cdot (x-a)^k
+    \end{align*}
+    Siendo $a_k = \frac{\frac{d^k}{dx^k} P(0)}{k!}$
+\end{definition}
+Este concepto es una herramienta muy útil en analisis pues justamente al aumentar el valor de $n$ arbitrariamente el polinomio se asemejará más a la función en general en un intervalo más amplio lo que es muy útil en problemas de aproxiamación.
+
+\begin{example}
+    Sea $f(x) = \sin(x)$ y sea $a=0$, notese el siguiente patrón en la derivada de la función $\sin(x)$:
+    \begin{align*}
+        \frac{d}{dx} \sin(x) &= \cos(x)\\
+        \frac{d^2}{dx^2} \sin(x) &= -\sin(x)\\
+        \frac{d^3}{dx^2} \sin(x) &= -\cos(x)\\
+        \frac{d^4}{dx^4} \sin(x) &= \sin(x)
+    \end{align*}
+    Tendremos un patrón cíclico similar a una suma modular para las derivadas de $\sin(x)$. Ahora, notese $\sin(x) = 0$ y estos valores se cancelarán dentro del polinomio, pero para los valores de $\cos(x)$ y $-\cos(x)$, estos oscilarán entre $1$ y $-1$. Con esto en mente, para en general cualquier valor de $n$ definiremos el polinomio de Taylor de $\sin(x)$ de grado $2n+1$ como:
+    \begin{align*}
+        P_{2n+1, 0, f}(x) &= \sum_{0}^{n} a_k \cdot (x-0)^k\\
+        &= \sum_{0}^{n} \frac{(-1)^{k}}{(2k+1)!} \cdot x^k
+    \end{align*}
+    Donde $(-1)^k$ es debido a los valores oscilantes de $\cos(x)$ y donde $(2k+1)!$ se debe a que los únicos factores que no se cancelarán son aquellos donde $k$ es un número impar(Es por eso que también la sumatoria va hasta $n$ y no hasta $2n+1$). 
+\end{example}
+
+\begin{exercise}
+En GeoGebra existe una función llamada \textit{TaylorPolinom}. Intenta jugar con dicha función, colocando en $n$ y $a$ valores que dependan de un deslizador y con diferentes funciones como:
+\begin{itemize}
+    \item $\sin(x)$
+    \item $\cosh(x)$
+    \item $\arctan(x)$
+    \item $e^x$
+    \item $\frac{1}{x}$
+\end{itemize}
+\end{exercise}
+\end{document}

@@ -1,0 +1,301 @@
+% !TEX root = ../main.tex
+
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+    \question \textbf{Ejercicio 1:} Evaular las siguientes integrales:
+    \begin{partes}
+        \parte $\int \frac{1}{\sqrt{2x-x^2}} dx$
+        \begin{align*}
+            \int \frac{1}{\sqrt{2x-x^2}} dx &= \int \frac{1}{\sqrt{2x-x^2-1+1}} dx\\
+            &= \int \frac{1}{\sqrt{1-(x+1)^2}} dx\\
+            &= \int \frac{1}{\sqrt{1-u^2}} du\\
+            &= \sin^{-1}(u) + C\\
+            &= \sin^{-1}(x+1) + C
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 2:} Evaular las siguientes integrales:
+    \begin{partes}
+        \parte $\int \log(\cos x) \cdot \tan x dx$
+        \begin{align*}
+            \int \log(\cos x) \cdot \tan x dx &= \int \log(\cos x) \cdot \frac{\sin x}{\cos x} dx\\
+            &= \int \log(u) \cdot \frac{-1}{u} du\\
+            &= - \int \frac{\log(u)}{u} du\\
+            &= - \int z dz\\
+            &= - \frac{z^2}{2} + C\\
+            &= - \frac{\log^2(u)}{2} + C\\
+            &= - \frac{\log^2(\cos x)}{2} + C
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 3:} Integración por partes:
+    \begin{partes}
+        \parte $\int \cos(\log x) dx$
+        \begin{align*}
+            \int \cos(\log x) dx &= \int 1 \cdot \cos(\log x) dx
+        \end{align*}
+        Y haciendo la sustitución $u = \cos(\log x)$ y $dv = 1 dx$, obtendremos que $du = -\frac{\sin(\log(x))}{x} dx$ y $v = x$. Tendremos entonces:
+        \begin{align*}
+            \int 1 \cdot \cos(\log x) dx &= x \cdot \cos(\log(x)) - \int -\frac{\sin(\log(x))}{x} \cdot x dx\\
+            &= x\cos(\log(x)) + \int \sin(\log x) dx\\
+            &= x\cos(\log(x)) + \int 1 \cdot \sin(\log x) dx
+        \end{align*}
+        Si ahora se hace $u = \sin(\log(x))$ y $dv = 1 dx$ tendremos $du = \frac{\cos(\log(x))}{x} dx$ y $v= x$ llegando a que:
+        \begin{align*}
+            \int \cos(\log x) dx  &= x\cos(\log(x)) + \int 1 \cdot \sin(\log x) dx\\
+            &= x\cos(\log(x)) + x\sin(\log(x)) - \int \frac{\cos(\log(x))}{x} \cdot x dx\\
+            &= x\cos(\log(x)) + x\sin(\log(x)) - \int \cos(\log(x)) dx
+        \end{align*}
+        Y despejando en la ecuación tendremos:
+        \begin{align*}
+            \int \cos(\log x) dx &= x\cos(\log(x)) + x\sin(\log(x)) - \int \cos(\log(x)) dx\\
+            2 \cdot \int \cos(\log x) dx &= x\cos(\log(x)) + x\sin(\log(x)) \\
+            \int \cos(\log x) dx &= \frac{x\cos(\log(x)) + x\sin(\log(x))}{2} + C
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 4:} Integrar usando identidades trigonometricas
+    \begin{partes}
+        \parte $\int \sqrt{x^2-1} dx$\\
+        Si se hace que $x = \sec u$ entonces $dx = \sec u \tan u du$ y por tanto:
+        \begin{align*}
+            \int \sqrt{x^2-1} dx &= \int \sqrt{\sec^2 u -1} \sec u \tan u du\\
+            &= \int \sqrt{\tan^2 u} \sec u \tan u du\\
+            &= \int \tan u \sec u \tan u du\\
+            &= \int \sec u \tan^2 u du\\|
+            &= \int \sec u(\sec^2 u - 1) du\\
+            &= \int \sec^3 u du - \int \sec u du\\
+            &= \frac{\sec u \tan u + \log(sec u + tan u)}{2} - \log(\sec u + \tan u) + C\\
+            &= \frac{x \tan(\sec^{-1} x) + \log(x + \tan(\sec^{-1}(x)))}{2} - \log(x + \tan(\sec^{-1}) x) + C\\
+            &= \frac{x \sqrt{x^2-1} + \log(x + \sqrt{x^2-1})}{2} - \log(x + \sqrt{x^2-1}) + C\\
+            &= \frac{x \sqrt{x^2-1} - \log(x + \sqrt{x^2-1})}{2}+ C
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 6:} Integrar las siguientes funciones racionales:
+    \begin{partes}
+        \parte $\int \frac{x^3+x+2}{x^4+2x^2+1} dx$
+        Empezamos resolviendo:
+        \begin{align*}
+            \int \frac{x^3+x+2}{x^4+2x^2+1} dx&= \int \frac{x^3+x+2}{(x^2+1)^2}dx
+        \end{align*}
+        Desarrollando fracciones parciales tendremos:
+        \begin{align*}
+            \frac{x^3+x+2}{(x^2+1)^2} &= \frac{Ax + B}{x^2+1} + \frac{Cx+D}{(x^2+1)^2}\\
+            x^3+x+2 &= (Ax+B)(x^2+1) + Cx + D\\
+            x^3 + x +2 &= Ax^3 + Ax + Bx^2 + B + Cx + D
+        \end{align*}
+        Y tendremos un sistema de ecuaciones donde:
+        \begin{align*}
+            A = 1\\
+            A + C = 1\\
+            B = 0\\
+            B + D = 2
+        \end{align*}
+        Y concluimos facilmente que $A=1, B=0, C=0, D=2$. Por lo que podemos reescribir:
+        \begin{align*}
+            \int \frac{x^3+x+2}{x^4+2x^2+1} dx &= \int \frac{x}{x^2+1}dx + 2\int\frac{1}{(x^2+1)^2}
+        \end{align*}
+        Resolviendo la primera integral por sustitución tendremos:
+        \begin{align*}
+            \int \frac{x}{x^2+1} dx &= \frac{1}{2} \int \frac{2x}{x^2+1} dx\\
+            &= \frac{1}{2}\int \frac{du}{u}\\
+            &= \frac{1}{2} \cdot \log|u|\\
+            &= \frac{\log|x^2+1|}{2}
+        \end{align*}
+        Y resolviendo la segunda por sustitución trigonometrica haciendo $x = \tan u$ con $dx = \sec^2 u du$:
+        \begin{align*}
+            2\int\frac{1}{(x^2+1)^2} dx&= 2\int \frac{\sec^2 u}{(\tan^2 u +1)^2} du\\
+            &= 2\int \frac{\sec^2 u}{(\sec^2 u)^2} du\\
+            &= 2\int \frac{\sec^2 u}{\sec^4 u} du\\
+            &= 2\int \frac{1}{\sec^2 u}du\\
+            &= 2 \int \cos^2 u du\\
+            &= 2 \int \frac{1 + \cos(2u)}{2} du\\
+            &= \int 1 + \cos(2u) du\\
+            &= u + \frac{1}{2} \sin(2u)\\
+            &= \tan^{-1} x + \frac{\sin(2\tan^{-1} x)}{2}
+        \end{align*}
+        Concluyendo así que:
+        \begin{align*}
+            \int \frac{x^3+x+2}{x^4+2x^2+1} dx &= \frac{\log|x^2+1|}{2} + \tan^{-1} x + \frac{\sin(2\tan^{-1} x)}{2}
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 7:} Resolver mediante varios metodos las siguientes integrales:
+    \begin{partes}
+        \parte $\int \sin^{-1}(\sqrt{x}) dx$\\
+        
+        Si se hace $u = \sqrt{x}$ con $du = \frac{1}{2\sqrt{x}} dx$ y se reescribe la integral como sigue:
+        \begin{align*}
+            \int \sin^{-1}(\sqrt{x}) dx &= \int \sin^{-1}(\sqrt{x}) dx \cdot \frac{1}{2\sqrt{x}} \cdot 2\sqrt{x} dx\\
+            &= \int \sin^{-1}(u) 2u du
+        \end{align*}
+        Luego, integraremos por partes haciendo que $z = \sin^{-1} u$ y $dv = u du$ por lo que $dz = \frac{1}{\sqrt{1-u^2}} du$ y $v = \frac{u^2}{2}$ tendremos:
+        \begin{align*}
+            2 \int \sin^{-1}(u) u du &= 2\left(\frac{u^2\sin^{-1}(u)}{2} - \int \frac{u^2}{2\sqrt{1-u^2}} du\right)\\
+            &=u^2\sin^{-1}(u) - \int \frac{u^2}{\sqrt{1-u^2}} du
+        \end{align*}
+        Para resolver la integral restante, aplicaremos la sustitución trigonometrica $u = \sin z$ y $du = \cos z dz$:
+        \begin{align*}
+            \int \frac{u^2}{\sqrt{1-u^2}} du &=\int \frac{\sin^2 z}{\sqrt{1-\sin^2 z}} \cos z dz\\
+            &= \int \frac{\sin^2 z}{\cos z} \cos z dz\\
+            &= \int \sin^2 z\\
+            &= \frac{1}{2}\int 1-\cos(2z)\\
+            &= \frac{z}{2} - \frac{1}{4} \sin(2z)\\
+            &= \frac{\sin^{-1} u}{2} - \frac{1}{4} \sin(2\sin^{-1}(u)) 
+        \end{align*}
+        Por lo que al final tendremos:
+        \begin{align*}
+            \int \sin^{-1}(u) 2u du &= u^2\sin^{-1}(u) - \frac{\sin^{-1} u}{2} +\frac{1}{4} \sin(2\sin^{-1}(u))\\
+            &=  x\sin^{-1}(\sqrt{x}) - \frac{\sin^{-1} \sqrt{x}}{2} +\frac{1}{4} \sin(2\sin^{-1}(\sqrt{x}))
+        \end{align*}
+    \end{partes}
+    
+    \question \textbf{Ejercicio 8:} Hallar las integrales siguientes:
+    \begin{partes}
+        \parte $\int \frac{\sin^3 x}{\cos^2 x} dx$
+        \begin{align*}
+            \int \frac{\sin^3 x}{\cos^2 x} dx &= \int \frac{\sin^2 x}{\cos^2 x} \sin x dx\\
+            &= \int \frac{1-\cos^2 x}{\cos^2 x} \sin x dx
+        \end{align*}
+        Haciendo la sustitución $u = \cos x$ y $du = -\sin x dx$ tendremos:
+        \begin{align*}
+            \int \frac{1-\cos^2 x}{\cos^2 x} \sin x dx &= \int \frac{u^2 - 1}{u^2} du\\
+            &= \int 1 du - \int \frac{1}{u^2} du\\
+            &= u + u^{-1} + C\\
+            &= \cos x + \sec x + C
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 9:} Hallar las integrales siguientes:
+    \begin{partes}
+        \parte $\int \frac{dx}{x - x^{\frac{3}{5}}} dx$
+        Aplicando la sustitución $u = x^\frac{1}{5}$ y con $du = \frac{1}{5 \cdot x^{\frac{4}{5}}} dx$ tendremos
+        \begin{align*}
+            \int \frac{dx}{x - x^{\frac{3}{5}}} dx &= \int \frac{1}{x- x^{\frac{3}{5}}} \cdot \frac{5x^{\frac{4}{5}}}{5x^{\frac{4}{5}}} dx\\
+            &= 5 \int \frac{u^4}{u^5 - u^3} du\\
+            &= 5 \int \frac{u^4}{u^3(u^2 -1)} du\\
+            &= 5 \int \frac{u}{u^2-1} du
+        \end{align*}
+        Ahora, haciendo la sustitución $z = u^2-1$ y $dz = 2u du$ tendremos:
+        \begin{align*}
+            5 \int \frac{u}{u^2-1} du &= 5 \int \frac{2u}{2(u^2-1)} du\\
+            &= \frac{5}{2} \int \frac{2u}{u^2-1} du\\
+            &= \frac{5}{2} \int \frac{1}{z} dz\\
+            &= \frac{5}{2} \log|z|\\
+            &= \frac{5}{2} \log|u^2-1|\\
+            &= \frac{5}{2} \log|x^{\frac{2}{5}}-1|\\
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 26:} Hallar el area delimitada por la gráfica de las siguientes funciones en coordenadas polares
+    \begin{partes}
+        \parte $r = 2 + \cos \theta$\\
+
+        Para empezar, encontraremos la integral indefinida de acuerdo a que el area delimitada en coordenadas polares es $\frac{1}{2}\int r^2 d\theta$:
+        \begin{align*}
+            \frac{1}{2}\int (2+\cos \theta)^2 d\theta &= \frac{1}{2} \int \cos^2\theta + 4 \cos\theta + 4 d\theta\\
+            &= \frac{1}{2}\left[\int \cos^2 \theta d\theta + 4\int \cos\theta + \int 4 d\theta \right]\\
+            &= \frac{1}{2}\left[\frac{\theta}{2} + \frac{\sin(2 \theta)}{2}+ 4\sin\theta + 4\theta \right] + C
+            &= \frac{\theta}{4} + \frac{\sin(2 \theta)}{4} + 2\sin\theta + 2\theta\\
+            &= \frac{9\theta}{4} + \frac{\sin(2 \theta)}{4} + 2\sin\theta
+        \end{align*} 
+
+        Luego, teniendo en cuenta que el periodo de $\cos \theta$ es $2\pi$ podremos calcular la integral:
+        \begin{align*}
+            \int_0^{2\pi}\frac{1}{2} r^2 d\theta &= \frac{9\theta}{4} + \frac{\sin(2 \theta)}{4} + 2\sin\theta |_{0}^{2\pi}\\
+            &= \frac{9(2\pi)}{4} + \frac{\sin(2 (2\pi))}{4} + 2\sin(2\pi) - \frac{9(0)}{4} - \frac{\sin(2 (0))}{4} - 2\sin(0)
+            &= \frac{9 \cdot 2\pi}{4}\\
+            &= \frac{9}{2} \pi
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 29:} Hallar la longitud de curva de las siguientes funciones descritas gráficamente:
+    \begin{partes}
+        \parte $f(x) = x^3 + \frac{1}{12x}$ para $1 \le x \le 2$\\
+
+        Para empezar, determinemos la derivada de $f$ respecto a $x$:
+        \begin{align*}
+            \frac{d}{dx} f(x) = 3x^2 - \frac{1}{144x^2}
+        \end{align*}
+        Luego, recordemos que la formula para la longitud de curva es $\int_{a}^b \sqrt{1+\left[\frac{d}{dx} f(x)\right]^2} dx$. Si evaluamos la integral indefinida:
+        \begin{align*}
+            \int \sqrt{1+\left[\frac{d}{dx} f(x)\right]^2}dx &= \int \sqrt{1+\left[3x^2 - \frac{1}{144x^2}\right]^2}dx\\
+            &= \int \sqrt{1+9x^4 - \frac{1}{2} + \frac{1}{144x^4}}dx\\
+            &= \int \sqrt{9x^4 + \frac{1}{2} + \frac{1}{144x^4}}dx\\
+            &= \int \sqrt{\left(3x^2 + \frac{1}{12x^2}\right)^2}dx\\
+            &= \int 3x^2 + \frac{1}{12x^2}dx\\
+            &= x^3 - \frac{1}{12x} + C
+        \end{align*}
+        Luego, si lo evaluamos en el intervalo requerido:
+        \begin{align*}
+            \int_{1}^2 \sqrt{1+\left[\frac{d}{dx} f(x)\right]^2} dx &= x^3 - \frac{1}{12x} |_1^2\\
+            &= 2^3 - \frac{1}{12\cdot 2} - 1 + \frac{1}{12}\\
+            &= 8 - \frac{1}{24} - 1 + \frac{1}{12}\\
+            &= \frac{169}{4}
+        \end{align*}
+    \end{partes}
+
+    \question \textbf{Ejercicio 30:} Para las funciones que siguen, hallar la longitud de la gráfica en coordenadas polares:
+    \begin{partes}
+        \parte $f(\theta) = a(1-\cos \theta)$
+    \end{partes}
+    Para empezar, derivemos la función $f$ con respecto a $\theta$:
+    \begin{align*}
+        \frac{d}{d\theta} f(\theta) &= a\sin \theta
+    \end{align*}
+    Ahora, recordemos que en coordenadas polares la formula para la longitud de curva es $$\int_{a}^b \sqrt{\left[f(\theta)\right]^2+\left[\frac{d}{d\theta} f(\theta)\right]^2} d\theta$$ lo que nos permite cálcular la integral indefinida:
+    \begin{align*}
+        \int \sqrt{\left[f(\theta)\right]^2+\left[\frac{d}{d\theta} f(\theta)\right]^2} d\theta &= \int \sqrt{\left[a(1-\cos\theta)\right]^2+\left[a\sin\theta\right]^2} d\theta\\
+        &= \int \sqrt{a^2\left[cos^2\theta - 2\cos\theta + 1\right] + a^2\sin^2\theta} d\theta\\
+        &= \int \sqrt{a^2\left[cos^2\theta - 2\cos\theta + 1 + \sin^2\theta\right]} d\theta\\
+        &= \int \sqrt{a^2\left[2-2\cos\theta\right]} d\theta\\
+        &= a \int \sqrt{2-2\cos\theta} d\theta
+    \end{align*}
+    Por último, resolviendo mediante la sustitución de Weirstrass la integral restante:
+    \begin{align*}
+        \int \sqrt{2-2\cos\theta} d\theta &= \int \sqrt{2-2\left[\frac{1-t^2}{1+t^2}\right]} \frac{2}{1+t^2} dt\\
+        &= \int \sqrt{2+\frac{2t^2-2}{1+t^2}}\frac{2}{1+t^2} dt\\
+        &= \int \sqrt{\frac{2t^2+ 2+ 2t^2-2}{1+t^2}}\frac{2}{1+t^2} dt\\
+        &= \int \sqrt{\frac{4t^2}{1+t^2}}\frac{2}{1+t^2} dt\\
+        &= \int \frac{4t}{\sqrt{1+t^2}}\frac{1}{1+t^2} dt\\
+    \end{align*}
+    luego sustituimos $z = t^2+1$ y $dz = 2t du$ quedando entonces:
+    \begin{align*}
+        4 \cdot \frac{1}{2}\int \frac{1}{z \cdot \sqrt{z}} dz &= 4 \cdot \frac{1}{2}\frac{1}{z^{\frac{3}{2}}} dz\\
+        &= 2 \int z^{-\frac{3}{2}} dz \\
+        &= 2 \cdot -\frac{z^{-\frac{1}{2}}}{\frac{1}{2}}\\
+        &= -\frac{4}{\sqrt{z}}\\
+        &= -\frac{4}{\sqrt{t^2+1}}\\
+        &= -\frac{4}{\sqrt{\tan^2(\frac{\theta}{2}) + 1}}\\
+        &= -\frac{4}{\sec^2\left(\frac{\theta}{2}\right)}\\
+        &= -4 \cdot \cos\left(\frac{\theta}{2}\right)
+    \end{align*} 
+    Por lo que:
+    \begin{align*}
+        \int \sqrt{\left[f(\theta)\right]^2+\left[\frac{d}{d\theta} f(\theta)\right]^2} d\theta &= -4a  \cos\left(\frac{\theta}{2}\right)
+    \end{align*}
+    Y evaluando entre $0$ y $2\pi$(Donde está definida la función en coordenadas polares):
+    \begin{align*}
+        \int_0^{2\pi} \sqrt{\left[f(\theta)\right]^2+\left[\frac{d}{d\theta} f(\theta)\right]^2} d\theta &= -4a  \cos\left(\frac{\theta}{2}\right) |_{0}^{2\pi}\\
+        &= -4a  \cos\left(\frac{2\pi}{2}\right) + 4a  \cos\left(\frac{0}{2}\right)\\
+        &= -4a  \cos\left(\pi\right) + 4a  \cos\left(0\right)\\
+        &= -4a  (-1) + 4a \\
+        &= 8a
+    \end{align*}
+
+    \question \textbf{Ejercicio 32:} Hallar el volumen del sólido de revolución generado al hacer girar con respecto al eje $x$ y $y$ la región delimitada por $f(x) = x$ y $f(x) = x^2$.\\
+
+    El truco empieza en recordar que para un disco el volumen $V = \pi \cdot h \cdot r^2$, y será lo que usaremos para cálcular el volumen. Para cuando se rota alrededor del eje $x$ o $y$ note que se generan anillos con cierto huecos, por lo que será cálcular el volumen del anillo menor al anillo mayor. 
+    \begin{itemize}
+        \item \textbf{Eje x:} Notese que el grosor será determinado por un $\delta x$, y note que el radio mayor será $x$ y el radio mayor menor será $x^2$. Luego, $\delta x$ al hacerlo cada vez más pequeño se aproxima el volumen mediante:
+        \begin{align*}
+            V_x &= \int_0^1 x^4 - x^2 dx
+        \end{align*}
+
+        \item \textbf{Eje y:} De manera similar el grosor será determinado por un $\delta y$, y note que el radio mayor será $y$ y el radio menor $\sqrt{y}$. Luego, $\delta y$ al hacerlo cada vez más pequeño se aproxima el volumen mediante:
+        \begin{align*}
+            V_y &= \int_0^1 y^2-y dy
+        \end{align*}
+    \end{itemize}
+\end{document}
