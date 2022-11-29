@@ -27,17 +27,68 @@ Esta secuencia es una secuencia monotona, dado que es decreciente. Esto puede se
 Note que el único caso donde se tiene la igualdad es con $n = 1$. Luego, dado que la serie es acotada inferiormente por $0$ tiene un valor de convergencia. Dicho valor, llega a ser $0$.
 
 \question $f(n) = \frac{n^{\frac{2}{3}} \sin(n!)}{n+1}$\\
-Note que la convergencia dependerá 
+Note que esta sucesión converge a $0$, esto por el comportamiento de la sucesión $\{\frac{1}{n+1}\}$ que tiende a $0$, la sucesión $\{sin(n!)\}$ oscila entre $1$ y $-1$, y la sucesión $\{n^{\frac{2}{3}}\}$ en su comportamiento aunque es creciente, dicho crecimiento cada vez es menor y menor, por lo que al combinar mediante un producto las 3 funciones, es fácil notar que el valor de la función recae principalmente en $\{\frac{1}{n+1}\}$ y dado que converge a $0$, entonces la sucesión entera converge a $0$.  
 
+% TODO: Question 12
 \question $f(n) = \frac{3^n + (-2)^n}{3^{n+1} + (-2)^{n+1}}$
+Si dividimos por $3^{n}$ en el numberador y en el denominador:
+\begin{align*}
+    \frac{3^n + (-2)^n}{3^{n+1} + (-2)^{n+1}} &= \frac{1 + \frac{(-2)^n}{3^{n}}}{3 + \frac{(-2)^{n+1}}{3^{n}}}\\
+    &= \frac{1 + \left(\frac{-2}{3}\right)^n}{3 - 2\left(\frac{-2}{3}\right)^n}\\
+\end{align*}
 
-\question $f(n) = \left(1 + \frac{2}{n}\right)^n$
+Y dado que $\lim\limits_{n \to \infty} \left(\frac{-2}{3}\right)^n = 0$ podemos concluir que la sucesión converge a $\frac{1}{3}$.
+
+\question $f(n) = \left(1 + \frac{2}{n}\right)^n$\\
+Gracias a las formulas dadas en la sección $10.2$ es fácil determinar que esta secuencia converge y además, converge a $e^2$.
 
 Cada una de las siguientes series es convergente. Mediante la definición formal, determine valores de $N$ que cumplen la definición para $\epsilon = 1, 0.1, 0.01, 0.001, 0.0001$.
 
-\question $a_n = \frac{n}{n+1}$
+\question $a_n = \frac{n}{n+1}$\\
+Para esto, note que la sucesión converge a $1$. Por lo que si partimos desde la definición, donde se tiene que cumplir que $|a_n - L| < \epsilon$ tendremos:
+\begin{align*}
+    |a_n - L| &= \left|\frac{n}{n+1} - 1 \right|\\
+    &= \left|\frac{-1}{n+1}\right|\\
+    &= \frac{1}{n+1}\\
+    &< \frac{1}{n} < \epsilon
+\end{align*}
+de donde se deduce que:
+\begin{align*}
+    n > \frac{1}{\epsilon}
+\end{align*}
+Por lo que servirá $N$ tal que $N > \frac{1}{\epsilon}$. Por lo que para cada valor tendremos:
+\begin{itemize}
+    \item Para $\epsilon = 1$ servirá $N = 2$
+    \item Para $\epsilon = 0.1$ servirá $N = 11$
+    \item Para $\epsilon = 0.01$ servirá $N = 101$
+    \item Para $\epsilon = 0.001$ servirá $N = 1001$
+    \item Para $\epsilon = 0.0001$ servirá $N = 10001$
+\end{itemize}
 
 \question $a_n = (-1)^n \left(\frac{9}{10}\right)^n$
+Note que la sucesión converge a $0$. Por lo que si partimos desde la definición, donde se tiene que cumplir que $|a_n - L| < \epsilon$ tendremos:
+\begin{align*}
+    |a_n - L| &= \left|(-1)^n \frac{9^n}{10^n} - 0\right|\\
+    &= \left|(-1)^n \frac{9^n}{10^n}\right|\\
+    &= \frac{9^n}{10^n}\\
+    &= \left(\frac{9}{10}\right)^n < \epsilon
+\end{align*}
+Luego, podremos reducir la expresión anterior a:
+\begin{align*}
+    \left(\frac{9}{10}\right)^n &< \epsilon\\
+    \left(\frac{10}{9}\right)^n &> \frac{1}{\epsilon}\\
+    \ln\left(\left(\frac{10}{9}\right)^n\right) &> \ln\left(\frac{1}{\epsilon}\right)\\
+    n \cdot \ln\left(\frac{10}{9}\right) &> \ln\left(\frac{1}{\epsilon}\right)\\
+    n &> \frac{\ln\left(\frac{1}{\epsilon}\right)}{\ln\left(\frac{10}{9}\right)}
+\end{align*}
+Por lo que servirá $N$ tal que $N > \frac{\ln\left(\frac{1}{\epsilon}\right)}{\ln\left(\frac{10}{9}\right)}$. Por lo que para cada valor tendremos:
+\begin{itemize}
+    \item Para $\epsilon = 1$ servirá $N = 1$
+    \item Para $\epsilon = 0.1$ servirá $N = 22$
+    \item Para $\epsilon = 0.01$ servirá $N = 44$
+    \item Para $\epsilon = 0.001$ servirá $N = 65$
+    \item Para $\epsilon = 0.0001$ servirá $N = 88$
+\end{itemize}
 
 Si $\alpha$ es un número real y $n$ es un entero no negativo, el coeficiente binomial $\binom{\alpha}{n}$ se define por:
 \begin{align*}
@@ -45,8 +96,72 @@ Si $\alpha$ es un número real y $n$ es un entero no negativo, el coeficiente bi
 \end{align*}
 \begin{partes}
     \parte Cuando $\alpha = -\frac{1}{2}$ demuestre que:
-    $$\binom{\alpha}{1} = -\frac{1}{2}, \binom{\alpha}{2} = \frac{3}{8}, \binom{\alpha}{3} = -\frac{5}{16}, \binom{\alpha}{4} = \frac{35}{128}, \binom{\alpha}{5} = -\frac{63}{256}$$
+    $$\binom{\alpha}{1} = -\frac{1}{2},\, \binom{\alpha}{2} = \frac{3}{8}, \binom{\alpha}{3} = -\frac{5}{16}, \binom{\alpha}{4} = \frac{35}{128}, \binom{\alpha}{5} = -\frac{63}{256}$$\\
+
+    \begin{proof}
+        Para ello vamos a aplicar directamente la definición dada para cada valor de $n$.
+        \begin{itemize}
+            \item $n = 1$:
+            \begin{align*}
+                \binom{\alpha}{1} &= \frac{\alpha}{1!} \\
+                &= \alpha = -\frac{1}{2}
+            \end{align*}
+            \item $n = 2$:
+            \begin{align*}
+                \binom{\alpha}{2} &= \frac{\alpha (\alpha-1)}{2!}\\
+                &= \frac{-\frac{1}{2} \left(-\frac{1}{2} - 1\right)}{2}\\
+                &= \frac{-\frac{1}{2} \left(-\frac{3}{2}\right)}{2}\\
+                &= \frac{\frac{3}{4}}{2}\\
+                &= \frac{3}{8}
+            \end{align*}
+            \item $n = 3$:
+            \begin{align*}
+                \binom{\alpha}{3} &= \frac{\alpha (\alpha-1) (\alpha-2)}{3!}\\
+                &= \frac{-\frac{1}{2} \left(-\frac{1}{2}-1\right)\left(-\frac{1}{2}-2\right)}{6}\\
+                &= \frac{-\frac{1}{2} \left(-\frac{3}{2}\right)\left(-\frac{5}{2}\right)}{6}\\
+                &= \frac{-\frac{15}{8}}{6}\\
+                &= -\frac{15}{8 \cdot 6}\\
+                &= -\frac{5}{16}
+            \end{align*}
+            \item $n = 4$:
+            \begin{align*}
+                \binom{\alpha}{4} &= \frac{\alpha (\alpha-1)(\alpha-2)(\alpha-3)}{4!}\\
+                &= \frac{-\frac{1}{2} \left(-\frac{1}{2}-1\right) \left(-\frac{1}{2}-2\right) \left(-\frac{1}{2}-3\right)}{24}\\
+                &= \frac{-\frac{1}{2} \left(-\frac{3}{2}\right)\left(-\frac{5}{2}\right) \left(-\frac{7}{2}\right)}{24}\\
+                &= \frac{\frac{15 \cdot 7}{16}}{24}\\
+                &= \frac{15 \cdot 7}{16 \cdot 24}\\
+                &= \frac{35}{128}
+            \end{align*}
+            \item $n = 5$:
+            \begin{align*}
+                \binom{\alpha}{5} &= \frac{\alpha (\alpha-1) (\alpha-2) (\alpha-3) (\alpha-4)}{5!}\\
+                &= \frac{-\frac{1}{2} \left(-\frac{1}{2}-1\right)\left(-\frac{1}{2}-2\right)\left(-\frac{1}{2}-3\right)\left(-\frac{1}{2}-4\right)}{120}\\
+                &= \frac{-\frac{1}{2} \left(-\frac{3}{2}\right)\left(-\frac{5}{2}\right)\left(-\frac{7}{2}\right)\left(-\frac{9}{2}\right)}{120}\\
+                &= \frac{\frac{15 \cdot 7 \cdot 9}{32}}{120}\\
+                &= \frac{15 \cdot 7 \cdot 9}{32 \cdot 120}\\
+                &= -\frac{63}{256}
+            \end{align*}
+        \end{itemize}
+    \end{proof}
 
     \parte Sea $a_n = (-1)^n \binom{-\frac{1}{2}}{n}$. Demostrar que $a_n > 0$ y que $a_{n+1} < a_n$ para todo $n \in \mathbb{N}$.
+    \begin{proof}
+        Note que $-\frac{1}{2}-k < 0$ para todo $k \in \mathbb{N}$. Luego, si $n$ es par, entonces tendremos un número par de terminos de la forma $-\frac{1}{2}-k$ para $0 \le k \le -n+1$, por lo que el producto de todos estos terminos será positivo, y dado que $n$ es par, entonces $(-1)^n$ será $1$. Por lo que $a_n > 0$. Si $n$ es impar, entonces tendremos una cantidad impares de terminos, por lo que su producto será un número negativo, pero dado que $(-1)^n$ será $(-1)$ el termino de la sucesión en general será positivo. Es decir, siempre $a_n > 0$.\\
+        
+        Para demostrar que $a_{n+1} < a_n$ es suficiente con notar que $a_{n+1} = a_n \cdot \left(\frac{a-n+2}{n+1}\right)$. Antes de seguir, demostraremos una desigualdad importante para esto(Notaremos a $-\frac{1}{2}$ como $\alpha$):
+        \begin{align*}
+            \frac{\alpha-n+2}{n+1} &= \frac{\alpha+3 - (n+1)}{n+1}\\
+            &= \frac{\alpha + 3}{n+1} - 1\\
+            &= \frac{-\frac{1}{2}+ 3}{n+1} - 1\\
+            &= \frac{\frac{5}{2}}{n+1} - 1\\
+            &= \frac{5}{2n+2} - 1 < 1
+        \end{align*}
+        Luego, tendremos:
+        \begin{align*}
+            \frac{\alpha-n+2}{n+1} &< 1\\
+            a_n \cdot \frac{a-n+2}{n+1} &< a_n\\
+            a_{n+1} &< a_{n}
+        \end{align*}
+    \end{proof}
 \end{partes}
 \end{document}

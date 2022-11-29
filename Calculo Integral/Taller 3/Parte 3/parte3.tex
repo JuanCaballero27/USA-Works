@@ -2,6 +2,92 @@
 
 \documentclass[../main.tex]{subfiles}
 \begin{document}
+Verificar si las siguientes series convergen o divergen y dar una justificación.
+\question $\sum\limits_{n = 1}^\infty \frac{\sqrt{2n-1} \log(4n+1)}{n(n+1)}$\\
+
+La serie converge. Para demostrarlo, tome $\{b_n\}$ donde $b_n = \frac{n^\epsilon}{n^\frac{3}{2}}$, con $\epsilon < \frac{1}{2}$. Note que $b_n$ genera una serie $p$ y es convergete dado que $\frac{3}{2} - \epsilon > 1$. Luego, si hacemos el limite de los terminos de ambas sucesiones:
+
+\begin{align*}
+    \lim_{n \to \infty} \frac{a_n}{b_n} &= \lim_{n \to \infty} \frac{\frac{\sqrt{2n-1} \log(4n+1)}{n(n+1)}}{\frac{n^\frac{3}{2}}{n^\epsilon}}\\
+    &= \lim_{n \to \infty} \frac{n^\frac{3}{2}\sqrt{2n-1} \log(4n+1)}{n \cdot n^\epsilon \cdot (n+1)}\\
+    &= \lim_{n \to \infty} \frac{n \cdot \sqrt{n} \sqrt{2n-1} \log(4n+1)}{n \cdot n^\epsilon \cdot (n+1)}\\
+    &= \lim_{n \to \infty} \frac{\sqrt{n} \sqrt{2n-1} \log(4n+1)}{n^\epsilon (n+1)}\\
+    &= \lim_{n \to \infty} \frac{\sqrt{2n^2 - n}}{n+1} \cdot \lim_{n \to \infty} \frac{\log(4n+1)}{n^\epsilon}\\
+    &= \lim_{n \to \infty} \frac{\sqrt{2 - \frac{1}{n}}}{1+\frac{1}{n}} \cdot \lim_{n \to \infty} \frac{\log(4n+1)}{n^\epsilon}\\
+    &= \sqrt{2} \cdot 0\\
+    &= 0
+\end{align*}
+Luego, gracias a esto, podemos concluir que la convergencia de $b_n$ implica la convergencia de $a_n$(La nota luego del Teorema 10.9 en el libro de Apostol).
 
 
+\question $\sum\limits_{n = 1}^\infty \frac{n+1}{2^n}$
+
+Usaremos el criterio de la integral. Para ello, note primero que si desarrollamos una integral por partes con $u = x$ y $dv = 2^{-x} dx$, obtieniendo que $du = dx$, $v = -\frac{2^{-x}}{\log(2)}$:
+\begin{align*}
+    \int \frac{x+1}{2^x} \, dx &= \int \frac{x}{2^x} \,dx + \int 2^{-x} \, dx\\
+    &= \frac{-x2^{-x}}{\log(2)} + \frac{1}{\log(2)} \int 2^{-x} \,dx - \frac{2^{-x}}{\log(2)}\\
+    &= \frac{-x2^{-x}}{\log(2)} - \frac{2^{-x}}{\log^2(2)} - \frac{2^{-x}}{\log(2)}\\
+\end{align*}
+Por lo que al hacer la integral impropia para la serie tendremos:
+\begin{align*}
+    \int_{1}^\infty &= \lim_{n \to \infty} \int_{1}^n \frac{x+1}{2^x} \,dx\\
+    &= \lim_{n \to \infty} \frac{-x2^{-x}}{\log(2)} - \frac{2^{-x}}{\log^2(2)} - \frac{2^{-x}}{\log(2)} |_{1}^n\\
+    &= \lim_{n \to \infty}\frac{-n2^{-n}}{\log(2)} - \frac{2^{-n}}{\log^2(2)} - \frac{2^{-n}}{\log(2)} + \frac{1}{2\log(2)} + \frac{1}{2\log^2(2)} + \frac{1}{2\log(2)}\\
+    &= \frac{1}{\log(2)} + \frac{1}{2\log^2(2)}
+\end{align*}
+Por lo que dado que la integral converge, la serie también lo hace.
+
+\question $\sum\limits_{n = 1}^\infty \frac{|\sin(nx)|}{n^2}$
+
+Esta serie converge gracias al criterio de comparación directa, puesto que:
+\begin{align*}
+    |\sin(nx)| &\le 1\\
+    \frac{|\sin(nx)|}{n^2} &\le \frac{1}{n^2}
+\end{align*}
+Y dado que $\sum\limits_{n = 1}^\infty \frac{1}{n^2}$ converge dado que es una serie $p$ con $p > 1$, entonces la serie que queriamos comprobar converge.
+
+\question $\sum\limits_{n = 1}^\infty \frac{1}{\sqrt{n(n+1)}}$\\
+
+Si aplicamos el criterio de comparación por limite con la serie $\frac{1}{n}$ tendremos:
+\begin{align*}
+    \lim_{n \to \infty} \frac{\frac{1}{\sqrt{n(n+1)}}}{\frac{1}{n}} &= \lim_{n \to \infty} \frac{n}{\sqrt{n^2 + n}}\\
+    &= \lim_{n \to \infty} \frac{1}{\sqrt{1 + \frac{1}{n}}}\\
+    &= 1
+\end{align*}
+Por lo que dado que $\frac{1}{n}$ genera una serie divergente, la otra serie también será divergente.
+
+\question $\sum\limits_{n = 1}^\infty \frac{n \cos^2\left(\frac{n\pi}{3}\right)}{2^n}$\\
+
+Si aplicamos el criterio de comparación directa, con el siguiente hecho:
+\begin{align*}
+    \cos^2\left(\frac{n\pi}{3}\right) &\le 1\\
+    n\cos^2\left(\frac{n\pi}{3}\right) &\le n\\
+    \frac{n\cos^2\left(\frac{n\pi}{3}\right)}{2^n} &\le \frac{n}{2^n}\\
+\end{align*}
+Y gracias a que sabemos que $\frac{n}{2^n}$ genera una serie convergente, entonces la serie original que deseabamos comparar, es convergente.
+
+\question $\sum\limits_{n = 1}^\infty ne^{-n^2}$
+Si integramos la función dada abajo, haciendo que $u = x^2$ y $du = 2x dx$ entonces:
+\begin{align*}
+    \int xe^{-x^2} \, dx &= \frac{1}{2} \int e^{-u} du\\
+    &= -\frac{1}{2} e^{-u}\\
+    &= -\frac{1}{2} e^{-x^2}
+\end{align*}
+Y haciendo el limite de la integral impropia:
+\begin{align*}
+    \lim_{n \to \infty} \int_{1}^n xe^{-x^2} \, dx &= \lim_{n \to \infty} -\frac{1}{2e^{x^2}} |_{1}^n\\
+    &= \lim_{n = \infty} -\frac{1}{2e^{n^2}} + \frac{1}{2e}\\
+    &= \frac{1}{2e}
+\end{align*}
+Y dado que la integral converge, entonces la serie converge.
+
+\question $\sum\limits_{n = 1}^\infty \int_{0}^{\frac{1}{n}} \frac{\sqrt{x}}{1+x^2} \, dx$
+
+Note que la integral anterior posee una función que es decreciente, por lo que el area de la curva entre $0$ y $\frac{1}{n}$ irá disminuyendo. Luego, tendremos que:
+\begin{align*}
+    \int_{0}^{\frac{1}{n}} \frac{\sqrt{x}}{1+x^2} \, dx &\le \frac{1}{n} \cdot \frac{\sqrt{\frac{1}{n}}}{1 + \frac{1}{n^2}}\\
+    &= \frac{1}{n^{\frac{3}{2}} + \frac{1}{\sqrt{n}}}\\
+    &< \frac{1}{n^{\frac{3}{2}}}
+\end{align*}
+Y dado que llegamos a una serie $p$ que converge, ya que $p > 1$, entonces la serie original converge.
 \end{document}

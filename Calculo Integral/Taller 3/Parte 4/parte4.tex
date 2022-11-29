@@ -2,6 +2,64 @@
 
 \documentclass[../main.tex]{subfiles}
 \begin{document}
+Determinar si las siguientes series son convergentes o no, y dar una justificación.
+
+\question $\sum\limits_{n = 1}^\infty \frac{2^n n!}{n^n}$
+Si aplicamos el criterio de la razón a la serie:
+\begin{align*}
+    \lim_{n \to \infty} \frac{a_{n+1}}{a_n} &= \lim_{n \to \infty} \frac{\frac{2^{n+1} (n+1)!}{(n+1)^{n+1}}}{\frac{2^n n!}{n^n}}\\
+    &= \lim_{n \to \infty} \frac{n^n 2^{n+1} (n+1)!}{(n+1)^{n+1} 2^n n!}\\
+    &= \lim_{n \to \infty} 2\frac{n^n (n+1)}{(n+1)^{n+1}}\\
+    &= \lim_{n \to \infty} 2\frac{n^n}{(n+1)^n}\\
+    &= \lim_{n \to \infty} 2\left(\frac{n}{n+1}\right)^n\\
+    &= \lim_{n \to \infty} \frac{2}{\left(\frac{n+1}{n}\right)^n}\\
+    &= \frac{2}{e}
+\end{align*}
+Y dado que $\frac{2}{e} < 1$ entonces la serie converge.
+
+\question $\sum\limits_{n = 1}^\infty \frac{n!}{2^{2n}}$
+Si aplicamos el criterio de la razón a esta serie:
+\begin{align*}
+    \lim_{n \to \infty} \frac{a_{n+1}}{a_n} &= \lim_{n \to \infty} \frac{\frac{(n+1)!}{2^{2n+2}}}{\frac{n!}{2^n}}\\
+    &= \lim_{n \to \infty} \frac{(n+1)! \cdot 2^n}{n! \cdot 2^{2n+2}}\\
+    &= \lim_{n \to \infty} \frac{n+1}{2^2}\\
+    &= \lim_{n \to \infty} \frac{n+1}{4}\\
+    &= \infty
+\end{align*}
+Por lo que la serie actualmente diverge.
+
+\question $\sum\limits_{n = 1}^\infty \left(n^{\frac{1}{n}} - 1\right)^n$
+Si aplicamos el test de la raíz:
+\begin{align*}
+    \lim_{n \to \infty} a_n^{\frac{1}{n}} &= \lim_{n \to \infty} \left(\left(n^{\frac{1}{n}} - 1\right)^n\right)^{\frac{1}{n}}\\
+    &= \lim_{n \to \infty} n^{\frac{1}{n}} - 1\\
+    &= \lim_{n \to \infty} n^{\frac{1}{n}} - \lim_{n \to \infty} 1\\
+    &= 1 - 1\\
+    &= 0
+\end{align*}
+Y dado que $0 < 1$ entonces la serie converge.
+
+\question $\sum\limits_{n = 1}^\infty \frac{1}{n} - e^{-n^2}$
+Sabemos de por sí que la serie $\frac{1}{n}$(La serie armonica) es divergente. Luego, aplicando el criterio de la raiz sobre la serie $e^{-n^2}$:
+\begin{align*}
+    \lim_{n \to \infty} a_{n}^{\frac{1}{n}} &= \lim_{n \to \infty} \left(e^{-n^2}\right)^{\frac{1}{n}}\\
+    &= \lim_{n \to \infty} \left(e^{-n^2 \cdot \frac{1}{n}}\right)\\
+    &= \lim_{n \to \infty} e^{-n}\\
+    &= 0
+\end{align*}
+Por lo que dicha serie converge, de lo que concluimos que $\sum\limits_{n = 1}^\infty \frac{1}{n} - e^{-n^2}$ diverge, ya que si no, la serie armonica convergería.
 
 
+\question $\sum_{n = 1}^\infty \frac{n^{1 + \frac{1}{n}}}{\left(\frac{n+1}{n}\right)^n}$
+
+Para determinar la convergencia de esta serie, aplicaremos el criterio de la raíz:
+\begin{align*}
+    \lim_{n \to \infty} a_n^{\frac{1}{n}} &= \lim_{n \to \infty} \left(\frac{n^{1 + \frac{1}{n}}}{\left(\frac{n+1}{n}\right)^n}\right)^{\frac{1}{n}}\\
+    &= \lim_{n \to \infty} \frac{n \cdot n^{\frac{1}{n^2}}}{\frac{n+1}{n}}\\
+    &= \lim_{n \to \infty} \frac{n^2 \cdot n^{\frac{1}{n^2}}}{n+1}\\
+    &= \lim_{n \to \infty} \frac{n^2}{n+1} \cdot \lim_{n \to \infty} n^{\frac{1}{n^2}}\\
+    &= \infty \cdot 1\\
+    &= \infty
+\end{align*}
+Por lo que la serie diverge dado que el limite es mayor que $1$.
 \end{document}

@@ -2,6 +2,96 @@
 
 \documentclass[../main.tex]{subfiles}
 \begin{document}
+Determinar la convergencia o divergencia de las series dadas. En caso de que la serie converja, determinar si la serie converge absolutamente o condicionalmente.
+
+\question $\sum\limits_{n = 1}^\infty (-1)^n \left(\frac{2n+100}{3n+1}\right)^n$
+
+Si aplicamos el criterio de la raíz a la serie $\left(\frac{2n+100}{3n+1}\right)^n$ entonces:
+\begin{align*}
+    \lim_{n \to \infty} a_n^{\frac{1}{n}} &= \lim_{n \to \infty} \left[\left(\frac{2n+100}{3n+1}\right)^n\right]^{\frac{1}{n}}\\
+    &= \lim_{n \to \infty} \frac{2n+100}{3n+1}\\
+    &= \lim_{n \to \infty} \frac{2 + \frac{100}{n}}{3 + \frac{1}{n}}\\
+    &= \frac{2}{3} < 1
+\end{align*}
+Por lo que la serie converge absolutamente, y por tanto tambień la serie alternante converge.
+
+\question $\sum\limits_{n = 1}^\infty \frac{(-1)^n}{\sqrt[n]{n}}$
+
+Para ello, note que el limite de la sucesión es:
+\begin{align*}
+    \lim_{n \to \infty} \frac{(-1)^n}{\sqrt[n]{n}} &= 1
+\end{align*}
+Por lo que gracias al criterio de convergencia, la serie no converge, y por tanto la serie de terminos en valor absoluto tambień diverge.
+
+\question $\sum\limits_{n = 1}^\infty (-1)^n \frac{n^2}{1+n^2}$
+Para ello, note que el limite de la sucesión es:
+\begin{align*}
+    \lim_{n \to \infty} \frac{(-1)^n n^2}{1 + n^2} &\neq 0
+\end{align*}
+Ya que para valores pares el limite de la sucesión será $1$ y para valores impares será $-1$. Por lo que gracias al criterio de convergencia, la serie no converge, y por tanto la serie de terminos en valor absoluto tambień diverge.
+
+\question $\sum\limits_{n = 1}^\infty \frac{(-1)^n}{\log\left(1 + \frac{1}{n}\right)}$
+Para ello, note que el limite de la sucesión es:
+\begin{align*}
+    \lim_{n \to \infty} \frac{(-1)^n}{\log\left(1 + \frac{1}{n}\right)} &\neq 0
+\end{align*}
+dado que el limite en valor absoluto tiende a $\infty$ y con $(-1)^n$ oscila entre $-\infty$ e $\infty$. Por lo que gracias al criterio de convergencia, la serie no converge, y por tanto la serie de terminos en valor absoluto tambień diverge.
+
+\question $\sum\limits_{n = 1}^\infty \frac{(-1)^n n^{37}}{(n+1)!}$
+
+Si aplicamos el criterio de la razón a la serie absoluta tendremos:
+\begin{align*}
+    \lim_{n \to \infty} \frac{a_{n+1}}{a_n} &= \lim_{n \to \infty} \frac{\frac{(n+1)^{37}}{(n+2)!}}{\frac{n^{37}}{(n+1)!}}\\
+    &= \lim_{n \to \infty} \frac{(n+1)! (n+1)^{37}}{(n+2)! n^37}\\
+    &= \lim_{n \to \infty} \frac{(n+1)^37}{(n+2) n^{37}}\\
+    &= \lim_{n \to \infty} \frac{1}{n+2} \cdot \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^{37}\\
+    &= 0 \cdot 1\\
+    &= 0 < 1
+\end{align*}
+Por lo que la serie converge absolutamente, y por tanto, también converge de forma alternante.
 
 
+\question $\sum\limits_{n = 1}^\infty (-1)^n \arctan \frac{1}{2n+1}$
+
+Si comprobamos la convergencia de la secuencia:
+\begin{align*}
+    \lim_{n \to \infty} \arctan \frac{1}{2n+1} &= \lim_{n \to \infty} \arctan \frac{\frac{1}{n}}{2 + \frac{1}{n}}\\
+    &= \arctan 0\\
+    &= 0
+\end{align*}
+Por lo que por el criterio de Leibniz, la serie converge condicionalmente. Luego, si la serie absoluta la comparamos con la serie $\frac{1}{2n}$.
+
+\begin{align*}
+    \lim_{n \to \infty} \frac{\arctan \frac{1}{2n+1}}{\frac{1}{2n}} &= \lim_{n \to \infty} \frac{\frac{1}{1+\left(\frac{1}{2n+1}\right)^2} \cdot \frac{-2}{(2n+1)^2}}{\frac{-1}{2n^2}}\\
+    &= \lim_{n \to \infty} \frac{\frac{-2}{4n^2 + 4n + 2}}{\frac{-1}{2n^2}}\\
+    &= \lim_{n \to \infty} \frac{\frac{-1}{2n^2 + 2n + 1}}{\frac{-1}{2n^2}}\\
+    &= \lim_{n \to \infty} \frac{2n^2}{2n^2 + 2n +1}\\
+    &= 1
+\end{align*}
+Por lo que por el criterio de comparación de limites, ambas series convergen o ambas divergen. Y por tanto la serie diverge en valor absoluto.
+
+\question $\sum\limits_{n = 1}^\infty (-1)^n \left[e - \left(1 + \frac{1}{n}\right)^n\right]$
+
+La serie converge condicionalmente ya que la sucesión de terminos es decreciente y:
+\begin{align*}
+    \lim_{n \to \infty} e - \left(1 + \frac{1}{n}\right)^n &= \lim_{n \to \infty} e - \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n\\
+    &= e - e\\
+    &= 0
+\end{align*}
+Por lo que es valido aplicar el criterio de Leibniz. Luego, si aplicamos el criterio de comparación por limite con la serie armonica tendremos:
+\begin{align*}
+    \lim_{n \to \infty} \frac{e - \left(1 + \frac{1}{n}\right)^n}{\frac{1}{n}} &= \frac{e}{2}
+\end{align*}
+Por lo que dado que la serie armonica diverge, entonces la serie original diverge, por lo que la serie solo converge condicionalmente.
+
+\question $\sum\limits_{n = 1}^\infty \left(\sin \frac{1}{n}\right)^{\frac{3}{2}}$
+
+Podemos usar el criterio de comparación por limites, con la serie $\frac{1}{n^{\frac{3}{2}}}$ de forma que:
+\begin{align*}
+    \lim_{n \to \infty} \frac{a_n}{b_n} &= \lim_{n \to \infty} \frac{\left(\sin \frac{1}{n}\right)^{\frac{3}{2}}}{\left(\frac{1}{n}\right)^{\frac{3}{2}}}\\
+    &= \lim_{n \to \infty} \left(\frac{\sin \frac{1}{n}}{\frac{1}{n}}\right)^{\frac{3}{2}}\\
+    &= 1^{\frac{3}{2}}\\
+    &= 1
+\end{align*}
+Y dada que la serie $\frac{1}{n^{\frac{3}{2}}}$ es una serie $p$ con $p > 1$, es convergente, entonces la serie original converge absolutamente.
 \end{document}

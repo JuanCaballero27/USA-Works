@@ -67,7 +67,7 @@ leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
 \newcommand{\curso}{Matemáticas Discretas}
 \newcommand{\professor}{Diego Villamizar}
 \newcommand{\disciplina}{Matemáticas}
-\newcommand{\titulo}{Taller 4}
+\newcommand{\titulo}{Taller 5}
 \newcommand{\alumnoI}{Juan Sebastián Caballero Bernal}
 \newcommand{\alumnoII}{Luz Ángela Orjuela Nieto}
 \linespread{1.5}
@@ -198,7 +198,24 @@ leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
                       \end{pmatrix}
         \end{align*}
         \begin{proof}
-            Ya determinamos en el punto anterior que la entrada de la matriz anterior son las caminatas de $v_i$ a $v_j$ de longitud $n$. Recordemos por el punto 1, que el número de caminatas de $v_1$ a $v_2$ de longitud $n$ es $F_n$ lo que explica las entradas $a_{1, 2}$ y $a_{2, 1}$(Note que las caminatas de $v_2$ a $v_1$ de longitud $n$ es invertir aquellas de $v_1$ a $v_2$). 
+            Ya determinamos en el punto anterior que la entrada de la matriz anterior son las caminatas de $v_i$ a $v_j$ de longitud $n$. Recordemos por el punto 1, que el número de caminatas de $v_1$ a $v_2$ de longitud $n$ es $F_n$ lo que explica las entradas $a_{1, 2}$ y $a_{2, 1}$(Note que las caminatas de $v_2$ a $v_1$ de longitud $n$ es invertir aquellas de $v_1$ a $v_2$). Para las otras dos entradas de la matriz:
+            \begin{itemize}
+                \item Para demostrar que $a_{1, 1}^{(n)} = F_{n+1}$, se usará inducción. El caso $n = 1$ es evidente, por lo que directamente supongamos que es verdad para $n$ y demostraremos que pasa lo mismo para $n+1$. Note que esto saldrá directamente de la multiplicación de $A^n \cdot A$, y la entrada $a_{1, 1}^{(n+1)}$ será:
+                \begin{align*}
+                    a_{1, 1}^{(n+1)} &= \sum_{k = 1}^2 a_{i, k}^{(n)} \cdot a_{k, j}\\
+                    &= a_{1, 1}^{(n)} \cdot a_{1, 1} + a_{2, 1}^{(n)} \cdot a_{2, 1}\\
+                    &= F_{n+1} \cdot 1 + F_{n} \cdot 1\\
+                    &= F_{n+2}
+                \end{align*}
+
+                \item Para demostrar que $a_{2, 2}^{(n)} = F_{n-1}$, se usará inducción. El caso $n = 1$ es evidente, por lo que directamente supongamos que es verdad para $n$ y demostraremos que pasa lo mismo para $n+1$. Note que de nuevo, saldrá sobre la multiplicación de $A^n \cdot A$, y la entrada $a_{2, 2}^{(n+1)}$ será:
+                \begin{align*}
+                    a_{2, 2}^{(n+1)} &= \sum_{k = 1}^2 a_{2, k}^{(n)} \cdot a_{k, 2}\\
+                    &= a_{2, 1}^{(n)} \cdot a_{1, 2} + a_{2, 2}^{(n)} \cdot a_{2, 2}\\
+                    &= F_{n} \cdot 1 + F_{n-1} \cdot 0\\
+                    &= F_{n}
+                \end{align*}
+            \end{itemize}
         \end{proof}
     \end{partes}
 
@@ -230,7 +247,20 @@ leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
     \end{align*}
     entonces $G$ es un grafo conexo.
     \begin{proof}
-        
+        Suponga que en realidad el grafo no es conexo. Es decir, $|V/R_G| = 2$. Desde este punto es bueno notar que cada componente conexa del grafo tendrá que tener $k+1$ vertices para poder tener grado $k$ en cada vertice. Luego, tendremos dos casos:
+        \begin{itemize}
+            \item Si $n-1$ es divisible por 4, entonces $n-1$ es par. Luego, esto nos dice que $n$ debería ser impar. Ahora, gracias a que las componentes conexas forman una partición de $V$, la suma de la cantidad de elementos en cada una deberá ser $|V|$. Esto es $k+1+k+1 = 2k+2$, pero note que este es un número par, por lo que $n$ debería ser par, lo que contradice el hecho de que sea impar.
+            \item Si $n-1$ no es divisible por 4, la suma de los elementos de las componentes conexas seguirá siendo $2k+2$ que debe ser $n$. Esto nos permite desarrollar la igualdad dada por los casos como sigue:
+            \begin{align*}
+                k &\ge \frac{n-1}{2}\\
+                2k &\ge n-1\\
+                2k+2 &\ge n+1\\
+                n &\ge n+1\\
+                0 &\ge 1
+            \end{align*}
+            Lo que de nuevo es una contradicción.
+        \end{itemize}
+        Para extender este razonamiento a varias componentes conexas, basta con pensar en que si hay $s$ componentes conexas entonces el número de vertices será $sk + s$ que será $n$. Eso llevará a una contradicción con $n$ y $n-1$, o con la desigualdad dada por los casos.
     \end{proof}
 
     Un $r-$coloramiento de un grafo no dirigido $G = (V, E)$ con $E \subseteq \binom{V}{2}$ es una función $f: V \to [r]$ tal que $f(x) \neq f(y)$ si $\{x, y\} \in E$. Un grafo se dice $r-$coloreable si existe un $r-$coloramiento en él.
@@ -249,7 +279,7 @@ leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
     \begin{itemize}
         \item $V_n$: $\to m^n$
         \item $G = ([n], E)$ con $E = \{(i, i+1): i \in [n-1]\}$: $\to m \cdot (m-1)^{n-1}$
-        \item $K_n$: $\to \binom{m}{n} \cdot n!$ 
+        \item $K_n$: $\to \binom{m}{n} \cdot n! \cdot n!$ 
     \end{itemize}
 
     \question Note que si un grafo es $k-$coloreable, entonces es $(k+1)-$coloreable. Denote $\chi(G)$ el minimo número $k$ tal que $G$ es $k-$coloreable.
@@ -262,6 +292,10 @@ leftmargin=*, itemsep=12pt, label={\textbf{\arabic*.)}}}
         \end{itemize}
 
         \parte Pruebe que $\chi(G) \le \Delta(G) + 1$ si $\Delta(G)$ es el máximo grado de $G$ i.e, $\Delta(G) = \max\limits_{x\in V} |Deg(x)|$
+        \begin{proof}
+            Suponga que $x \in V$ es tal que $|Deg(x)| = \Delta(G)$, entonces para cada uno de los vertices en $Deg(x)$ se puede escoger un color diferente para cada uno de los vertices(Aunque esto no llega a ser necesario a no ser que estén conectados entre sí), y dado que no hay otro vertice con dicha caracteristica, llegaremos a que agregando la imagen para $x$ en el coloreamiento:
+            $$\chi(G) \le \Delta(G) + 1$$
+        \end{proof}
     \end{partes}
 \end{questions}
 \end{document}
