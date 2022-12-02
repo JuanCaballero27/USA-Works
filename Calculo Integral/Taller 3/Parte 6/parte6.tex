@@ -2,6 +2,108 @@
 
 \documentclass[../main.tex]{subfiles}
 \begin{document}
+En los siguientes ejercicios testear la convergencia de la integral impropia.
+
+\question $\int_{0}^\infty \frac{x}{\sqrt{x^4+1}} \, dx$\\
+
+Si se hace comparación con la integral $\int_{0}^\infty \frac{1}{x}$ tendremos:
+\begin{align*}
+    \lim_{x \to \infty} \frac{\frac{x}{\sqrt{x^4+1}}}{\frac{1}{x}} &= \lim_{x \to \infty} \frac{x^2}{\sqrt{x^4 + 1}}\\
+    &= \lim_{x \to \infty} \frac{1}{\sqrt{1 + \frac{1}{x^4}}}\\
+    &= 1
+\end{align*}
+
+Y dado que la integral impropia de $\frac{1}{x}$ diverge, entonces la integral original diverge.
 
 
+\question $\int_{0}^\infty \frac{1}{\sqrt{x^3+1}} \, dx$\\
+
+Si lo comparamos con la integral $\int_{0}^\infty \frac{1}{x^\frac{3}{2}}\, dx$ tendremos:
+\begin{align*}
+    \lim_{x \to \infty} \frac{\frac{1}{\sqrt{x^3+1}}}{\frac{x^{\frac{1}{2}}}{x^{2}}} &= \lim_{x \to \infty} \frac{x^2}{\sqrt{x^2}\sqrt{x^3 + 1}}\\
+    &= \lim_{x \to \infty} \frac{x^2}{\sqrt{x} \sqrt{x^4 + x}}\\
+    &= \lim_{x \to \infty} \frac{1}{\sqrt{x} \sqrt{1 + \frac{1}{x}}}
+    &= 0
+\end{align*}
+Y dado que la integral $\int_{0}^\infty \frac{1}{x^{\frac{3}{2}}}\, dx$ converge, la otra integral impropia también converge.
+
+\question $\int_{0+}^\infty \frac{e^{-\sqrt{x}}}{\sqrt{x}} \, dx$\\
+
+Primero, computemos la integral dada abajo:
+\begin{align*}
+    \int \frac{e^{-\sqrt{x}}}{\sqrt{x}} \, dx &= 2\int e^{-u} \, du\\
+    &= -2e^{-u} + C\\
+    &= -2e^{-\sqrt{x}} + C
+\end{align*}
+
+Y luego, aplicando la definición de la integral impropia:
+\begin{align*}
+    \lim_{\substack{a \to 0^+ \\ b \to \infty}} \int_{a}^b \frac{e^{-\sqrt{x}}}{\sqrt{x}} \, dx &= \lim_{\substack{a \to 0^+ \\ b \to \infty}} \left[-2e^{-\sqrt{x}}\right]_{a}^b\\
+    &=  \lim_{\substack{a \to 0^+ \\ b \to \infty}} -2e^{-\sqrt{b}} + 2e^{\sqrt{a}}\\
+    &= -2 \cdot 0 + 2 \cdot e^0\\
+    &= 2
+\end{align*}
+Por lo que la integral converge, y además converge a $2$.
+
+
+\question $\int_{0 +}^{1-} \frac{\log x}{1-x} \, dx$\\
+Note que $\int_{0+}^1 \frac{\log x}{\sqrt{x}}$ es convergente. Esto dado que si se hace la integral indefinida obtendremos:
+\begin{align*}
+    \int \frac{\log x}{\sqrt{x}} &= 2\sqrt{x}\log x - 4 \sqrt{x}
+\end{align*}
+Por lo que al evaluar el limite tendremos:
+\begin{align*}
+    \lim_{a \to 0^+} 2\sqrt{x}\log x - 4 \sqrt{x}|_{a}^1 &= \lim_{a \to 0^+} 2\sqrt{1}\log 1 - 4 \sqrt{1} - 2\sqrt{a}\log a + 4 \sqrt{a}\\
+    &= \lim_{a \to 0^+} -4 - 2\sqrt{a}\log a + 4\sqrt{a}\\
+    &= -4
+\end{align*}
+Luego, si aplicamos el criterio de comparación por limite tendremos:
+\begin{align*}
+    \lim_{n \to \infty} \frac{\frac{\log x}{1-x}}{\frac{\log x}{\sqrt{x}}} &= \lim_{n \to \infty} \frac{\sqrt{x}}{1-x}\\
+    &= - \lim_{n \to \infty} \frac{\sqrt{x}}{x-1}\\
+    &= - \lim_{n \to \infty} \frac{1}{2\sqrt{x}}\\
+    &= 0
+\end{align*}
+Por lo que la convergencia de $\frac{\log x}{\sqrt{x}}$ nos permite concluir la convergente de la integral original.
+
+\question $\int_{0 +}^{1-} \frac{dx}{\sqrt{x} \, \log x}$\\
+
+Note que si se hace una sustitución en la integral de forma que $u = \sqrt{x}$ y $du = \frac{1}{2\sqrt{x}} dx$ entonces la integral indefinida será:
+\begin{align*}
+    \int \frac{dx}{\sqrt{x} \, \log x} &= 2\int \frac{1}{\log u^2} \, du\\
+    &= 2\int \frac{1}{2\log u} \, du\\
+    &= \int \frac{1}{\log u} \, du
+\end{align*}
+Ahora, dado que $\log(u) < u$ entonces $\frac{1}{\log(u)} > \frac{1}{u}$, y como $\frac{1}{u}$ genera una integral impropia divergente. Luego, por el criterio de comparación directa, la integral original diverge.
+
+\question Para un valor real de $C$ la integral:
+\begin{align*}
+    \int_{2}^\infty \left(\frac{Cx}{x^2+1} - \frac{1}{2x+1}\right) \, dx
+\end{align*}
+
+Si desarrollamos la integral:
+\begin{align*}
+    \int_{2}^\infty \frac{(2x+1)Cx - (x^2+1)}{(x^2+1)(2x+1)} \, dx &= \int_{2}^\infty \frac{2Cx^2+Cx - (x^2+1)}{(x^2+1)(2x+1)} \, dx \\
+    &= \int_{2}^\infty \frac{2Cx^2+Cx - x^2+1}{(x^2+1)(2x+1)} \, dx \\
+    &= \int_{2}^\infty \frac{2Cx^2+Cx - x^2+1}{(x^2+1)(2x+1)} \, dx \\
+    &= \int_{2}^\infty \frac{(2C-1)x^2+Cx +1}{(x^2+1)(2x+1)} \, dx \\
+\end{align*}
+Y si aplicamos el criterio de comparación con la integral $\int_{2}^\infty \frac{1}{x} \, dx$:
+\begin{align*}
+    \lim_{n \to \infty} \frac{\frac{(2C-1)x^2+Cx +1}{(x^2+1)(2x+1)}}{\frac{1}{x}} &= \lim_{n \to \infty} \frac{(2C-1)x^3 + Cx^2 + x}{(x^2+1)(2x+1)}\\
+    &= \lim_{n \to \infty} \frac{(2C-1)x^3 + Cx^2 + x}{2x^3 + x^2 + 2x + 1}\\
+\end{align*}
+Para que luego el criterio no sea valido, es necesario que $2C-1 = 0$, por lo que $C = \frac{1}{2}$. Luego, reemplazando en la integral original:
+\begin{align*}
+    \int_{2}^\infty \left(\frac{Cx}{x^2+1} - \frac{1}{2x+1}\right) \, dx &= \int_{2}^\infty \left(\frac{\frac{1}{2}x}{x^2+1} - \frac{1}{2x+1}\right) \, dx\\
+    &= \frac{1}{2} \int_{2}^\infty \frac{x}{x^2+1} \, dx - \int_{2}^\infty \frac{1}{2x+1} \, dx\\
+    &=  \lim_{n \to \infty} \frac{1}{2}\int_{2}^n \frac{x}{x^2+1} \, dx - \int_{2}^n \frac{1}{2x+1} \, dx\\
+    &=  \lim_{n \to \infty} \frac{1}{2} \log(2n+1) - \frac{1}{2} \log(5) - \frac{1}{4}\log(n^2+1) + \log(5)\\
+    &= \frac{1}{4} \lim_{n \to \infty} 2\log(2n+1) - \log(5) - \log(n^2+1) + 2\log(5)\\
+    &= \frac{1}{4} \lim_{n \to \infty} \log\left(\frac{n^2+1}{(2n+1)^2}\right) + \log(5)\\
+    &= \frac{1}{4} \lim_{n \to \infty} \log\left(\frac{n^2+1}{4n^2 + 4n + 1}\right) + \log(5)\\
+    &= \frac{1}{4} \lim_{n \to \infty} \log\left(\frac{1 + \frac{1}{n^2}}{4 + \frac{4}{n} + \frac{1}{4}}\right) + \log(5)\\
+    &= \frac{1}{4} \log\left(\frac{1}{4}\right) + \log(5)\\
+    &= \frac{1}{4} \log\left(\frac{5}{4}\right)
+\end{align*}
 \end{document}

@@ -2,6 +2,211 @@
 
 \documentclass[../main.tex]{subfiles}
 \begin{document}
+Para cada una de las series de potencias determinar el conjunto de todos los números reales $x$ para los cuales converge, y determinar la suma de la serie.
+\question $\sum\limits_{n = 0}^\infty \frac{x^n}{3^{n+1}}$\\
+
+Reescribiendo la serie:
+\begin{align*}
+    \sum_{n = 0}^\infty \frac{x^n}{3^{n+1}} &=\frac{1}{3} \sum_{n = 0}^\infty \frac{x^n}{3^n}\\
+    &= \frac{1}{3}\sum_{n = 0}^\infty \left(\frac{x}{3}\right)^n
+\end{align*}
+Y dado que es una serie geometrica, para que sea convergente, $\left|\frac{x}{3}\right| < 1$, por lo que $|x| < 3$. Y evaluando bajo esta condición:
+\begin{align*}
+    \frac{1}{3}\sum_{n = 0}^\infty \left(\frac{x}{3}\right)^n &= \frac{1}{3}\cdot \frac{1}{1 - \frac{x}{3}}\\
+    &= \frac{1}{3}\cdot \frac{1}{\frac{x-3}{3}}\\
+    &= \frac{1}{3}\cdot \frac{3}{x-3}\\
+    &= \frac{1}{x-3}
+\end{align*}
+
+\question $\sum\limits_{n = 0}^\infty (-2)^n \cdot \frac{n+2}{n+1} x^n$\\
+
+Si aplicamos el criterio de la razón a la serie, tendremos:
+\begin{align*}
+    \lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| &= \lim_{n \to \infty} \left|\frac{(-2)^{n+1} \cdot \frac{n+3}{n+2} x^{n+1}}{(-2)^n \cdot \frac{n+2}{n+1} x^n}\right|\\
+    &= \lim_{n \to \infty} \left|\frac{(-2)^{n+1} x^{n+1} (n+3)(n+1)}{(-2)^n x^n (n+2)(n+2)}\right|\\
+    &= \lim_{n \to \infty} \left|\frac{n^2+4n+3}{n^2+4n+4}\right| \cdot |-2x|\\
+    &= |-2x| < 1
+\end{align*}
+Por lo que $|x| < \frac{1}{2}$. Si $x = \frac{1}{2}$ o $x = -\frac{1}{2}$ tendremos series que son divergentes ya que sus terminos no convergen a $0$. Luego, el intervalo de convergencia es $\left(-\frac{1}{2}, \frac{1}{2}\right)$. Tendremos luego:
+\begin{align*}
+    \sum\limits_{n = 0}^\infty (-2)^n \cdot \frac{n+2}{n+1} x^n &= \sum\limits_{n = 0}^\infty \frac{(-2x)^n (n+1)}{n+1} + \sum\limits_{n = 0}^\infty \frac{(-2x)^n}{n+1}\\
+    &= \sum_{n = 0}^\infty (-2x)^n + \frac{1}{2x} \sum\limits_{n = 0}^\infty \frac{(-2x)^{n+1}}{n+1}\\
+    &= \frac{1}{1+2x} + \frac{1}{2x}\sum\limits_{n = 0}^\infty \frac{(-2x)^{n+1}}{n+1}
+\end{align*}
+Para evaluar la segunda suma, derivaremos y luego integraremos:
+\begin{align*}
+    f(x) &= \frac{1}{2x}\sum\limits_{n = 0}^\infty \frac{(-2x)^{n+1}}{n+1}\\
+    \frac{d}{dx} f(x) &= \frac{1}{2x} \sum_{n = 1}^\infty (-2x)^n\\
+    &= \frac{1}{2x} \cdot \frac{1}{1+2x}\\
+    \frac{1}{2x} \int_{0}^x \frac{1}{1+2t} \, dt &= \frac{1}{4x} \left[\log(1+2x) - \log(1)\right] + C\\
+    &= \frac{\log(1+2x)}{4x} + C
+\end{align*}
+Se puede comprobar que $C=0$ haciendo $x=0$. Luego, la serie original quedará:
+\begin{align*}
+    \frac{1}{1+2x} + \frac{1}{2x}\sum\limits_{n = 0}^\infty \frac{(-2x)^{n+1}}{n+1} &= \frac{1}{1+2x} + \frac{\log(1+2x)}{4x}
+\end{align*}
+
+\question $\sum\limits_{n = 1}^\infty \frac{2^n x^n}{n}$\\
+
+Si aplicamos el criterio de la razón en la serie tendremos:
+\begin{align*}
+    \lim_{n \to \infty} \left|\frac{a_{n+1}}{a_{n}}\right| &= \lim_{n \to \infty} \left|\frac{\frac{2^{n+1} x^{n+1}}{n+1}}{\frac{2^nx^n}{n}}\right|\\
+    &= \lim_{n \to \infty} \left|\frac{2^{n+1} x^{n+1} \cdot n}{2^n x^n \cdot (n+1)}\right|\\
+    &= \lim_{n \to \infty} \frac{n}{n+1} \cdot |2x|\\
+    &= |2x|
+\end{align*}
+Por lo que $|2x| <1$ de lo que deducimos que $|x| < \frac{1}{2}$. Si $x = \frac{1}{2}$ tendremos la serie armonica, que es divergente. Si $x = -\frac{1}{2}$ tendremos la serie armonica alternante que es convergente. Por lo tanto, el intervalo de convergencia es $\left[-\frac{1}{2}, \frac{1}{2}\right)$. Si derivamos y luego integralos la serie tendremos:
+\begin{align*}
+    f(x) &= \sum_{n = 1}^\infty \frac{(2x)^n}{n}\\
+    \frac{d}{dx} f(x) &= \sum_{n = 1}^\infty (2x)^{n-1}\\
+    &= \sum_{n = 0}^\infty (2x)^n\\
+    &= \frac{1}{1 - 2x}\\
+    \int_{0}^\infty \frac{1}{1-2t} dt &= -\frac{\log(1-2x)}{2} + C 
+\end{align*} 
+Si se hace $x = 0$ es facil ver que $C = 0$. Por lo que:
+\begin{align*}
+    \sum_{n = 1}^\infty \frac{(2x)^n}{n} &= -\frac{\log(1-2x)}{2}
+\end{align*}
+
+\question $\sum\limits_{n = 0}^\infty \frac{(-1)^n}{2n+1} \cdot \left(\frac{x}{2}\right)^{2n}$
+
+Para esto, aplicamos primero el criterio de la razón. Así tendremos que:
+\begin{align*}
+    \lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| &= \lim_{n \to \infty} \left|\frac{\frac{(-1)^{n+1}}{2n+3} \cdot \left(\frac{x}{2}\right)^{2n+2}}{\frac{(-1)^n}{2n+1} \cdot \left(\frac{x}{2}\right)^{2n}}\right|\\
+    &= \lim_{n \to \infty} \left|\frac{(-1)^{n+1} (2n+1) x^{2n+2} 2^{2n}}{(-1)^n (2n+3) x^{2n} 2^{2n+2}}\right|\\
+    &= \lim_{n \to \infty} \frac{2n+1}{2n+3} \cdot \left|\frac{x}{2}\right|^2\\
+    &= \left|\frac{x}{2}\right|^2
+\end{align*}
+Y para que $\left|\frac{x}{2}\right|^2 < 1$ tendremos que $\left|\frac{x}{2}\right| < 1$, lo que implica que $|x| < 2$. Para $x = 2$ y para $x=-2$ tendremos una serie alternante cuyos terminos convergen a $0$ y es decreciente, por lo que son convergentes. Luego, el intervalo de convergencia es $[-2, 2]$. Si derivamos e integramos la serie:
+\begin{align*}
+    f(x) &= \frac{2}{x}\sum\limits_{n = 0}^\infty \frac{(-1)^n}{2n+1} \cdot \left(\frac{x}{2}\right)^{2n+1}\\
+    \frac{d}{dx} f(x) &= \frac{1}{x} \sum\limits_{n = 0}^\infty (-1)^n \left(\frac{x}{2}\right)^{2n}\\
+    &= \frac{1}{x} \cdot \frac{4}{x^2+4}\\
+    4\int_{0}^x \frac{1}{t^2+4} dt &= 2\arctan\left(\frac{x}{2}\right) + C
+\end{align*}
+Haciendo $x = 0$ es facil ver que $C =0$. Luego, tendremos que:
+\begin{align*}
+    \sum\limits_{n = 0}^\infty \frac{(-1)^n}{2n+1} \cdot \left(\frac{x}{2}\right)^{2n}&= 2\arctan\left(\frac{x}{2}\right)
+\end{align*}
+
+\question $\sum\limits_{n = 0}^\infty \frac{x^n}{(n+3)!}$\\
+
+Si aplicamos el test de la razón a esta serie tendremos:
+\begin{align*}
+    \lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| &= \lim_{n \to \infty} \left|\frac{\frac{x^{n+1}}{(n+4)!}}{\frac{x^n}{(n+3)!}}\right|\\
+    &= \lim_{n \to \infty} \left|\frac{x^{n+1} (n+3)!}{x^n (n+4)!}\right|\\
+    &= \lim_{n \to \infty} \frac{|x|}{n+4}\\
+    &= 0
+\end{align*}
+Por lo que para todo $x \in \mathbb{R}$, la serie es convergente. Si $x = 0$ es fácil ver que la serie converge a $0$. Para $x \neq 0$ tendremos:
+\begin{align*}
+    \sum_{n = 0}^\infty \frac{x^n}{(n+3)!} &= \sum_{k = 3}^\infty \frac{x^{k-3}}{k!}\\
+    &= \frac{1}{x^3} \sum_{k = 3}^\infty \frac{x^k}{k!}\\
+    &= \frac{1}{x^3} \left[\sum_{k = 3}^\infty \frac{x^k}{k!} + 1 - 1 + x - x + \frac{x^2}{2} - \frac{x^2}{2} \right]\\
+    &= \frac{1}{x^3} \left[\sum_{k = 0}^\infty \frac{x^k}{k!} - 1 - x - \frac{x^2}{2} \right]\\
+    &= \frac{1}{x^2} \left[e^x - 1 - x - \frac{x^2}{2}\right]
+\end{align*}
+
+\question $\sum\limits_{n = 0}^\infty \frac{(x-1)^n}{(n+2)!}$
+
+Si aplicamos el criterio de la razón tendremos:
+\begin{align*}
+    \lim_{n \to \infty} \left|\frac{\frac{(x-1)^{n+1}}{(n+3)!}}{\frac{(x-1)^n}{(n+2)!}}\right| &= \lim_{n \to \infty} \left|\frac{(x-1)^{n+1} (n+2)!}{(x-1)^n (n+3)!}\right|\\
+    &= \lim_{n \to \infty} \frac{|x-1|}{n+3}\\
+    &= 0
+\end{align*}
+Por lo que la serie es convergente para todo $n \in \mathbb{R}$. Luego, si $x \neq 1$ tendremos:
+\begin{align*}
+    \sum\limits_{n = 0}^\infty \frac{(x-1)^n}{(n+2)!} &= \sum\limits_{k = 2}^\infty \frac{(x-1)^{k-2}}{k!}\\
+    &= \frac{1}{(x-1)^2} \sum_{k = 2}^\infty \frac{(x-1)^k}{k!}\\
+    &= \frac{1}{(x-1)^2}\left[\sum_{k = 2}^\infty \frac{(x-1)^k}{k!} + (x-1) + 1- (x-1) - 1 \right]\\ 
+    &= \frac{1}{(x-1)^2}\left[\sum_{k = 0}^\infty \frac{(x-1)^k}{k!} - (x-1) - 1 \right]\\ 
+    &= \frac{1}{(x-1)^2}\left[e^{x-1} - (x-1) - 1 \right]\\ 
+\end{align*}
+En el caso en que $n = 1$ todos los terminos serán $0$ a excepción del primero, por lo que la suma converge a $\frac{1}{2}$.
+
+En los siguientes ejercicios se da la representación de funciones mediante series de potencias de $x$. Asuma la existencia de esta expansión, verifique que los coeficientes tienen la forma dada y demostrar que la serie converge para los valores de $x$ indicados.
+
+\question $\frac{1}{2-x} = \sum\limits_{n = 0}^\infty \frac{x^n}{2^{n+1}}$ para $|x| < 2$.\\
+
+Si partimos del lado izquierdo, podemos reescribirlo como:
+\begin{align*}
+    \frac{1}{2-x} &= \frac{1}{2} \cdot \frac{2}{2-x}\\
+    &= \frac{1}{2} \cdot \frac{1}{\frac{2-x}{2}}\\
+    &= \frac{1}{2} \cdot \frac{1}{1 - \frac{x}{2}}
+\end{align*}
+Note que esto es en realidad el limite de convergencia de una serie geometrica, por lo que:
+\begin{align*}
+    \frac{1}{2} \cdot \frac{1}{1 - \frac{x}{2}} &= \frac{1}{2} \cdot \sum_{n = 0}^\infty \left(\frac{x}{2}\right)^n\\
+    &= \frac{1}{2} \cdot \sum_{n = 0}^\infty \frac{x^n}{2^n}\\
+    &= \sum_{n = 0}^\infty \frac{x^n}{2^{n+1}}\\
+\end{align*}
+Lo que argumenta, además, el porqué dicha igualdad es valida para $|x| < 2$ ya que en ese caso $\left|\frac{x}{2}\right| < 1$, haciendo la serie geometrica convergente.
 
 
+\question $\sin^3 x = \frac{3}{4} \sum\limits_{n = 1}^\infty (-1)^{n+1} \frac{3^{2n}-1}{(2n+1)!}x^{2n+1}$ para todo $x \in \mathbb{R}$.\\
+
+Recordemos la identidad del ángulo triple para el seno:
+\begin{align*}
+    \sin(3x) &= 3\sin x - 4\sin^3x\\
+    4\sin^3x &= 3\sin x - \sin(3x)\\
+    \sin^3x &= \frac{3}{4} \sin x - \frac{1}{4} \sin (3x)
+\end{align*}
+Y si usamos la expansión del seno podremos determinar que:
+\begin{align*}
+    \sin^3x &= \frac{3}{4} \sum_{n = 1}^\infty (-1)^{n+1} \frac{x^{2n-1}}{(2n-1)!} - \frac{1}{4} \sum_{n = 1}^\infty (-1)^{n+1} \frac{(3x)^{2n-1}}{(2n-1)!}\\
+    &= \frac{3}{4} \sum_{n = 1}^\infty (-1)^{n+1} \frac{x^{2n-1}}{(2n-1)!} - \frac{3}{4} \sum_{n = 1}^\infty (-1)^{n+1} \frac{3^{2n-2} x^{2n-1}}{(2n-1)!}\\
+    &= \frac{3}{4} \sum_{n = 1}^\infty (-1)^{n+1} \frac{x^{2n-1}}{(2n-1)!} - (-1)^{n+1} \frac{3^{2n-2} x^{2n-1}}{(2n-1)!}\\
+    &= \frac{3}{4} \sum_{n = 1}^\infty (-1)^{n+1} \left[\frac{x^{2n-1}}{(2n-1)!} - \frac{3^{2n-2} x^{2n-1}}{(2n-1)!}\right]\\
+    &= \frac{3}{4} \sum_{n = 1}^\infty (-1)^{n+1} \left[\frac{x^{2n-1} - 3^{2n-2} x^{2n-1}}{(2n-1)!}\right]\\
+    &= \frac{3}{4} \sum_{n = 1}^\infty (-1)^{n+1} \left[\frac{x^{2n-1} - 3^{2n-2} x^{2n-1}}{(2n-1)!}\right]\\
+\end{align*}
+
+\begin{align*}
+    &= \frac{3}{4} \sum_{n = 1}^\infty (-1)^{n+1} \left[\frac{x^{2n-1} (1-3^{2n-2})}{(2n-1)!}\right]\\
+    &= \frac{3}{4} \sum_{n = 1}^\infty (-1)^{n+1} \left[\frac{x^{2n-1} (1-3^{2n-2})}{(2n-1)!}\right]\\
+    &= \frac{3}{4} \sum_{n = 1}^\infty (-1)^{n} \left[\frac{x^{2n-1} (3^{2n-2}-1)}{(2n-1)!}\right]\\
+    &= \frac{3}{4} \sum_{n = 2}^\infty (-1)^{n} \left[\frac{x^{2n-1} (3^{2n-2}-1)}{(2n-1)!}\right]\\
+    &= \frac{3}{4} \sum_{k = 1}^\infty (-1)^{k+1} \left[\frac{x^{2k+1} (3^{2k}-1)}{(2k+1)!}\right]\\
+    &= \frac{3}{4} \sum_{k = 1}^\infty (-1)^{k+1} \frac{x^{2k+1} (3^{2k}-1)}{(2k+1)!}\\
+    &= \frac{3}{4} \sum_{k = 1}^\infty (-1)^{k+1} \frac{3^{2k}-1}{(2k+1)!} x^{2k+1} \\
+\end{align*}
+
+Para demostrar que es convergente en todo $x$, se puede usar el test de la razón:
+\begin{align*}
+    \lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| &= \lim_{n \to \infty} \left|\frac{(-1)^{n+2} \frac{3^{2n+1}-1}{(2n+3)!}x^{2n+3}}{(-1)^{n+1} \frac{3^{2n}-1}{(2n+1)!} x^{2n+1}}\right|\\
+    &= \lim_{n \to \infty} \left|\frac{x^{2n+3} (3^{2n+1}-1) (2n+1)!}{x^{2n+1} (3^{2n}-1)(2n+3)!}\right|\\
+    &= \lim_{n \to \infty} \left|\frac{x^2 (3- \frac{1}{3^{2n}})}{(1- \frac{1}{3^{2n}})(2n+3)(2n+2)}\right|\\
+    &= 0
+\end{align*}
+Por lo que al ser dicho limite menor que $1$, la serie converge para todo $x \in \mathbb{R}$.
+
+\question $\frac{x}{1+x-2x^2} = \frac{1}{3}\sum\limits_{n = 1}^\infty [1-(-2)^n]x^n$ para $|x| < \frac{1}{2}$\\
+
+Si empezamos desde el lado derecho tendremos:
+\begin{align*}
+    \frac{1}{3}\sum\limits_{n = 1}^\infty [1-(-2)^n]x^n &= \frac{1}{3} \left[\sum_{n = 1}^\infty x^n - \sum_{n = 1}^\infty (-2x)^n\right]\\
+    &= \frac{1}{3} \left[x\sum_{k = 0}^\infty x^n + (2x) \sum_{k = 0}^\infty (-2x)^n\right]\\
+    &= \frac{1}{3} \left[\frac{x}{1-x} + \frac{2x}{1+2x}\right]\\
+    &= \frac{1}{3} \left[\frac{x(1+2x) + 2x(1-x)}{(1-x)(1+2x)}\right]\\
+\end{align*}
+\begin{align*}
+    &= \frac{1}{3} \left[\frac{x+2x^2+2x-2x^2}{1-x+2x-2x^2}\right]\\
+    &= \frac{1}{3} \left[\frac{3x}{1+x-2x^2}\right]\\
+    &= \frac{x}{1+x-2x^2}
+\end{align*}
+Es fácil corroborar que esto solo es verdad para $|x| < \frac{1}{2}$ ya que es una condición necesaria y suficiente para que ambas series geometricas que hemos desarrollado puedan converger.
+
+\question $\frac{12-5x}{6-5x-x^2} = \sum\limits_{n=0}^\infty \left[1 + \frac{(-1)^n}{6^n}\right]x^n$
+
+Si partimos del lado derecho, podremos hacer lo siguiente:
+\begin{align*}
+    \sum_{n=0}^\infty \left[1 + \frac{(-1)^n}{6^n}\right]x^n &= \sum_{n = 0}^\infty x^n + \sum_{n = 0}^\infty \left(\frac{-x}{6}\right)^n\\
+    &= \frac{1}{1-x} + \frac{1}{1+\frac{x}{6}}\\
+    &= \frac{1}{1-x} + \frac{6}{x+6}\\
+    &= \frac{x+6 + 6 - 6x}{(x+6)(1-x)}\\
+    &= \frac{12 - 5x}{x+6-x^2-6x}\\
+    &= \frac{12 - 5x}{6-5x-x^2}\\
+\end{align*}
+Luego, es fácil ver que para que ambas series que desarrollamos sean convergentes, $|x| < 1$ y $|x| < 6$, por lo que es necesario que $|x| < 1$.
 \end{document}
